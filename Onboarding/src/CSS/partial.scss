@@ -1,0 +1,23 @@
+$orange: #ef5f17;
+$blue: #9bb7d3;
+$white: #ffffff;
+$lightgray: #d1d4d7;
+$darkgray: #54575a;
+$font: 'Arial', Helvetica, sans-serif;
+$border-radius: 10px;
+
+@mixin heading($size: 24px) {
+  font-family: $font;
+  font-size: $size;
+  color: $darkgray;
+}
+
+@mixin txt($size: 16px) {
+  font-family: $font;
+  font-size: $size;
+  color: $darkgray;
+}
+@mixin btn($bgcolor: $orange, $color: $white) {
+  background-color: $bgcolor;
+  color: $color;
+}
