@@ -1,1 +1,12 @@
-/*# sourceMappingURL=partial.css.map */
+@font-face {
+  font-family: "OpenSans-Regular";
+  src: url(/Onboarding/src/assets/fonts/OpenSans-Regular.ttf);
+}
+@font-face {
+  font-family: "OpenSans-SemiBold";
+  src: url(/Onboarding/src/assets/fonts/OpenSans-SemiBold.ttf);
+}
+@font-face {
+  font-family: "OpenSans-Bold";
+  src: url(/Onboarding/src/assets/fonts/OpenSans-Bold.ttf);
+}/*# sourceMappingURL=partial.css.map */
