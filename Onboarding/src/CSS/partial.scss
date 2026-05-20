@@ -3,8 +3,25 @@ $blue: #9bb7d3;
 $white: #ffffff;
 $lightgray: #d1d4d7;
 $darkgray: #54575a;
-$font: 'Arial', Helvetica, sans-serif;
+$fontReg: 'OpenSans-Regular', Arial, Helvetica, sans-serif;
+$fontSemi: 'OpenSans-SemiBold', Arial, Helvetica, sans-serif;
+$fontBold: 'OpenSans-Bold', Arial, Helvetica, sans-serif;
 $border-radius: 10px;
+
+@font-face {
+  font-family: 'OpenSans-Regular';
+  src: url(/Onboarding/src/assets/fonts/OpenSans-Regular.ttf);
+}
+
+@font-face {
+  font-family: 'OpenSans-SemiBold';
+  src: url(/Onboarding/src/assets/fonts/OpenSans-SemiBold.ttf);
+}
+
+@font-face {
+  font-family: 'OpenSans-Bold';
+  src: url(/Onboarding/src/assets/fonts/OpenSans-Bold.ttf);
+}
 
 @mixin heading($size: 24px) {
   font-family: $font;
