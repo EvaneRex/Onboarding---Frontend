@@ -1,1 +1,5 @@
 # Eksamens projekt
+
+## Dependensies
+
+- **Axios**

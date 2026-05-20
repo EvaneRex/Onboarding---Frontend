@@ -1,47 +1,33 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
+import { ref } from 'vue'
+
+import login from './components/login.vue'
+
+import adminDashboard from './Private/adminDashboard.vue'
+
+import clientDashboard from './Private/clientDashboard.vue'
+
+const currentPage = ref('login')
+
+const currentUser = ref(null)
+
+function handleLogin(user) {
+  currentUser.value = user
+  if (user.role === 'admin') {
+    currentPage.value = 'adminDashboard'
+  } else {
+    currentPage.value = 'clientDashboard'
+  }
+}
+
+function logout() {
+  currentUser.value = null
+  currentPage.value = 'login'
+}
 </script>
 
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
-
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+  <login v-if="currentPage === 'login'" @login-success="handleLogin" />
+  <admindashboard v-if="currentPage === 'adminDashboard'" :user="currentUser" @logout="logout" />
+  <clientDashboard v-if="currentPage === 'clientDashboard'" :user="currentUser" @logout="logout" />
 </template>
-
-<style scoped>
-header {
-  line-height: 1.5;
-}
-
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
-}
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
-}
-</style>
