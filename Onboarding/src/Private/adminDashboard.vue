@@ -1,9 +1,11 @@
 <script setup>
 import { ref } from 'vue'
 
-// Shared components
-import Header
-from '@/components/shared/header.vue'
+import Header from '@/components/shared/header.vue'
+
+defineProps({
+  logout: Function
+})
 
 // Admin components
 import materialOverview
@@ -11,9 +13,6 @@ from '@/components/admin/materialOverview.vue'
 
 import companyList
 from '@/components/admin/companyList.vue'
-
-import surveyOverview
-from '@/components/admin/surveyOverview.vue'
 
 // Styrer hvilken side der vises
 const currentView =
@@ -53,14 +52,7 @@ function goBack() {
     class="dashboard"
   >
 
-    <!-- Header -->
-    <Header
-      @logout="
-        emit(
-          'logout'
-        )
-      "
-    />
+   <Header :logout="logout" />
 
     <!-- Welcome -->
     <section

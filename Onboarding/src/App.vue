@@ -28,6 +28,6 @@ function logout() {
 
 <template>
   <login v-if="currentPage === 'login'" @login-success="handleLogin" />
-  <adminDashboard v-if="currentPage === 'adminDashboard'" :user="currentUser" @logout="logout" />
-  <clientDashboard v-if="currentPage === 'clientDashboard'" :user="currentUser" @logout="logout" />
+  <adminDashboard v-if="currentPage === 'adminDashboard'" :user="currentUser" :logout="logout" />
+  <clientDashboard v-if="currentPage === 'clientDashboard'" :user="currentUser" :logout="logout" />
 </template>
