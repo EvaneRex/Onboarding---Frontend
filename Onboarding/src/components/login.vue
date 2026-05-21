@@ -1,7 +1,6 @@
 <script setup>
 import { ref } from 'vue'
-import { getUser } from './services/authService'
-import axios from 'axios'
+import { getUser, login as loginService } from './services/authService'
 
 const email = ref('')
 const adgangskode = ref('')
@@ -10,12 +9,7 @@ const user = ref(null)
 
 const login = async () => {
   try {
-    const res = await axios.post('http://localhost:3000/login', {
-      email: email.value,
-      password: adgangskode.value,
-    })
-
-    const data = res.data
+    const data = await loginService(email.value, adgangskode.value)
 
     if (data.success) {
       const userData = await getUser()
@@ -41,7 +35,7 @@ const login = async () => {
     <label for="adgangskode">Adgangskode</label>
     <input type="password" v-model="adgangskode" required />
 
-    <p v-if="err">{{ err }}</p>
+    <p v-if="error">{{ error }}</p>
     <button type="submit">Login</button>
   </form>
 </template>
