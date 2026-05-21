@@ -1,12 +1,9 @@
 <script setup>
 const props = defineProps({
-  material: Object
+  material: Object,
 })
 
-const emit = defineEmits([
-  'goBack',
-  'complete'
-])
+const emit = defineEmits(['goBack', 'complete'])
 
 const completeMaterial = () => {
   emit('complete', props.material.index)
@@ -15,16 +12,9 @@ const completeMaterial = () => {
 
 <template>
   <section class="materialView">
-    
-    <button
-      class="backBtn"
-      @click="emit('goBack')"
-    >
-      ← Tilbage
-    </button>
+    <button class="backBtn" @click="emit('goBack')">⟵ Tilbage til dashboard</button>
 
     <div class="content">
-
       <!-- YOUTUBE -->
       <iframe
         v-if="material.type === 'youtube'"
@@ -35,20 +25,9 @@ const completeMaterial = () => {
       />
 
       <!-- PDF -->
-      <iframe
-        v-if="material.type === 'pdf'"
-        :src="material.src"
-        class="viewer"
-      />
-
+      <iframe v-if="material.type === 'pdf'" :src="material.src" class="viewer" />
     </div>
 
-    <button
-      class="completeBtn"
-      @click="completeMaterial"
-    >
-      Marker som gennemført
-    </button>
-
+    <button class="completeBtn" @click="completeMaterial">Marker som gennemført</button>
   </section>
 </template>
