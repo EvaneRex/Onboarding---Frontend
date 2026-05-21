@@ -3,6 +3,10 @@ import { ref, onMounted } from 'vue'
 import clientMatView from '@/components/client/clientMatView.vue'
 import { getOnboarding } from '@/components/services/materialService.js'
 
+// Shared components
+import Header
+from '@/components/shared/header.vue'
+
 const currentView = ref('dashboard')
 const selectedMaterial = ref(null)
 
@@ -63,6 +67,15 @@ const goBack = () => {
 </script>
 
 <template>
+  <!-- Header -->
+    <Header
+      @logout="
+        emit(
+          'logout'
+        )
+      "
+    />
+
   <!-- DASHBOARD -->
   <section
     v-if="currentView === 'dashboard'"
