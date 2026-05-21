@@ -3,12 +3,11 @@
 import header from '@/components/shared/header.vue'
 
 defineProps({
+  material: Object,
   logout: Function
 })
 
-const props = defineProps({
-  material: Object
-})
+
 
 const emit = defineEmits([
   'goBack',
