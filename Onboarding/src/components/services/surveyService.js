@@ -7,7 +7,7 @@ export async function getSurveyQuestions() {
   try {
 
     const response = await axios.get(
-      `${API_URL}/survey-questions`
+      `${API_URL}/survey/survey-questions`
     )
 
     return response.data
@@ -34,7 +34,7 @@ export async function submitSurvey(
   try {
 
     const response = await axios.post(
-      `${API_URL}/survey-answers`,
+      `${API_URL}/survey/survey-answers`,
       answers
     )
 
@@ -62,7 +62,7 @@ export async function createSurvey(
   try {
 
     const response = await axios.post(
-      `${API_URL}/new-survey`,
+      `${API_URL}/survey/new-survey`,
       surveyQuestions
     )
 
@@ -88,7 +88,7 @@ export async function getAnsweredSurveys() {
   try {
 
     const response = await axios.get(
-      `${API_URL}/answered-surveys`
+      `${API_URL}/survey/answered-surveys`
     )
 
     return response.data
