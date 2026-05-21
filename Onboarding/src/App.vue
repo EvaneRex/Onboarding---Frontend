@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 
-import login from './components/login.vue'
+// import login from './components/login.vue'
 
 import adminDashboard from './Private/adminDashboard.vue'
 

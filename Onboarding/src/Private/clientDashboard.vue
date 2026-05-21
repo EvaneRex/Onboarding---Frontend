@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import clientMatView from '@/components/client/clientMatView.vue'
-import { getOnboarding } from '@/components/services/clientService.js'
+import { getOnboarding } from '@/components/services/materialService.js'
 
 const currentView = ref('dashboard')
 const selectedMaterial = ref(null)
