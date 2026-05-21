@@ -4,3 +4,45 @@
   padding: 0;
   box-sizing: border-box;
 }
+body {
+  background-color: partial.$white;
+}
+.login {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .login-wrapper {
+    background-color: partial.$lightgray;
+    display: flex;
+    flex-direction: column;
+    width: 40vw;
+    height: auto;
+    padding: 3rem 3rem;
+    border-radius: partial.$border-radius;
+    @include partial.heading;
+
+    form {
+      display: flex;
+      flex-direction: column;
+
+      label {
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+        @include partial.txt;
+      }
+      input {
+        height: 3rem;
+        border-radius: partial.$border-radius;
+        border: none;
+        padding: 5px;
+        @include partial.txt;
+      }
+      button {
+        @include partial.btn;
+        margin-top: 2.5rem;
+      }
+    }
+  }
+}

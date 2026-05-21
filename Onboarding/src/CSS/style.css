@@ -1,5 +1,70 @@
+@font-face {
+  font-family: "OpenSans-Regular";
+  src: url(/Onboarding/src/assets/fonts/OpenSans-Regular.ttf);
+}
+@font-face {
+  font-family: "OpenSans-SemiBold";
+  src: url(/Onboarding/src/assets/fonts/OpenSans-SemiBold.ttf);
+}
+@font-face {
+  font-family: "OpenSans-Bold";
+  src: url(/Onboarding/src/assets/fonts/OpenSans-Bold.ttf);
+}
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+body {
+  background-color: #ffffff;
+}
+
+.login {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login .login-wrapper {
+  background-color: #d1d4d7;
+  display: flex;
+  flex-direction: column;
+  width: 40vw;
+  height: auto;
+  padding: 3rem 3rem;
+  border-radius: 10px;
+  font-family: "OpenSans-SemiBold", Arial, Helvetica, sans-serif;
+  font-size: 24px;
+  color: #53575a;
+}
+.login .login-wrapper form {
+  display: flex;
+  flex-direction: column;
+}
+.login .login-wrapper form label {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+  font-family: "OpenSans-Regular", Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  color: #53575a;
+}
+.login .login-wrapper form input {
+  height: 3rem;
+  border-radius: 10px;
+  border: none;
+  padding: 5px;
+  font-family: "OpenSans-Regular", Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  color: #53575a;
+}
+.login .login-wrapper form button {
+  background-color: #ff5100;
+  color: #ffffff;
+  border-radius: 10px;
+  border: none;
+  height: 3rem;
+  font-family: "OpenSans-Bold", Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  margin-top: 2.5rem;
 }/*# sourceMappingURL=style.css.map */

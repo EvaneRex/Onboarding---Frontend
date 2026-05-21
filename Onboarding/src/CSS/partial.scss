@@ -24,17 +24,22 @@ $border-radius: 10px;
 }
 
 @mixin heading($size: 24px) {
-  font-family: $font;
+  font-family: $fontSemi;
   font-size: $size;
   color: $darkgray;
 }
 
 @mixin txt($size: 16px) {
-  font-family: $font;
+  font-family: $fontReg;
   font-size: $size;
   color: $darkgray;
 }
 @mixin btn($bgcolor: $orange, $color: $white) {
   background-color: $bgcolor;
   color: $color;
+  border-radius: $border-radius;
+  border: none;
+  height: 3rem;
+  font-family: $fontBold;
+  font-size: 18px;
 }
