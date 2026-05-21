@@ -37,16 +37,11 @@ const login = async () => {
         <label for="adgangskode">Adgangskode</label>
         <input id="adgangskode" type="password" v-model="adgangskode" required />
 
-<<<<<<< HEAD
         <p v-if="error">{{ error }}</p>
         <button type="submit">Login</button>
       </form>
     </div>
   </main>
-=======
-    <p v-if="error">{{ error }}</p>
-    <button type="submit">Login</button>
-  </form>
 </template> -->
 
 <script setup>
@@ -111,5 +106,4 @@ const login = async () => {
       Login
     </button>
   </form>
->>>>>>> f6e7d61bc9e93914f1e21a4f6bf04825d9453d6c
 </template>
