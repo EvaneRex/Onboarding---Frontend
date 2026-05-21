@@ -7,7 +7,7 @@ export async function getPdfSlides() {
   try {
 
     const response = await axios.get(
-      `${API_URL}/pdf-slides`
+      `${API_URL}/onboarding/pdf-slides`
     )
 
     return response.data
@@ -30,7 +30,7 @@ export async function uploadPdf(
   try {
 
     const response = await axios.post(
-      `${API_URL}/pdf-slides`,
+      `${API_URL}/onboarding/pdf-slides`,
       formData
     )
 
@@ -56,7 +56,7 @@ export async function getYoutubeLinks() {
   try {
 
     const response = await axios.get(
-      `${API_URL}/youtube-links`
+      `${API_URL}/onboarding/youtube-links`
     )
 
     return response.data
@@ -79,7 +79,7 @@ export async function uploadYoutubeLinks(
   try {
 
     const response = await axios.post(
-      `${API_URL}/youtube-links`,
+      `${API_URL}/onboarding/youtube-links`,
       links
     )
 

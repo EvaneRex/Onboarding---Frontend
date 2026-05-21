@@ -7,7 +7,7 @@ export async function getAllClients() {
   try {
 
     const response = await axios.get(
-      `${API_URL}/all-clients`
+      `${API_URL}/clients/all-clients`
     )
 
     return response.data
@@ -30,7 +30,7 @@ export async function getClientInfo(
   try {
 
     const response = await axios.get(
-      `${API_URL}/client-info/${clientId}`
+      `${API_URL}/clients/client-info/${clientId}`
     )
 
     return response.data
@@ -54,7 +54,7 @@ export async function deleteClient(
 
     const response =
       await axios.delete(
-        `${API_URL}/${clientId}`
+        `${API_URL}/clients/${clientId}`
       )
 
     return response.data
@@ -83,7 +83,7 @@ export async function assignOnboarding(
 
     const response =
       await axios.post(
-        `${API_URL}/${clientId}/onboarding`,
+        `${API_URL}/onboarding/${clientId}/onboarding`,
         slides
       )
 
@@ -113,7 +113,7 @@ export async function updateOnboarding(
 
     const response =
       await axios.put(
-        `${API_URL}/${clientId}/onboarding`,
+        `${API_URL}/onboarding/${clientId}/onboarding`,
         slides
       )
 
@@ -142,7 +142,7 @@ export async function deleteOnboarding(
 
     const response =
       await axios.delete(
-        `${API_URL}/${clientId}/onboarding`
+        `${API_URL}/onboarding/${clientId}/onboarding`
       )
 
     return response.data
@@ -171,7 +171,7 @@ export async function saveOnboardingProgress(
 
     const response =
       await axios.post(
-        `${API_URL}/onboarding-progress`,
+        `${API_URL}/onboarding/onboarding-progress`,
         progress
       )
 
