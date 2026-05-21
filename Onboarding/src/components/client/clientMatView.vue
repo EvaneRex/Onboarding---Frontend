@@ -40,7 +40,7 @@ const completeMaterial = () => {
         frameborder="0"
         allowfullscreen
         class="viewer"
-      />
+      ></iframe>
 
       <!-- PDF -->
       <iframe
