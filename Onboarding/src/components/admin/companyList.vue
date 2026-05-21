@@ -79,7 +79,7 @@ onMounted(() => {
   <section v-if="currentView === 'list'" class="companyList">
 
     <!-- Tilbage -->
-    <button class="backBtn" @click="emit('goBack')">← Tilbage til dashboard</button>
+    <button class="backBtn" @click="emit('goBack')">⟵ Tilbage til dashboard</button>
 
     <!-- Top section -->
     <section class="topSection">
