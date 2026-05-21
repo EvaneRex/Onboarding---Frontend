@@ -3,6 +3,10 @@ import { ref, onMounted } from 'vue'
 
 import Header from '@/components/shared/header.vue'
 
+defineProps({
+  logout: Function
+})
+
 import companyInfo from '@/components/admin/companyInfo.vue'
 
 import { getAllClients, deleteClient } from '@/components/services/customerService'
@@ -76,6 +80,8 @@ onMounted(() => {
 </script>
 
 <template>
+  <Header :logout="logout" />
+  
   <!-- COMPANY LIST -->
   <section v-if="currentView === 'list'" class="companyList">
     <!-- Header -->

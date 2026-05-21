@@ -61,7 +61,7 @@ const login = async () => {
   if (email.value === 'admin@test.dk') {
     emit('login-success', {
       name: 'Admin',
-      role: 'admin'
+      role: 'admin',
     })
 
     return
@@ -70,7 +70,7 @@ const login = async () => {
   if (email.value === 'client@test.dk') {
     emit('login-success', {
       name: 'Client',
-      role: 'client'
+      role: 'client',
     })
 
     return
@@ -81,29 +81,19 @@ const login = async () => {
 </script>
 
 <template>
-  <h1>Login</h1>
+  <main class="login">
+    <div class="login-wrapper">
+      <h1>Login</h1>
+      <form method="post" @submit.prevent="login">
+        <label for="email">Email</label>
+        <input id="email" type="email" v-model="email" required />
 
-  <form @submit.prevent="login">
-    <label>Email</label>
-    <input
-      type="email"
-      v-model="email"
-      required
-    />
+        <label for="adgangskode">Adgangskode</label>
+        <input id="adgangskode" type="password" v-model="adgangskode" required />
 
-    <label>Adgangskode</label>
-    <input
-      type="password"
-      v-model="adgangskode"
-      required
-    />
-
-    <p v-if="error">
-      {{ error }}
-    </p>
-
-    <button type="submit">
-      Login
-    </button>
-  </form>
+        <p v-if="error">{{ error }}</p>
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  </main>
 </template>
