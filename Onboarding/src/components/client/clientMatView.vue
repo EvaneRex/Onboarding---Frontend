@@ -22,10 +22,10 @@ const completeMaterial = () => {
         frameborder="0"
         allowfullscreen
         class="viewer"
-      />
+      ></iframe>
 
       <!-- PDF -->
-      <iframe v-if="material.type === 'pdf'" :src="material.src" class="viewer" />
+      <iframe v-if="material.type === 'pdf'" :src="material.src" class="viewer"></iframe>
     </div>
 
     <button class="completeBtn" @click="completeMaterial">Marker som gennemført</button>
