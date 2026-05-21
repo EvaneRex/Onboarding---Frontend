@@ -80,8 +80,8 @@ onMounted(() => {
 </script>
 
 <template>
-  <Header :logout="logout" />
-  
+  <header :logout="logout" />
+
   <!-- COMPANY LIST -->
   <section v-if="currentView === 'list'" class="companyList">
     <!-- Header -->

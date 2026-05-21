@@ -3,9 +3,11 @@ import { ref, onMounted } from 'vue'
 import clientMatView from '@/components/client/clientMatView.vue'
 import { getOnboarding } from '@/components/services/materialService.js'
 
-// Shared components
-import Header
-from '@/components/shared/header.vue'
+import Header from '@/components/shared/header.vue'
+
+defineProps({
+  logout: Function
+})
 
 const currentView = ref('dashboard')
 const selectedMaterial = ref(null)
@@ -67,14 +69,7 @@ const goBack = () => {
 </script>
 
 <template>
-  <!-- Header -->
-    <Header
-      @logout="
-        emit(
-          'logout'
-        )
-      "
-    />
+  <header :logout="logout" />
 
   <!-- DASHBOARD -->
   <section

@@ -52,7 +52,7 @@ function goBack() {
     class="dashboard"
   >
 
-   <Header :logout="logout" />
+   <header :logout="logout" />
 
     <!-- Welcome -->
     <section
