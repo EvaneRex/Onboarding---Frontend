@@ -1,4 +1,15 @@
-<script setup></script>
+<script setup>
+import header from '@/components/shared/header.vue'
+
+defineProps({
+  logout: Function
+})
+
+</script>
 <template>
-  <button class="backBtn" @click="emit('goBack')">⟵ Tilbage til dashboard</button>
+  <header :logout="logout" />
+  <div>
+    <span class="icon">➜</span>
+    <p>Tilbage til dashboard</p>
+  </div>
 </template>
