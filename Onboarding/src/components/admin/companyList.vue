@@ -5,7 +5,7 @@ import {
 } from 'vue'
 
 import Header
-from '@/shared/header.vue'
+from '@/components/shared/header.vue'
 
 import companyInfo
 from '@/components/admin/companyInfo.vue'
@@ -14,7 +14,7 @@ import {
   getAllClients,
   deleteClient
 }
-from '@/services/customerService'
+from '@/components/services/customerService'
 
 // Event til parent
 const emit =

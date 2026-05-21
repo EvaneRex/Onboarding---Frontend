@@ -3,7 +3,7 @@ import { ref } from 'vue'
 
 // Shared components
 import Header
-from '@/shared/header.vue'
+from '@/components/shared/header.vue'
 
 // Admin components
 import materialOverview
