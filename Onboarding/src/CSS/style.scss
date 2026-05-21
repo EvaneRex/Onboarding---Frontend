@@ -4,6 +4,7 @@
   padding: 0;
   box-sizing: border-box;
 }
+
 body {
   background-color: partial.$white;
 }
@@ -59,7 +60,7 @@ header {
     width: 180px;
   }
 
-  .logoutBtn {
+  .logout {
     background: none;
     border: none;
     padding: 0;
@@ -76,6 +77,197 @@ header {
 
     &:active {
       transform: scale(0.98);
+    }
+  }
+}
+
+.dashboard {
+  padding: 2rem 3rem;
+  min-height: 100vh;
+  background-color: partial.$white;
+
+  .welcome {
+    margin-bottom: 5rem;
+    max-width: 700px;
+
+    h1 {
+      @include partial.heading(48px);
+      margin-bottom: 1rem;
+    }
+
+    p {
+      @include partial.txt(18px);
+      line-height: 1.7;
+      max-width: 650px;
+    }
+  }
+
+  .dashboardCards {
+    display: flex;
+    justify-content: center;
+    gap: 6rem;
+    margin-top: 5rem;
+
+    .card {
+      width: 100%;
+      padding: 2rem 2rem;
+
+      background-color: partial.$lightgray;
+      border-radius: partial.$border-radius;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      cursor: pointer;
+
+      transition: 0.25s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+      &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
+      }
+
+      &:active {
+        transform: scale(0.98);
+      }
+
+      h2 {
+        @include partial.heading(40px);
+        margin-bottom: 1.5rem;
+      }
+
+      .iconCard {
+        color: partial.$orange;
+        font-size: 6rem;
+      }
+    }
+  }
+}
+
+.companyList {
+  padding: 2rem 3rem;
+  min-height: 100vh;
+  background-color: partial.$white;
+
+  .backBtn {
+    background: none;
+    border: none;
+
+    cursor: pointer;
+
+    margin-bottom: 3rem;
+
+    @include partial.txt(20px);
+
+    transition: 0.2s ease;
+
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+
+  .topSection {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 3rem;
+
+    h1 {
+      @include partial.heading(48px);
+    }
+
+    .createBtn {
+      @include partial.btn;
+
+      padding: 0 2rem;
+      min-width: 240px;
+    }
+    .topButtons {
+      display: flex;
+      gap: 1rem;
+    }
+  }
+
+  .tableBox {
+    background-color: partial.$lightgray;
+
+    border-radius: partial.$border-radius;
+
+    overflow: hidden;
+
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+
+      thead {
+        background-color: partial.$blue;
+
+        th {
+          @include partial.txt(20px);
+
+          text-align: left;
+          padding: 1.4rem 2rem;
+          font-family: partial.$fontSemi;
+        }
+      }
+
+      tbody {
+        tr {
+          border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+
+          transition: 0.2s ease;
+
+          &:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+          }
+
+          &:last-child {
+            border-bottom: none;
+          }
+
+          td {
+            padding: 1.5rem 2rem;
+
+            @include partial.txt(18px);
+          }
+        }
+      }
+    }
+  }
+
+  .actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+
+    button {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+
+      background: none;
+      border: none;
+
+      cursor: pointer;
+
+      @include partial.txt(18px);
+
+      transition: 0.2s ease;
+
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+
+    .iconCompanyList {
+      width: 22px;
+      height: 22px;
     }
   }
 }

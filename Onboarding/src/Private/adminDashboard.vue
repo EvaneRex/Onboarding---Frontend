@@ -18,12 +18,6 @@ from '@/components/admin/companyList.vue'
 const currentView =
   ref('dashboard')
 
-// Sender logout til App.vue
-const emit =
-  defineEmits([
-    'logout'
-  ])
-
 // Navigation
 function navigateTo(
   view
@@ -42,7 +36,7 @@ function goBack() {
 </script>
 
 <template>
-
+    <Header :logout="logout" />
   <!-- DASHBOARD -->
   <section
     v-if="
@@ -51,8 +45,6 @@ function goBack() {
     "
     class="dashboard"
   >
-
-   <header :logout="logout" />
 
     <!-- Welcome -->
     <section
@@ -91,26 +83,15 @@ function goBack() {
           )
         "
       >
-
         <h2>
           Materialer
         </h2>
 
-      </div>
-
-      <!-- SURVEY -->
-      <div
-        class="card"
-        @click="
-          navigateTo(
-            'survey'
-          )
-        "
-      >
-
-        <h2>
-          Spørgeskema
-        </h2>
+         <img 
+         src="@/assets/icon/layer-group-solid-full.svg" 
+         alt="materialer" 
+         class="iconCard" 
+         />
 
       </div>
 
@@ -128,6 +109,12 @@ function goBack() {
           Kunder
         </h2>
 
+        <img 
+         src="@/assets/icon/users-line-solid-full.svg" 
+         alt="kunder" 
+         class="iconCard" 
+         />
+
       </div>
 
     </section>
@@ -139,17 +126,6 @@ function goBack() {
     v-if="
       currentView ===
       'materials'
-    "
-    @goBack="
-      goBack
-    "
-  />
-
-  <!-- SURVEY -->
-  <surveyOverview
-    v-if="
-      currentView ===
-      'survey'
     "
     @goBack="
       goBack

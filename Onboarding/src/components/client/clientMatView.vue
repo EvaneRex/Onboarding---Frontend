@@ -1,6 +1,6 @@
 <script setup>
 
-import header from '@/components/shared/header.vue'
+import Header from '@/components/shared/header.vue'
 
 defineProps({
   material: Object,
@@ -20,7 +20,7 @@ const completeMaterial = () => {
 </script>
 
 <template>
-  <header :logout="logout" />
+  <Header :logout="logout" />
   <section class="materialView">
     
     <button

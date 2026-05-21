@@ -1,12 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 
-import Header from '@/components/shared/header.vue'
-
-defineProps({
-  logout: Function
-})
-
 import companyInfo from '@/components/admin/companyInfo.vue'
 
 import { getAllClients, deleteClient } from '@/components/services/customerService'
@@ -80,12 +74,9 @@ onMounted(() => {
 </script>
 
 <template>
-  <header :logout="logout" />
 
   <!-- COMPANY LIST -->
   <section v-if="currentView === 'list'" class="companyList">
-    <!-- Header -->
-    <Header />
 
     <!-- Tilbage -->
     <button class="backBtn" @click="emit('goBack')">← Tilbage til dashboard</button>
@@ -94,7 +85,15 @@ onMounted(() => {
     <section class="topSection">
       <h1>Oversigt over kunder</h1>
 
-      <button class="createBtn">Opret virksomhed</button>
+      <div class="topButtons">
+        <button class="createBtn">
+          Opret bruger
+        </button>
+
+        <button class="createBtn">
+          Opret virksomhed
+        </button>
+      </div>
     </section>
 
     <!-- Table -->
