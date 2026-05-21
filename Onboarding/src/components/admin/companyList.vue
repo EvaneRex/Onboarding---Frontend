@@ -4,7 +4,7 @@ import { ref, onMounted } from 'vue'
 import Header from '@/components/shared/header.vue'
 
 defineProps({
-  logout: Function
+  logout: Function,
 })
 
 import companyInfo from '@/components/admin/companyInfo.vue'
@@ -88,7 +88,7 @@ onMounted(() => {
     <Header />
 
     <!-- Tilbage -->
-    <button class="backBtn" @click="emit('goBack')">← Tilbage til dashboard</button>
+    <button class="backBtn" @click="emit('goBack')">⟵ Tilbage til dashboard</button>
 
     <!-- Top section -->
     <section class="topSection">
