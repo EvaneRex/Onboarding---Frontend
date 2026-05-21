@@ -1,9 +1,18 @@
 <script setup>
-const props = defineProps({
+
+import header from '@/components/shared/header.vue'
+
+defineProps({
   material: Object,
+  logout: Function
 })
 
-const emit = defineEmits(['goBack', 'complete'])
+
+
+const emit = defineEmits([
+  'goBack',
+  'complete'
+])
 
 const completeMaterial = () => {
   emit('complete', props.material.index)
@@ -11,10 +20,18 @@ const completeMaterial = () => {
 </script>
 
 <template>
+  <header :logout="logout" />
   <section class="materialView">
-    <button class="backBtn" @click="emit('goBack')">⟵ Tilbage til dashboard</button>
+    
+    <button
+      class="backBtn"
+      @click="emit('goBack')"
+    >
+      ← Tilbage
+    </button>
 
     <div class="content">
+
       <!-- YOUTUBE -->
       <iframe
         v-if="material.type === 'youtube'"
@@ -25,9 +42,20 @@ const completeMaterial = () => {
       ></iframe>
 
       <!-- PDF -->
-      <iframe v-if="material.type === 'pdf'" :src="material.src" class="viewer"></iframe>
+      <iframe
+        v-if="material.type === 'pdf'"
+        :src="material.src"
+        class="viewer"
+      />
+
     </div>
 
-    <button class="completeBtn" @click="completeMaterial">Marker som gennemført</button>
+    <button
+      class="completeBtn"
+      @click="completeMaterial"
+    >
+      Marker som gennemført
+    </button>
+
   </section>
 </template>
