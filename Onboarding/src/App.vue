@@ -1,7 +1,7 @@
 <script setup>
 import { ref } from 'vue'
 
-// import login from './components/login.vue'
+import login from './components/login.vue'
 
 import adminDashboard from './Private/adminDashboard.vue'
 
@@ -28,6 +28,6 @@ function logout() {
 
 <template>
   <login v-if="currentPage === 'login'" @login-success="handleLogin" />
-  <admindashboard v-if="currentPage === 'adminDashboard'" :user="currentUser" @logout="logout" />
+  <adminDashboard v-if="currentPage === 'adminDashboard'" :user="currentUser" @logout="logout" />
   <clientDashboard v-if="currentPage === 'clientDashboard'" :user="currentUser" @logout="logout" />
 </template>
