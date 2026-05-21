@@ -1,4 +1,4 @@
-<script setup>
+<!-- <script setup>
 import { ref } from 'vue'
 import { getUser, login as loginService } from './services/authService'
 
@@ -37,9 +37,79 @@ const login = async () => {
         <label for="adgangskode">Adgangskode</label>
         <input id="adgangskode" type="password" v-model="adgangskode" required />
 
+<<<<<<< HEAD
         <p v-if="error">{{ error }}</p>
         <button type="submit">Login</button>
       </form>
     </div>
   </main>
+=======
+    <p v-if="error">{{ error }}</p>
+    <button type="submit">Login</button>
+  </form>
+</template> -->
+
+<script setup>
+import { ref } from 'vue'
+
+// emit
+const emit = defineEmits(['login-success'])
+
+const email = ref('')
+const adgangskode = ref('')
+const error = ref('')
+
+const login = async () => {
+  error.value = ''
+
+  // FAKE LOGIN
+  if (email.value === 'admin@test.dk') {
+    emit('login-success', {
+      name: 'Admin',
+      role: 'admin'
+    })
+
+    return
+  }
+
+  if (email.value === 'client@test.dk') {
+    emit('login-success', {
+      name: 'Client',
+      role: 'client'
+    })
+
+    return
+  }
+
+  error.value = 'Forkert login'
+}
+</script>
+
+<template>
+  <h1>Login</h1>
+
+  <form @submit.prevent="login">
+    <label>Email</label>
+    <input
+      type="email"
+      v-model="email"
+      required
+    />
+
+    <label>Adgangskode</label>
+    <input
+      type="password"
+      v-model="adgangskode"
+      required
+    />
+
+    <p v-if="error">
+      {{ error }}
+    </p>
+
+    <button type="submit">
+      Login
+    </button>
+  </form>
+>>>>>>> f6e7d61bc9e93914f1e21a4f6bf04825d9453d6c
 </template>
