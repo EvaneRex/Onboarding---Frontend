@@ -252,7 +252,7 @@ onMounted(() => {
                 "
               >
               <img
-                src="@/assets/icons/arrow-up-right-from-square-solid-full.svg"
+                src="@/assets/icon/arrow-up-right-from-square-solid-full.svg"
                 alt="Åben kunde"
                 class="iconCompanyList"
               >
@@ -270,7 +270,7 @@ onMounted(() => {
               >
 
                 <img
-                  src="@/assets/icons/trash-solid-full.svg"
+                  src="@/assets/icon/trash-solid-full.svg"
                   alt="Slet kunde"
                   class="iconCompanyList"
                 >
