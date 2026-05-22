@@ -29,8 +29,8 @@ const emit = defineEmits(['goBack'])
 const props = defineProps({
   client: {
     type: Object,
-    default: null
-  }
+    default: null,
+  },
 })
 
 const dialogRef = ref(null)
@@ -66,36 +66,27 @@ onMounted(() => {
 </script>
 
 <template>
-  <dialog
-    ref="dialogRef"
-    class="companyDialog"
-  >
-  <div>
-    <button
-      class="closeBtn"
-      @click="closeModal"
-    >
-
-      x
-
-    </button>
-  </div>
+  <dialog ref="dialogRef" class="companyDialog">
+    <div>
+      <button class="closeBtn" @click="closeModal">x</button>
+    </div>
     <!-- Top -->
     <section class="modalTop">
-
       <div>
         <h1>
           {{ props.client?.clientName }}
         </h1>
 
         <p>
-          Her er de materialer, som er tildelt denne virksomhed
-          samt status på hvor langt de er med disse.
+          Her er de materialer, som er tildelt denne virksomhed samt status på hvor langt de er med
+          disse.
         </p>
       </div>
 
       <div class="topButtons">
+        <button class="createBtn">Tildel materialer</button>
 
+<<<<<<< HEAD
         <button class="createBtn" @click="openAssignment">
           Tildel materialer
         </button>
@@ -104,15 +95,15 @@ onMounted(() => {
           Se spørgeskema
         </button>
 
+=======
+        <button class="createBtn">Se spørgeskema</button>
+>>>>>>> 9fc9b541e22d0db343b01c6aece7e35c54d87444
       </div>
-
     </section>
 
     <!-- Table -->
     <section class="tableBox">
-
       <table v-if="currentState === 'success'">
-
         <thead>
           <tr>
             <th>Materialer</th>
@@ -121,10 +112,7 @@ onMounted(() => {
         </thead>
 
         <tbody>
-          <tr
-            v-for="(material, index) in materials"
-            :key="index"
-          >
+          <tr v-for="(material, index) in materials" :key="index">
             <td>
               {{ material.title || `Materiale ${index + 1}` }}
             </td>
@@ -134,19 +122,14 @@ onMounted(() => {
             </td>
           </tr>
         </tbody>
-
       </table>
 
-      <p v-if="currentState === 'loading'">
-        Indlæser materialer...
-      </p>
+      <p v-if="currentState === 'loading'">Indlæser materialer...</p>
 
-      <p v-if="currentState === 'error'">
-        Der skete en fejl.
-      </p>
-
+      <p v-if="currentState === 'error'">Der skete en fejl.</p>
     </section>
   </dialog>
+<<<<<<< HEAD
 
       <MaterialAssignment
       v-if="showAssignment"
@@ -156,3 +139,6 @@ onMounted(() => {
     />
 
 </template>
+=======
+</template>
+>>>>>>> 9fc9b541e22d0db343b01c6aece7e35c54d87444
