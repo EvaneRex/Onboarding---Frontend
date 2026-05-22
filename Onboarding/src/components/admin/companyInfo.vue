@@ -58,8 +58,7 @@ function getMaterialStatus(material) {
 onMounted(() => {
   dialogRef.value?.showModal()
 
-  materials.value =
-    props.client?.onboardingSlides || []
+  materials.value = props.client?.onboardingSlides || []
 
   currentState.value = 'success'
 })
@@ -86,18 +85,7 @@ onMounted(() => {
       <div class="topButtons">
         <button class="createBtn">Tildel materialer</button>
 
-<<<<<<< HEAD
-        <button class="createBtn" @click="openAssignment">
-          Tildel materialer
-        </button>
-
-        <button class="createBtn">
-          Se spørgeskema
-        </button>
-
-=======
         <button class="createBtn">Se spørgeskema</button>
->>>>>>> 9fc9b541e22d0db343b01c6aece7e35c54d87444
       </div>
     </section>
 
@@ -129,16 +117,4 @@ onMounted(() => {
       <p v-if="currentState === 'error'">Der skete en fejl.</p>
     </section>
   </dialog>
-<<<<<<< HEAD
-
-      <MaterialAssignment
-      v-if="showAssignment"
-      :client="props.client"
-      @close="closeAssignment"
-      @save="saveAssignedMaterials"
-    />
-
 </template>
-=======
-</template>
->>>>>>> 9fc9b541e22d0db343b01c6aece7e35c54d87444
