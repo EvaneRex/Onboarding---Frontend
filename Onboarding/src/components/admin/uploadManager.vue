@@ -9,10 +9,10 @@ const activeTab = ref('pdf')
 const emit = defineEmits(['close'])
 </script>
 <template>
-  <button class="close-btn" @click="emit('close')" aria-label="Luk">
-    <img :src="x" alt="Luk" />
-  </button>
   <dialog>
+    <button class="close-btn" @click="emit('close')" aria-label="Luk">
+      <img :src="x" alt="Luk" />
+    </button>
     <div class="modal">
       <h1>Upload materialer</h1>
       <p>
