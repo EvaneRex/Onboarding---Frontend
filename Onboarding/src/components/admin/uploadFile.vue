@@ -2,6 +2,7 @@
 import { ref } from 'vue'
 
 const filInput = ref(null)
+const emit = defineEmits(['goBack'])
 
 async function uploadPdfFiler() {
   const filer = filInput.value.files
@@ -32,7 +33,7 @@ async function uploadPdfFiler() {
 }
 </script>
 <template>
-<button class="backBtn" @click="emit('goBack')">⟵ Tilbage til dashboard</button>
+  <button class="backBtn" @click="emit('goBack')">⟵ Tilbage til dashboard</button>
   <main>
     <form @submit.prevent="uploadPdfFiler">
       <label for="input">Vælg PDF-fil(er):</label>
