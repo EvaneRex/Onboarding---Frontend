@@ -10,10 +10,12 @@ import UploadFile from './uploadFile.vue'
 import UploadVideo from './uploadVideo.vue'
 import UploadSurvey from './uploadSurvey.vue'
 import { ref, onMounted } from 'vue'
-import closeIcon from '@/assets/icon/x-solid-full.svg'
 
 const activeTab = ref('pdf')
-const emit = defineEmits(['close'])
+function closeModal() {
+  dialogRef.value.close()
+  emit('goBack')
+}
 
 const dialogRef = ref(null)
 
@@ -25,9 +27,7 @@ onMounted(() => {
 </script>
 <template>
   <dialog ref="dialogRef">
-    <button class="close-btn" @click="emit('close')" aria-label="Luk">
-      <img :src="closeIcon" alt="luk modal" />
-    </button>
+    <button class="closeBtn" @click="closeModal">x</button>
     <div class="modal">
       <h1>Upload materialer</h1>
       <p>

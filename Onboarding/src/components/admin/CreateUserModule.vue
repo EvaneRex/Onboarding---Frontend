@@ -1,10 +1,14 @@
+<!--
+Denne er ansvarligt for at oprette nye brugere, alt efter hvilken knap man trykker på, bliver de enten oprettet som admin eller klient. 
+-->
+
 <script setup>
 import { ref } from 'vue'
 const emit = defineEmits(['close'])
 
 const email = ref('')
 const username = ref('')
-const surveyId = 'indsæt_surveyId_her' // Hent dette dynamisk hvis nødvendigt
+const surveyId = 'indsæt_surveyId_her'
 
 async function opretKlient() {
   await fetch(`http://localhost:2000/register/create-new-client-account/${surveyId}`, {
