@@ -83,7 +83,7 @@ onMounted(() => {
       </div>
 
       <div class="topButtons">
-        <button class="createBtn">Tildel materialer</button>
+        <button class="createBtn" @click="openAssignment">Tildel materialer</button>
 
         <button class="createBtn">Se spørgeskema</button>
       </div>
@@ -117,4 +117,11 @@ onMounted(() => {
       <p v-if="currentState === 'error'">Der skete en fejl.</p>
     </section>
   </dialog>
+
+  <MaterialAssignment
+    v-if="showAssignment"
+    :client="props.client"
+    @close="closeAssignment"
+    @save="saveAssignedMaterials"
+  />
 </template>
