@@ -1,7 +1,5 @@
 <script setup>
 
-import Header from '@/components/shared/header.vue'
-
 defineProps({
   material: Object,
   logout: Function
@@ -20,7 +18,6 @@ const completeMaterial = () => {
 </script>
 
 <template>
-  <Header :logout="logout" />
   <section class="materialView">
     
     <button
@@ -46,7 +43,7 @@ const completeMaterial = () => {
         v-if="material.type === 'pdf'"
         :src="material.src"
         class="viewer"
-      />
+      ></iframe>
 
     </div>
 
