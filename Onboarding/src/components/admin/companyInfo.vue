@@ -2,6 +2,28 @@
 import { ref, onMounted } from 'vue'
 import { getOnboarding } from '@/components/services/materialService'
 
+import MaterialAssignment from '@/components/admin/materialAssignment.vue'
+
+const showAssignment = ref(false)
+
+function openAssignment() {
+  dialogRef.value?.close()
+  showAssignment.value = true
+}
+
+function closeAssignment() {
+  showAssignment.value = false
+
+  // åbn company modal igen
+  dialogRef.value?.showModal()
+}
+function saveAssignedMaterials(selectedMaterials) {
+  // Gem tildelte materialer til backend
+  props.client.onboardingSlides = selectedMaterials
+  materials.value = selectedMaterials
+  showAssignment.value = false
+}
+
 const emit = defineEmits(['goBack'])
 
 const props = defineProps({
@@ -33,22 +55,13 @@ function getMaterialStatus(material) {
   return 'Ikke startet'
 }
 
-onMounted(async () => {
-  // ÅBN som RIGTIG modal
+onMounted(() => {
   dialogRef.value?.showModal()
 
-  try {
-    const onboarding = await getOnboarding()
+  materials.value =
+    props.client?.onboardingSlides || []
 
-    materials.value =
-      onboarding?.onboardingSlides || []
-
-    currentState.value = 'success'
-  }
-
-  catch (error) {
-    currentState.value = 'error'
-  }
+  currentState.value = 'success'
 })
 </script>
 
@@ -83,7 +96,7 @@ onMounted(async () => {
 
       <div class="topButtons">
 
-        <button class="createBtn">
+        <button class="createBtn" @click="openAssignment">
           Tildel materialer
         </button>
 
@@ -134,4 +147,12 @@ onMounted(async () => {
 
     </section>
   </dialog>
+
+      <MaterialAssignment
+      v-if="showAssignment"
+      :client="props.client"
+      @close="closeAssignment"
+      @save="saveAssignedMaterials"
+    />
+
 </template>
