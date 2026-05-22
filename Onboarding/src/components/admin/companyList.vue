@@ -112,7 +112,7 @@ onMounted(() => {
           <tr>
             <th>Virksomhed</th>
 
-            <th>Handlinger</th>
+            <th></th>
           </tr>
         </thead>
 
