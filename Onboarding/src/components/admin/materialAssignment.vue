@@ -43,9 +43,10 @@ function saveMaterials() {
         )
     )
 
-  emit('save', selected)
-
   dialogRef.value.close()
+
+  emit('save', selected)
+  emit('close')
 }
 
 function closeModal() {

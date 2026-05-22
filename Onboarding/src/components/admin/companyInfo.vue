@@ -18,10 +18,17 @@ function closeAssignment() {
   dialogRef.value?.showModal()
 }
 function saveAssignedMaterials(selectedMaterials) {
-  // Gem tildelte materialer til backend
-  props.client.onboardingSlides = selectedMaterials
-  materials.value = selectedMaterials
-  showAssignment.value = false
+  props.client.onboardingSlides =
+    selectedMaterials
+
+  materials.value =
+    selectedMaterials
+
+  showAssignment.value =
+    false
+
+  // åbn modal igen
+  dialogRef.value?.showModal()
 }
 
 const emit = defineEmits(['goBack'])
