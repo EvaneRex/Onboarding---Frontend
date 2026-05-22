@@ -84,9 +84,7 @@ onMounted(() => {
       </div>
 
       <div class="topButtons">
-        <button class="createBtn">Tildel materialer</button>
 
-<<<<<<< HEAD
         <button class="createBtn" @click="openAssignment">
           Tildel materialer
         </button>
@@ -95,9 +93,6 @@ onMounted(() => {
           Se spørgeskema
         </button>
 
-=======
-        <button class="createBtn">Se spørgeskema</button>
->>>>>>> 9fc9b541e22d0db343b01c6aece7e35c54d87444
       </div>
     </section>
 
@@ -129,7 +124,6 @@ onMounted(() => {
       <p v-if="currentState === 'error'">Der skete en fejl.</p>
     </section>
   </dialog>
-<<<<<<< HEAD
 
       <MaterialAssignment
       v-if="showAssignment"
@@ -139,6 +133,3 @@ onMounted(() => {
     />
 
 </template>
-=======
-</template>
->>>>>>> 9fc9b541e22d0db343b01c6aece7e35c54d87444
