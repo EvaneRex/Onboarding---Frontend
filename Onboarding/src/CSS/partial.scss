@@ -47,3 +47,18 @@ $border-radius: 10px;
     background-color: #cc4101;
   }
 }
+
+@mixin backbtn($color: $darkgray) {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: $fontSemi;
+  font-size: 16px;
+  color: $color;
+  cursor: pointer;
+  transition: 0.2s ease;
+
+  &:hover {
+    opacity: 0.7;
+}
+}
