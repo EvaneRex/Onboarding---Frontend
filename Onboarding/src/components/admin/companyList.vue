@@ -90,9 +90,6 @@ onMounted(() => {
           Opret bruger
         </button>
 
-        <button class="createBtn">
-          Opret virksomhed
-        </button>
       </div>
     </section>
 
