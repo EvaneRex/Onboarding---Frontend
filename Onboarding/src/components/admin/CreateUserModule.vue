@@ -3,15 +3,23 @@ Denne er ansvarligt for at oprette nye brugere, alt efter hvilken knap man trykk
 -->
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 const emit = defineEmits(['close'])
 
 const email = ref('')
 const username = ref('')
-const surveyId = 'indsæt_surveyId_her'
+const surveyId = ref('')
+
+onMounted(async () => {
+  const res = await fetch('http://localhost:2000/survey/survey-questions', {
+    credentials: 'include',
+  })
+  const data = await res.json()
+  surveyId.value = data.id
+})
 
 async function opretKlient() {
-  await fetch(`http://localhost:2000/register/create-new-client-account/${surveyId}`, {
+  await fetch(`http://localhost:2000/register/create-new-client-account/${surveyId.value}`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     credentials: 'include',
