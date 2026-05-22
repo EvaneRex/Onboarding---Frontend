@@ -1,3 +1,7 @@
+<!--
+Dette er komponenten der styrer upload af PDF'filer, de kan uploade en eller flere.
+Forældrekomponenten er uploadManager.vue
+-->
 <script setup>
 import { ref } from 'vue'
 

@@ -1,3 +1,7 @@
+<!--
+Dette er en komponent som håndtere upload af youtube links, både enkeltvis men også flere ad gangen. 
+Dens forældre komponent er uploadManager.vue
+-->
 <script setup>
 import { ref } from 'vue'
 

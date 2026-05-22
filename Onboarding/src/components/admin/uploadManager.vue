@@ -1,3 +1,10 @@
+<!--
+Denne komponent har faste elementer men har en sektion som skifter mellem tre underkomponenter.
+Disse er :
+- uploadSurvey
+- uploadVideo
+- uploadFile
+-->
 <script setup>
 import UploadFile from './uploadFile.vue'
 import UploadVideo from './uploadVideo.vue'
