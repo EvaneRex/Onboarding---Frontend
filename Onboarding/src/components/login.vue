@@ -76,7 +76,7 @@ const login = async () => {
 
     emit('login-success', {
       name: 'Admin',
-      role: 'admin'
+      role: 'admin',
     })
 
     return
@@ -93,7 +93,7 @@ const login = async () => {
 
     emit('login-success', {
       name: 'Client',
-      role: 'client'
+      role: 'client',
     })
 
     return
@@ -108,36 +108,20 @@ const login = async () => {
     <div class="login-wrapper">
       <h1>Login</h1>
 
-      <form @submit.prevent="login">
-        <label>Email</label>
-        <input
-          type="email"
-          v-model="email"
-          required
-        />
+      <form method="post" @submit.prevent="login">
+        <label for="email">Email</label>
+        <input id="email" type="email" v-model="email" required />
 
-        <label>Adgangskode</label>
-        <input
-          type="password"
-          v-model="adgangskode"
-          required
-        />
+        <label for="adgangskode">Adgangskode</label>
+        <input id="adgangskode" type="password" v-model="adgangskode" required />
 
         <label>
-          <input
-            type="checkbox"
-            v-model="rememberMe"
-          />
+          <input type="checkbox" v-model="rememberMe" />
           Husk mig
         </label>
 
-        <p v-if="error">
-          {{ error }}
-        </p>
-
-        <button type="submit">
-          Login
-        </button>
+        <p v-if="error">{{ error }}</p>
+        <button type="submit">Login</button>
       </form>
     </div>
   </main>

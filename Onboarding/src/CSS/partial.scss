@@ -62,3 +62,43 @@ $border-radius: 10px;
     opacity: 0.7;
 }
 }
+@mixin tablebox ($background-color: partial.$blue){
+  table {
+      width: 100%;
+      border-collapse: collapse;
+
+      thead {
+        background-color: $background-color;
+
+        th {
+          @include partial.txt(20px);
+
+          text-align: left;
+          padding: 1.4rem 2rem;
+          font-family: partial.$fontSemi;
+        }
+      }
+
+      tbody {
+        tr {
+          border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+
+          transition: 0.2s ease;
+
+          &:hover {
+            background-color: rgba(255, 255, 255, 0.3);
+          }
+
+          &:last-child {
+            border-bottom: none;
+          }
+
+          td {
+            padding: 1.5rem 2rem;
+
+            @include partial.txt(18px);
+          }
+        }
+      }
+    }
+}
