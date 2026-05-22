@@ -2,16 +2,24 @@
 import UploadFile from './uploadFile.vue'
 import UploadVideo from './uploadVideo.vue'
 import UploadSurvey from './uploadSurvey.vue'
-import { ref } from 'vue'
-import x from '@/assets/icon/x-solid-full.svg'
+import { ref, onMounted } from 'vue'
+import closeIcon from '@/assets/icon/x-solid-full.svg'
 
 const activeTab = ref('pdf')
 const emit = defineEmits(['close'])
+
+const dialogRef = ref(null)
+
+onMounted(() => {
+  if (dialogRef.value) {
+    dialogRef.value.showModal()
+  }
+})
 </script>
 <template>
-  <dialog>
+  <dialog ref="dialogRef">
     <button class="close-btn" @click="emit('close')" aria-label="Luk">
-      <img :src="x" alt="Luk" />
+      <img :src="closeIcon" alt="luk modal" />
     </button>
     <div class="modal">
       <h1>Upload materialer</h1>
