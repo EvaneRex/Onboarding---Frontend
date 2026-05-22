@@ -81,11 +81,17 @@ header {
   }
 }
 
-.dashboard {
+.dashboard,
+.companyList,
+.matOverview {
   padding: 2rem 3rem;
   min-height: 100vh;
   background-color: partial.$white;
 
+  @include partial.backBtn;
+}
+
+.dashboard {
   .welcome {
     margin-bottom: 5rem;
     max-width: 700px;
@@ -148,12 +154,6 @@ header {
 }
 
 .companyList {
-  padding: 2rem 3rem;
-  min-height: 100vh;
-  background-color: partial.$white;
-
-  @include partial.backBtn;
-
   .topSection {
     display: flex;
     justify-content: space-between;

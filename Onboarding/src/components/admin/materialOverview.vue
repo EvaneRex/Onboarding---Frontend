@@ -14,7 +14,7 @@ function lukUploadManager() {
 </script>
 
 <template>
-  <section class="MatOverview">
+  <section class="matOverview">
     <button class="backBtn" @click="emit('goBack')">⟵ Tilbage til dashboard</button>
     <h1>Materialer</h1>
     <p>Her kan du tilgå materialerne, samt uploade nyt indhold og ændre navn på filerne.</p>
