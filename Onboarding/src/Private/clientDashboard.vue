@@ -3,7 +3,7 @@ import { ref, onMounted } from 'vue'
 import clientMatView from '@/components/client/clientMatView.vue'
 import { getOnboarding } from '@/components/services/materialService.js'
 
-import header from '@/components/shared/header.vue'
+import Header from '@/components/shared/header.vue'
 
 defineProps({
   logout: Function
@@ -69,7 +69,7 @@ const goBack = () => {
 </script>
 
 <template>
-  <header :logout="logout" />
+  <Header :logout="logout" />
 
   <!-- DASHBOARD -->
   <section
