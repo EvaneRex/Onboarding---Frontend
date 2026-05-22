@@ -1,3 +1,8 @@
+<!--
+Dette er en komponent som håndtere upload spørgeskemaet, fra serverside erstatter den spørgeskemaet der allerede ligger på serveren.
+Dens forældre komponent er uploadManager.vue
+-->
+
 <script setup>
 import { ref } from 'vue'
 
