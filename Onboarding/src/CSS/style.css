@@ -101,11 +101,28 @@ header .logout:active {
   transform: scale(0.98);
 }
 
-.dashboard {
+.dashboard,
+.companyList,
+.matOverview {
   padding: 2rem 3rem;
   min-height: 100vh;
   background-color: #ffffff;
 }
+
+.backBtn {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: "OpenSans-SemiBold", Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  color: #53575a;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+.backBtn:hover {
+  opacity: 0.7;
+}
+
 .dashboard .welcome {
   margin-bottom: 5rem;
   max-width: 700px;
@@ -160,24 +177,6 @@ header .logout:active {
   font-size: 6rem;
 }
 
-.companyList {
-  padding: 2rem 3rem;
-  min-height: 100vh;
-  background-color: #ffffff;
-}
-.companyList .backBtn {
-  background: none;
-  border: none;
-  cursor: pointer;
-  margin-bottom: 3rem;
-  font-family: "OpenSans-Regular", Arial, Helvetica, sans-serif;
-  font-size: 20px;
-  color: #53575a;
-  transition: 0.2s ease;
-}
-.companyList .backBtn:hover {
-  opacity: 0.7;
-}
 .companyList .topSection {
   display: flex;
   justify-content: space-between;
@@ -270,4 +269,56 @@ header .logout:active {
 .companyList .actions .iconCompanyList {
   width: 22px;
   height: 22px;
+}
+
+.clientDashboard .materialTable {
+  background-color: #d1d4d7;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+  margin-top: 2rem;
+}
+.clientDashboard .materialTable table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.clientDashboard .materialTable table thead {
+  background-color: #9bb7d3;
+}
+.clientDashboard .materialTable table thead th {
+  font-family: "OpenSans-Regular", Arial, Helvetica, sans-serif;
+  font-size: 20px;
+  color: #53575a;
+  text-align: left;
+  padding: 1.4rem 2rem;
+  font-family: "OpenSans-SemiBold", Arial, Helvetica, sans-serif;
+}
+.clientDashboard .materialTable table tbody tr {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+  transition: 0.2s ease;
+}
+.clientDashboard .materialTable table tbody tr:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+.clientDashboard .materialTable table tbody tr:last-child {
+  border-bottom: none;
+}
+.clientDashboard .materialTable table tbody tr td {
+  padding: 1.5rem 2rem;
+  font-family: "OpenSans-Regular", Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  color: #53575a;
+}
+.clientDashboard .materialTable .clickableRow {
+  cursor: pointer;
+}
+.clientDashboard .materialTable .clickableRow:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+.clientDashboard .tableClient {
+  width: 100%;
+}
+.clientDashboard .tableClient th:last-child,
+.clientDashboard .tableClient td:last-child {
+  width: 240px;
 }/*# sourceMappingURL=style.css.map */

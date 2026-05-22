@@ -22,7 +22,7 @@ body {
     height: auto;
     padding: 3rem 3rem;
     border-radius: partial.$border-radius;
-    @include partial.heading;
+    @include partial.heading();
 
     form {
       display: flex;
@@ -31,17 +31,17 @@ body {
       label {
         margin-top: 1rem;
         margin-bottom: 0.5rem;
-        @include partial.txt;
+        @include partial.txt();
       }
       input {
         height: 3rem;
         border-radius: partial.$border-radius;
         border: none;
         padding: 5px;
-        @include partial.txt;
+        @include partial.txt();
       }
       button {
-        @include partial.btn;
+        @include partial.btn();
         margin-top: 2.5rem;
       }
     }
@@ -87,8 +87,10 @@ header {
   padding: 2rem 3rem;
   min-height: 100vh;
   background-color: partial.$white;
+}
 
-  @include partial.backBtn;
+.backBtn {
+  @include partial.backBtn();
 }
 
 .dashboard {
@@ -166,7 +168,7 @@ header {
     }
 
     .createBtn {
-      @include partial.btn;
+      @include partial.btn();
 
       padding: 0 2rem;
       min-width: 240px;
@@ -186,7 +188,7 @@ header {
 
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
 
-    @include partial.tablebox;
+    @include partial.tableBox();
   }
 
   .actions {
@@ -216,6 +218,39 @@ header {
     .iconCompanyList {
       width: 22px;
       height: 22px;
+    }
+  }
+}
+
+.clientDashboard {
+   .materialTable {
+    background-color: partial.$lightgray;
+
+    border-radius: partial.$border-radius;
+
+    overflow: hidden;
+
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+
+    margin-top: 2rem;
+
+    @include partial.tableBox();
+
+    .clickableRow {
+      cursor: pointer;
+
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.3);
+      }
+    }
+  }
+
+  .tableClient {
+    width: 100%;
+
+    th:last-child,
+    td:last-child {
+      width: 240px;
     }
   }
 }

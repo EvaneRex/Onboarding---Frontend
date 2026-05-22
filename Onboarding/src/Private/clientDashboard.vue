@@ -74,7 +74,7 @@ const goBack = () => {
   <!-- DASHBOARD -->
   <section
     v-if="currentView === 'dashboard'"
-    class="dashboard"
+    class="dashboard clientDashboard"
   >
     <div class="welcome">
       <h1>Velkommen!</h1>
@@ -90,7 +90,7 @@ const goBack = () => {
 
     <div class="materialTable">
 
-      <table v-if="currentState === 'success'">
+      <table v-if="currentState === 'success'" class="tableClient">
 
         <thead>
           <tr>
