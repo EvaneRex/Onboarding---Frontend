@@ -5,6 +5,11 @@
   box-sizing: border-box;
 }
 
+.trash {
+  height: 1rem;
+  width: auto;
+}
+
 body {
   background-color: partial.$white;
 }
@@ -224,7 +229,7 @@ header {
 }
 
 .clientDashboard {
-   .materialTable {
+  .materialTable {
     background-color: partial.$lightgray;
 
     border-radius: partial.$border-radius;

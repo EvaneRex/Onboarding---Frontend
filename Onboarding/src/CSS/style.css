@@ -16,6 +16,11 @@
   box-sizing: border-box;
 }
 
+.trash {
+  height: 1rem;
+  width: auto;
+}
+
 body {
   background-color: #ffffff;
 }
