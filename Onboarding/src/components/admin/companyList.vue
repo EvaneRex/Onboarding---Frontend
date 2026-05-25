@@ -2,6 +2,7 @@
 import { ref, onMounted } from 'vue'
 
 import companyInfo from '@/components/admin/companyInfo.vue'
+import createUser from '@/components/admin/CreateUserModule.vue'
 
 import { getAllClients, deleteClient } from '@/components/services/customerService'
 
@@ -20,6 +21,14 @@ const clients = ref([])
 const loading = ref(true)
 
 const errorMessage = ref('')
+const showCreateUser = ref(false)
+
+function openCreateUser() {
+  showCreateUser.value = true
+}
+function closeCreateUser() {
+  showCreateUser.value = false
+}
 
 // Henter alle kunder
 async function loadClients() {
@@ -74,10 +83,8 @@ onMounted(() => {
 </script>
 
 <template>
-
   <!-- COMPANY LIST -->
   <section v-if="currentView === 'list'" class="companyList">
-
     <!-- Tilbage -->
     <button class="backBtn" @click="emit('goBack')">⟵ Tilbage til dashboard</button>
 
@@ -86,10 +93,7 @@ onMounted(() => {
       <h1>Oversigt over kunder</h1>
 
       <div class="topButtons">
-        <button class="createBtn">
-          Opret bruger
-        </button>
-
+        <button class="createBtn" @click="openCreateUser">Opret bruger</button>
       </div>
     </section>
 
@@ -154,4 +158,6 @@ onMounted(() => {
     :client="selectedCompany"
     @goBack="goBackToList"
   />
+
+  <createUser v-if="showCreateUser" @close="closeCreateUser" />
 </template>

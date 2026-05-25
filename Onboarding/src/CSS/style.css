@@ -785,4 +785,83 @@ header .logout:active {
 }
 .uploadVideo .submitLink {
   padding: 0.5rem 3rem;
+}
+
+.createUser {
+  width: 90%;
+  position: relative;
+  max-width: 1200px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  background: #ffffff;
+  padding: 2rem;
+  margin: auto;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+.createUser::backdrop {
+  background: rgba(0, 0, 0, 0.4);
+}
+.createUser h1 {
+  margin-top: 1rem;
+  font-family: "OpenSans-SemiBold", Arial, Helvetica, sans-serif;
+  font-size: 24px;
+  color: #53575a;
+}
+.createUser form {
+  font-family: "OpenSans-Regular", Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  color: #53575a;
+  margin: 1rem 0rem;
+}
+.createUser form label {
+  margin-top: 0.5rem;
+}
+.createUser form input {
+  height: 1.5rem;
+  border: 1px solid #53575a;
+  padding: 0.2rem;
+}
+.createUser .closeBtn {
+  position: absolute;
+  top: 1rem;
+  right: 2rem;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+  z-index: 10;
+}
+.createUser .closeBtn:hover {
+  opacity: 0.7;
+}
+.createUser .createUserBox {
+  display: flex;
+  flex-direction: column;
+  background-color: #d1d4d7;
+  border-radius: 10px;
+  padding: 1.5rem;
+}
+.createUser .createUserBox .createBtn {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.createUser .createUserBox .createBtn button {
+  background-color: #ff5100;
+  color: #ffffff;
+  border-radius: 10px;
+  border: none;
+  height: 3rem;
+  font-family: "OpenSans-Bold", Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  cursor: pointer;
+}
+.createUser .createUserBox .createBtn button:hover {
+  background-color: #cc4101;
+}
+.createUser .createUserBox .createBtn button {
+  align-self: flex-end;
+  width: 10vw;
 }/*# sourceMappingURL=style.css.map */

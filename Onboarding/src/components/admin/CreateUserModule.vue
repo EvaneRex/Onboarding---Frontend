@@ -3,9 +3,10 @@ Denne er ansvarligt for at oprette nye brugere, alt efter hvilken knap man trykk
 -->
 
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 const emit = defineEmits(['close'])
 
+const dialogRef = ref(null)
 const email = ref('')
 const username = ref('')
 const surveyId = ref('')
@@ -16,6 +17,13 @@ onMounted(async () => {
   })
   const data = await res.json()
   surveyId.value = data.id
+})
+
+onMounted(() => {
+  dialogRef.value?.showModal()
+})
+onBeforeUnmount(() => {
+  dialogRef.value?.close()
 })
 
 async function opretKlient() {
@@ -38,22 +46,21 @@ async function opretAdmin() {
 </script>
 
 <template>
-  <dialog ref="dialogRef">
-    <button class="close-btn" @click="emit('close')" aria-label="Luk">
-      <img :src="closeIcon" alt="luk modal" />
-    </button>
+  <dialog ref="dialogRef" class="createUser">
+    <button class="closeBtn" @click="emit('close')">x</button>
     <section>
       <h1>Opret en ny bruger</h1>
-      <div class="createUserBox">
+      <form class="createUserBox">
         <label for="email">Email</label>
         <input id="email" v-model="email" type="email" />
 
         <label for="username">Brugernavn</label>
         <input id="username" v-model="username" type="text" />
-
-        <button @click="opretKlient" type="button">Opret klient</button>
-        <button @click="opretAdmin" type="button">Opret admin</button>
-      </div>
+        <div class="createBtn">
+          <button @click="opretKlient" type="button">Opret klient</button>
+          <button @click="opretAdmin" type="button">Opret admin</button>
+        </div>
+      </form>
     </section>
   </dialog>
 </template>
