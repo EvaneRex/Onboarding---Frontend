@@ -26,7 +26,7 @@ onMounted(() => {
 })
 </script>
 <template>
-  <dialog ref="dialogRef">
+  <dialog ref="dialogRef" class="upManager">
     <button class="closeBtn" @click="closeModal">x</button>
     <div class="modal">
       <h1>Upload materialer</h1>
@@ -36,13 +36,22 @@ onMounted(() => {
         <em>OBS Når der uploades et nyt spørgeskema erstatter det det gamle.</em>
       </p>
       <div class="uploadbox">
-        <button @click="activeTab = 'pdf'">PDF upload</button>
-        <button @click="activeTab = 'video'">Youtube link</button>
-        <button @click="activeTab = 'survey'">Upload spørgeskema</button>
-
-        <UploadFile v-if="activeTab === 'pdf'" />
-        <UploadVideo v-else-if="activeTab === 'video'" />
-        <UploadSurvey v-else-if="activeTab === 'survey'" />
+        <div class="tabButtons">
+          <button :class="{ active: activeTab === 'pdf' }" @click="activeTab = 'pdf'">
+            PDF upload
+          </button>
+          <button :class="{ active: activeTab === 'video' }" @click="activeTab = 'video'">
+            Youtube link
+          </button>
+          <button :class="{ active: activeTab === 'survey' }" @click="activeTab = 'survey'">
+            Upload spørgeskema
+          </button>
+        </div>
+        <div class="tabContent">
+          <UploadFile v-if="activeTab === 'pdf'" />
+          <UploadVideo v-else-if="activeTab === 'video'" />
+          <UploadSurvey v-else-if="activeTab === 'survey'" />
+        </div>
       </div>
     </div>
   </dialog>
