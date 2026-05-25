@@ -3,12 +3,28 @@ import { ref, onMounted } from 'vue'
 import { getOnboarding } from '@/components/services/materialService'
 
 import MaterialAssignment from '@/components/admin/materialAssignment.vue'
+import ClientSurvey from '@/components/admin/clientSurvey.vue'
+
 
 const showAssignment = ref(false)
+const showSurvey = ref(false)
 
 function openAssignment() {
   dialogRef.value?.close()
   showAssignment.value = true
+}
+
+function openSurvey() {
+  dialogRef.value?.close()
+
+  showSurvey.value = true
+}
+
+function closeSurvey() {
+  showSurvey.value = false
+
+  // åbn company modal igen
+  dialogRef.value?.showModal()
 }
 
 function closeAssignment() {
@@ -46,7 +62,8 @@ const materials = ref([])
 const currentState = ref('loading')
 
 function closeModal() {
-  dialogRef.value.close()
+  dialogRef.value?.close()
+
   emit('goBack')
 }
 
@@ -92,7 +109,12 @@ onMounted(() => {
       <div class="topButtons">
         <button class="createBtn" @click="openAssignment">Tildel materialer</button>
 
-        <button class="createBtn">Se spørgeskema</button>
+        <button
+          class="createBtn"
+          @click="openSurvey"
+        >
+          Se spørgeskema
+        </button>
       </div>
     </section>
 
@@ -131,4 +153,10 @@ onMounted(() => {
     @close="closeAssignment"
     @save="saveAssignedMaterials"
   />
+
+  <ClientSurvey
+  v-if="showSurvey"
+  :client="props.client"
+  @close="closeSurvey"
+/>
 </template>
