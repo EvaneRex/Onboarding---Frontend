@@ -41,7 +41,7 @@ async function uploadNewSurvey() {
 </script>
 
 <template>
-  <form @submit.prevent="uploadNewSurvey">
+  <form class="uploadSurvey" @submit.prevent="uploadNewSurvey">
     <label for="surveyInput">Vælg JSON fil:</label>
     <input id="surveyInput" ref="filInput" type="file" accept="application/json" required />
     <button type="submit">Upload</button>

@@ -533,6 +533,7 @@ header {
         &:hover {
           color: partial.$white;
           border: partial.$orange;
+          background-color: partial.$orange;
         }
         &.active {
           background-color: partial.$orange;
@@ -545,5 +546,52 @@ header {
     .tabContent {
       margin-top: 1rem;
     }
+  }
+}
+
+.uploadFile,
+.uploadSurvey {
+  display: flex;
+  flex-direction: column;
+  @include partial.txt;
+
+  label {
+    margin-bottom: 0.5rem;
+  }
+  input {
+    margin-bottom: 0.5rem;
+  }
+  button {
+    align-self: flex-end;
+    @include partial.btn;
+    padding: 0.5rem 3rem;
+  }
+}
+
+.uploadVideo {
+  display: flex;
+  flex-direction: column;
+
+  .formGruppe {
+    @include partial.txt;
+    margin-bottom: 1rem;
+    label {
+      input {
+        height: 1.5rem;
+      }
+    }
+    .trash {
+      height: 1.2rem;
+      width: auto;
+    }
+    .addMore {
+      @include partial.txt;
+      padding: 0.5rem 3rem;
+    }
+  }
+  .submitLink {
+    align-self: flex-end;
+    @include partial.btn;
+    padding: 0.5rem 3rem;
   }
 }

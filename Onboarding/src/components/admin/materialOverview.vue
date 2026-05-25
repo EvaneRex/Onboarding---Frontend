@@ -15,6 +15,40 @@ function lukUploadManager() {
 const pdfSlides = ref([])
 const youtubeLinks = ref([])
 
+async function sletYoutubeLink(linkId) {
+  try {
+    const res = await fetch(`/onboarding/youtube-link/${linkId}`, {
+      method: 'DELETE',
+      credentials: 'include',
+    })
+    const data = await res.json()
+    if (res.ok) {
+      youtubeLinks.value = data.hvis_res_ok.allLinks
+    } else {
+      alert(data.message || 'Kunne ikke slette link')
+    }
+  } catch (e) {
+    alert('Der opstod en fejl')
+  }
+}
+async function sletPdfFil(filename) {
+  try {
+    const res = await fetch(`/onboarding/pdf-file/${filename}`, {
+      method: 'DELETE',
+      credentials: 'include',
+    })
+    const data = await res.json()
+    if (res.ok) {
+      // Fjern filen fra listen
+      pdfSlides.value = pdfSlides.value.filter((pdf) => pdf.filnavn !== filename)
+    } else {
+      alert(data.message || 'Kunne ikke slette fil')
+    }
+  } catch (e) {
+    alert('Der opstod en fejl')
+  }
+}
+
 onMounted(async () => {
   try {
     const pdfRes = await fetch('/onboarding/pdf-slides')
@@ -60,27 +94,13 @@ onMounted(async () => {
           <tr v-for="pdf in pdfSlides" :key="pdf.filnavn">
             <td>
               {{ pdf.filnavn }}
-              <img
-                src="@/assets/icon/pen-solid-full.svg"
-                alt="Rediger"
-                class="icon"
-                style="cursor: pointer; margin-left: 8px"
-                @click="
-                  () => {
-                    /* rediger funktion */
-                  }
-                "
-              />
+
               <img
                 src="@/assets/icon/trash-solid-full.svg"
                 alt="Slet"
                 class="icon"
                 style="cursor: pointer; margin-left: 4px"
-                @click="
-                  () => {
-                    /* slet funktion */
-                  }
-                "
+                @click="() => sletPdfFil(pdf.filnavn)"
               />
             </td>
             <td>PDF</td>
@@ -89,26 +109,11 @@ onMounted(async () => {
             <td>
               {{ yt.titel }}
               <img
-                src="@/assets/icon/pen-solid-full.svg"
-                alt="Rediger"
-                class="icon"
-                style="cursor: pointer; margin-left: 8px"
-                @click="
-                  () => {
-                    /* rediger funktion */
-                  }
-                "
-              />
-              <img
                 src="@/assets/icon/trash-solid-full.svg"
                 alt="Slet"
                 class="icon"
                 style="cursor: pointer; margin-left: 4px"
-                @click="
-                  () => {
-                    /* slet funktion */
-                  }
-                "
+                @click="() => sletYoutubeLink(yt.id)"
               />
             </td>
             <td>YouTube</td>

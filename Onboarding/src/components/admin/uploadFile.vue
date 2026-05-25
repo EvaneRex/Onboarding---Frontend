@@ -37,11 +37,9 @@ async function uploadPdfFiler() {
 </script>
 
 <template>
-  <main>
-    <form @submit.prevent="uploadPdfFiler">
-      <label for="input">Vælg PDF-fil(er):</label>
-      <input id="input" ref="filInput" type="file" accept="application/pdf" multiple required />
-      <button type="submit">Upload</button>
-    </form>
-  </main>
+  <form @submit.prevent="uploadPdfFiler" class="uploadFile">
+    <label for="input">Vælg PDF-fil(er):</label>
+    <input id="input" ref="filInput" type="file" accept="application/pdf" multiple required />
+    <button type="submit">Upload</button>
+  </form>
 </template>

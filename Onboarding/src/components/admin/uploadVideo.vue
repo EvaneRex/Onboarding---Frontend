@@ -49,8 +49,8 @@ async function uploadVideo() {
 </script>
 
 <template>
-  <form id="dynamicForm" @submit.prevent="uploadVideo">
-    <div class="formGruppe" v-for="(link, idx) in links" :key="idx" style="margin-bottom: 1em">
+  <form class="uploadVideo" @submit.prevent="uploadVideo">
+    <div class="formGruppe" v-for="(link, idx) in links" :key="idx">
       <label>
         Titel:
         <input v-model="link.titel" type="text" required />
@@ -64,8 +64,8 @@ async function uploadVideo() {
       </button>
     </div>
     <div class="formGruppe">
-      <button type="button" @click="tilføjLink">Tilføj flere</button>
+      <button class="addMore" type="button" @click="tilføjLink">Tilføj flere</button>
     </div>
-    <button type="submit">Upload video links</button>
+    <button class="submitLink" type="submit">Upload video links</button>
   </form>
 </template>
