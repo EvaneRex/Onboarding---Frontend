@@ -17,7 +17,6 @@ npm install
 - Vue
 - Vite
 - Prettier
-- SCSS
 
 ### Note
 
