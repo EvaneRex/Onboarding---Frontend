@@ -886,18 +886,15 @@ header .logout:active {
   margin-bottom: 2rem;
 }
 .surveyDialog .surveyAnswers {
-  width: 90%;
-  position: relative;
-  max-width: 1200px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
+  background-color: #d1d4d7;
   border-radius: 10px;
-  background: #ffffff;
-  padding: 2rem;
-  margin: auto;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
-}
-.surveyDialog .surveyAnswers::backdrop {
-  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+  padding: 3rem;
+  height: 450px;
+  overflow-y: auto;
 }
 .surveyDialog .answerCard {
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
