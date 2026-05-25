@@ -92,12 +92,10 @@ header {
   padding: 2rem 3rem;
   min-height: 100vh;
   background-color: partial.$white;
-    .backBtn {
+  .backBtn {
     @include partial.backBtn();
   }
 }
-
-
 
 .dashboard {
   .welcome {
@@ -261,7 +259,6 @@ header {
   }
 }
 
-
 .companyDialog {
   width: 90%;
   position: relative;
@@ -282,7 +279,7 @@ header {
     background: rgba(0, 0, 0, 0.4);
   }
 
-    .closeBtn {
+  .closeBtn {
     position: absolute;
 
     top: 1rem;
@@ -327,7 +324,7 @@ header {
     margin: 1rem;
 
     .createBtn {
-      @include partial.btn();
+      @include partial.btn;
       padding: 0 2rem;
     }
   }
@@ -342,7 +339,7 @@ header {
 }
 
 .materialDialog {
-   width: 90%;
+  width: 90%;
   position: relative;
   max-width: 1200px;
 
@@ -438,5 +435,25 @@ header {
       min-width: 200px;
       padding: 0 2rem;
     }
+  }
+}
+
+.matOverview {
+  @include partial.heading(48px);
+  @include partial.txt;
+
+  .btn {
+    margin-top: 3rem;
+    padding: 0 2rem;
+    @include partial.btn;
+  }
+
+  .matTable {
+    margin-top: 4rem;
+    background-color: partial.$lightgray;
+    border-radius: partial.$border-radius;
+    overflow: hidden;
+
+    @include partial.tableBox();
   }
 }
