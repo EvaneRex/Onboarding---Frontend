@@ -864,4 +864,75 @@ header .logout:active {
 .createUser .createUserBox .createBtn button {
   align-self: flex-end;
   width: 10vw;
+}
+
+.surveyDialog {
+  width: 90%;
+  max-width: 1100px;
+  border: none;
+  border-radius: 10px;
+  background-color: #ffffff;
+  padding: 3rem;
+  position: relative;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+.surveyDialog::backdrop {
+  background: rgba(0, 0, 0, 0.35);
+}
+.surveyDialog h1 {
+  font-family: "OpenSans-SemiBold", Arial, Helvetica, sans-serif;
+  font-size: 42px;
+  color: #53575a;
+  margin-bottom: 2rem;
+}
+.surveyDialog .surveyAnswers {
+  width: 90%;
+  position: relative;
+  max-width: 1200px;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  background: #ffffff;
+  padding: 2rem;
+  margin: auto;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+.surveyDialog .surveyAnswers::backdrop {
+  background: rgba(0, 0, 0, 0.4);
+}
+.surveyDialog .answerCard {
+  border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+  padding-bottom: 2rem;
+}
+.surveyDialog .answerCard:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.surveyDialog .answerCard h3 {
+  font-family: "OpenSans-SemiBold", Arial, Helvetica, sans-serif;
+  font-size: 24px;
+  color: #53575a;
+  margin-bottom: 1rem;
+}
+.surveyDialog .answerCard p {
+  font-family: "OpenSans-Regular", Arial, Helvetica, sans-serif;
+  font-size: 22px;
+  color: #53575a;
+  line-height: 1.7;
+  padding-left: 2rem;
+  word-break: break-word;
+}
+.surveyDialog .closeBtn {
+  position: absolute;
+  top: 2rem;
+  right: 2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: "OpenSans-SemiBold", Arial, Helvetica, sans-serif;
+  font-size: 28px;
+  color: #53575a;
+  transition: 0.2s ease;
+}
+.surveyDialog .closeBtn:hover {
+  opacity: 0.7;
 }/*# sourceMappingURL=style.css.map */
