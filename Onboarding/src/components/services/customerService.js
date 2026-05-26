@@ -1,207 +1,56 @@
-// import axios from 'axios'
+const API_URL =
+  'http://localhost:2000'
 
-// const API_URL = 'http://localhost:3000'
+// Hent CSRF token
+async function getCsrfToken() {
+  const response =
+    await fetch(
+      `${API_URL}/csrf`,
+      {
+        credentials:
+          'include'
+      }
+    )
 
-// // Henter alle virksomheder
-// export async function getAllClients() {
-//   try {
+  const data =
+    await response.json()
 
-//     const response = await axios.get(
-//       `${API_URL}/clients/all-clients`
-//     )
-
-//     return response.data
-
-//   } catch (error) {
-
-//     console.error(
-//       'Fejl ved hentning af virksomheder:',
-//       error
-//     )
-
-//     return []
-//   }
-// }
-
-// // Henter info om valgt virksomhed
-// export async function getClientInfo(
-//   clientId
-// ) {
-//   try {
-
-//     const response = await axios.get(
-//       `${API_URL}/clients/client-info/${clientId}`
-//     )
-
-//     return response.data
-
-//   } catch (error) {
-
-//     console.error(
-//       'Fejl ved hentning af virksomhed:',
-//       error
-//     )
-
-//     return null
-//   }
-// }
-
-// // Sletter virksomhed
-// export async function deleteClient(
-//   clientId
-// ) {
-//   try {
-
-//     const response =
-//       await axios.delete(
-//         `${API_URL}/clients/${clientId}`
-//       )
-
-//     return response.data
-
-//   } catch (error) {
-
-//     console.error(
-//       'Fejl ved sletning:',
-//       error
-//     )
-
-//     return {
-//       success: false,
-//       message:
-//         'Kunne ikke slette virksomhed'
-//     }
-//   }
-// }
-
-// // Tildeler onboarding-materialer
-// export async function assignOnboarding(
-//   clientId,
-//   slides
-// ) {
-//   try {
-
-//     const response =
-//       await axios.post(
-//         `${API_URL}/onboarding/${clientId}/onboarding`,
-//         slides
-//       )
-
-//     return response.data
-
-//   } catch (error) {
-
-//     console.error(
-//       'Fejl ved onboarding:',
-//       error
-//     )
-
-//     return {
-//       success: false,
-//       message:
-//         'Kunne ikke tildele onboarding'
-//     }
-//   }
-// }
-
-// // Opdaterer onboarding-materialer
-// export async function updateOnboarding(
-//   clientId,
-//   slides
-// ) {
-//   try {
-
-//     const response =
-//       await axios.put(
-//         `${API_URL}/onboarding/${clientId}/onboarding`,
-//         slides
-//       )
-
-//     return response.data
-
-//   } catch (error) {
-
-//     console.error(
-//       'Fejl ved opdatering:',
-//       error
-//     )
-
-//     return {
-//       success: false,
-//       message:
-//         'Kunne ikke opdatere onboarding'
-//     }
-//   }
-// }
-
-// // Sletter onboarding for en virksomhed
-// export async function deleteOnboarding(
-//   clientId
-// ) {
-//   try {
-
-//     const response =
-//       await axios.delete(
-//         `${API_URL}/onboarding/${clientId}/onboarding`
-//       )
-
-//     return response.data
-
-//   } catch (error) {
-
-//     console.error(
-//       'Fejl ved sletning af onboarding:',
-//       error
-//     )
-
-//     return {
-//       success: false,
-//       message:
-//         'Kunne ikke slette onboarding'
-//     }
-//   }
-// }
-
-// //Gemmer hvor langt kunden er nået i onboarding
-
-// export async function saveOnboardingProgress(
-//   progress
-// ) {
-//   try {
-
-//     const response =
-//       await axios.post(
-//         `${API_URL}/onboarding/onboarding-progress`,
-//         progress
-//       )
-
-//     return response.data
-
-//   } catch (error) {
-
-//     console.error(
-//       'Fejl ved gem af progress:',
-//       error
-//     )
-
-//     return {
-//       success: false,
-//       message:
-//         'Kunne ikke gemme progress'
-//     }
-//   }
-// }
-
-import {
-  mockClients,
-  mockClientInfo
+  return data.csrfToken
 }
-from '@/api/mockApi'
 
 // Henter alle virksomheder
-export async function getAllClients() {
+export async function
+getAllClients() {
+  try {
 
-  return mockClients
+    const response =
+      await fetch(
+        `${API_URL}/clients/all-clients`,
+        {
+          method: 'GET',
+          credentials:
+            'include'
+        }
+      )
+
+    const data =
+      await response.json()
+
+    return data
+
+  } catch (error) {
+
+    console.error(
+      'Fejl ved hentning af virksomheder:',
+      error
+    )
+
+    return {
+      success: false,
+      message:
+        'Kunne ikke hente virksomheder'
+    }
+  }
 }
 
 // Henter info om valgt virksomhed
@@ -209,10 +58,31 @@ export async function
 getClientInfo(
   clientId
 ) {
+  try {
 
-  return {
-    ...mockClientInfo,
-    clientId
+    const response =
+      await fetch(
+        `${API_URL}/clients/client-info/${clientId}`,
+        {
+          method: 'GET',
+          credentials:
+            'include'
+        }
+      )
+
+    const data =
+      await response.json()
+
+    return data
+
+  } catch (error) {
+
+    console.error(
+      'Fejl ved hentning af virksomhed:',
+      error
+    )
+
+    return null
   }
 }
 
@@ -221,63 +91,43 @@ export async function
 deleteClient(
   clientId
 ) {
+  try {
 
-  return {
-    success: true,
-    message:
-      `Klient ${clientId} slettet`
-  }
-}
+    const csrfToken =
+      await getCsrfToken()
 
-// Tildeler onboarding
-export async function
-assignOnboarding(
-  clientId,
-  slides
-) {
+    const response =
+      await fetch(
+        `${API_URL}/clients/${clientId}`,
+        {
+          method: 'DELETE',
 
-  return {
-    success: true,
-    clientId,
-    slides
-  }
-}
+          headers: {
+            'x-csrf-token':
+              csrfToken
+          },
 
-// Opdater onboarding
-export async function
-updateOnboarding(
-  clientId,
-  slides
-) {
+          credentials:
+            'include'
+        }
+      )
 
-  return {
-    success: true,
-    clientId,
-    slides
-  }
-}
+    const data =
+      await response.json()
 
-// Sletter onboarding
-export async function
-deleteOnboarding(
-  clientId
-) {
+    return data
 
-  return {
-    success: true,
-    message:
-      'Onboarding slettet'
-  }
-}
+  } catch (error) {
 
-// Gemmer progress
-export async function
-saveOnboardingProgress(
-  progress
-) {
+    console.error(
+      'Fejl ved sletning:',
+      error
+    )
 
-  return {
-    success: true,
-    progress
+    return {
+      success: false,
+      message:
+        'Kunne ikke slette virksomhed'
+    }
   }
 }
