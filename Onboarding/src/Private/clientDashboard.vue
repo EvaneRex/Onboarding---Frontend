@@ -6,6 +6,7 @@ import { getOnboarding } from '@/components/services/materialService.js'
 import Header from '@/components/shared/header.vue'
 
 defineProps({
+  user: Object,
   logout: Function,
 })
 

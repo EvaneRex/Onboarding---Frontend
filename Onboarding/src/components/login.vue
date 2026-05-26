@@ -1,11 +1,17 @@
 <script setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 const emit = defineEmits(['login-success'])
-
+const error = ref('')
 const brugernavn = ref('')
 const adgangskode = ref('')
-const error = ref('')
-const user = ref(null)
+const rememberMe = ref(false)
+
+onMounted(() => {
+  rememberMe.value = localStorage.getItem('rememberMe') === 'true'
+  if (rememberMe.value) {
+    brugernavn.value = localStorage.getItem('rememberedUsername') || ''
+  }
+})
 
 async function getCsrfToken() {
   const response = await fetch('http://localhost:2000/csrf', {
@@ -34,7 +40,8 @@ const login = async () => {
       }),
     })
     const data = await res.json()
-    console.log('Login response:', data)
+
+    // console.log('Login response:', data)
 
     if (data.success) {
       const user = {
@@ -46,6 +53,13 @@ const login = async () => {
         registrationTokenHash: data.registrationTokenHash,
         registrationTokenExpiresAt: data.registrationTokenExpiresAt,
         registrationTokenUsedAt: data.registrationTokenUsedAt,
+      }
+      if (rememberMe.value) {
+        localStorage.setItem('rememberMe', 'true')
+        localStorage.setItem('rememberedUsername', brugernavn.value)
+      } else {
+        localStorage.removeItem('rememberMe')
+        localStorage.removeItem('rememberedUsername')
       }
       emit('login-success', user)
     } else {
@@ -70,10 +84,10 @@ const login = async () => {
         <label for="adgangskode">Adgangskode</label>
         <input id="adgangskode" type="password" v-model="adgangskode" required />
 
-        <!--<label>
+        <label>
           <input type="checkbox" v-model="rememberMe" />
           Husk mig
-        </label>-->
+        </label>
 
         <p v-if="error">{{ error }}</p>
         <button type="submit">Login</button>
