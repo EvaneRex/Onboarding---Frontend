@@ -1,14 +1,9 @@
 <script setup>
-<<<<<<< HEAD
 import {
   ref,
   onMounted,
   onBeforeUnmount
 } from 'vue'
-=======
-import { ref, onMounted, computed } from 'vue'
-import { getAnsweredSurveys, sendSurveyWithCompany } from '@/components/services/surveyService'
->>>>>>> 4dfb81b470f91d27718aa9f33daf0bb025f8be36
 
 const emit = defineEmits(['close'])
 
