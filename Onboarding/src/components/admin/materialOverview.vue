@@ -28,6 +28,7 @@ async function getCsrfToken() {
 }
 
 async function sletYoutubeLink(linkId) {
+  if (!window.confirm('Er du sikker på, at du vil slette dette link?')) return
   try {
     const csrfToken = await getCsrfToken()
     const res = await fetch(`http://localhost:2000/onboarding/youtube-link/${linkId}`, {
@@ -48,6 +49,7 @@ async function sletYoutubeLink(linkId) {
   }
 }
 async function sletPdfFil(filename) {
+  if (!window.confirm('Er du sikker på, at du vil slette denne fil?')) return
   try {
     const csrfToken = await getCsrfToken()
     const res = await fetch(`http://localhost:2000/onboarding/pdf-file/${filename}`, {
@@ -68,7 +70,7 @@ async function sletPdfFil(filename) {
   }
 }
 
-onMounted(async () => {
+async function hentMaterialer() {
   try {
     const pdfRes = await fetch('http://localhost:2000/onboarding/pdf-slides', {
       credentials: 'include',
@@ -90,7 +92,6 @@ onMounted(async () => {
     }
   } catch (e) {
     console.error('Fejl ved hentning af YouTube:', e)
-    console.log('YouTube data fra backend:', data)
   }
   try {
     const surveyRes = await fetch('http://localhost:2000/survey/survey-questions', {
@@ -99,16 +100,14 @@ onMounted(async () => {
     if (surveyRes.ok) {
       const data = await surveyRes.json()
       const questions = Array.isArray(data) ? data : data.questions
-      if (Array.isArray(questions) && questions.length > 0) {
-        surveyFileName.value = 'Survey.json'
-      } else {
-        surveyFileName.value = ''
-      }
+      surveyFileName.value = Array.isArray(questions) && questions.length > 0 ? 'Survey.json' : ''
     }
   } catch (e) {
     surveyFileName.value = ''
   }
-})
+}
+
+onMounted(hentMaterialer)
 </script>
 
 <template>
@@ -117,7 +116,7 @@ onMounted(async () => {
     <h1>Materialer</h1>
     <p>Her kan du tilgå materialerne, samt uploade nyt indhold og ændre navn på filerne.</p>
     <button class="btn" @click="tilføjMat">Tilføj materialer</button>
-    <UploadManager v-if="showUploadManager" @close="lukUploadManager" />
+    <UploadManager v-if="showUploadManager" @close="lukUploadManager" @uploaded="hentMaterialer" />
 
     <div class="matTable">
       <table>
