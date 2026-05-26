@@ -332,14 +332,17 @@ header .logout:active {
 }
 
 .companyDialog {
+  position: fixed;
+  inset: 0;
+  margin: auto;
   width: 90%;
-  position: relative;
   max-width: 1200px;
+  height: -moz-fit-content;
+  height: fit-content;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   background: #ffffff;
   padding: 2rem;
-  margin: auto;
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
 }
 .companyDialog::backdrop {
@@ -437,14 +440,17 @@ header .logout:active {
 }
 
 .materialDialog {
+  position: fixed;
+  inset: 0;
+  margin: auto;
   width: 90%;
-  position: relative;
   max-width: 1200px;
+  height: -moz-fit-content;
+  height: fit-content;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   background: #ffffff;
   padding: 2rem;
-  margin: auto;
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
 }
 .materialDialog::backdrop {
@@ -867,13 +873,17 @@ header .logout:active {
 }
 
 .surveyDialog {
+  position: fixed;
+  inset: 0;
+  margin: auto;
   width: 90%;
   max-width: 1100px;
+  height: -moz-fit-content;
+  height: fit-content;
   border: none;
   border-radius: 10px;
   background-color: #ffffff;
   padding: 3rem;
-  position: relative;
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
 }
 .surveyDialog::backdrop {

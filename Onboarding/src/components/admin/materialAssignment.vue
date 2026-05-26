@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { getOnboarding } from '@/components/services/materialService'
 
 const emit = defineEmits([
@@ -54,6 +54,11 @@ function closeModal() {
 
   emit('close')
 }
+
+onBeforeUnmount(() => {
+  dialogRef.value?.close()
+})
+
 </script>
 
 <template>

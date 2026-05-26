@@ -1,7 +1,5 @@
 <script setup>
-import { ref, onMounted } from 'vue'
-
-import { getAnsweredSurveys } from '@/components/services/surveyService'
+import { ref, onMounted, onBeforeUnmount } from 'vue'
 
 const emit = defineEmits(['close'])
 
@@ -42,18 +40,16 @@ onMounted(async () => {
     currentState.value = 'error'
   }
 })
+
+onBeforeUnmount(() => {
+  dialogRef.value?.close()
+
+  emit('close')
+})
 </script>
 
 <template>
   <dialog ref="dialogRef" class="surveyDialog">
-    <button class="closeBtn" @click="closeModal">✕</button>
-
-    <h1>
-      Se
-      {{ props.client?.clientName }}
-      spørgeskema
-    </h1>
-
     <!-- loading -->
     <p v-if="currentState === 'loading'">Indlæser spørgsmål...</p>
 

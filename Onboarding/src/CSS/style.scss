@@ -260,18 +260,19 @@ header {
 }
 
 .companyDialog {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+
   width: 90%;
-  position: relative;
   max-width: 1200px;
+  height: fit-content;
 
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: partial.$border-radius;
 
   background: partial.$white;
-
   padding: 2rem;
-
-  margin: auto;
 
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
 
@@ -339,18 +340,19 @@ header {
 }
 
 .materialDialog {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+
   width: 90%;
-  position: relative;
   max-width: 1200px;
+  height: fit-content;
 
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: partial.$border-radius;
 
   background: partial.$white;
-
   padding: 2rem;
-
-  margin: auto;
 
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
 
@@ -673,25 +675,24 @@ header {
 }
 
 .surveyDialog {
+   position: fixed;
+  inset: 0;
+  margin: auto;
+
   width: 90%;
   max-width: 1100px;
+  height: fit-content;
 
   border: none;
   border-radius: partial.$border-radius;
 
   background-color: partial.$white;
-
   padding: 3rem;
 
-  position: relative;
-
-  box-shadow:
-    0 12px 40px
-    rgba(0, 0, 0, 0.15);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
 
   &::backdrop {
-    background:
-      rgba(0, 0, 0, 0.35);
+    background: rgba(0, 0, 0, 0.35);
   }
 
   h1 {
