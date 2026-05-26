@@ -108,46 +108,50 @@
 //   }
 // }
 
-import {
-  mockSurveyQuestions,
-  mockAnsweredSurveys
-}
-from '@/api/mockApi'
+import { mockSurveyQuestions, mockAnsweredSurveys } from '@/api/mockApi'
 
 // Henter survey
-export async function
-getSurveyQuestions() {
-
+export async function getSurveyQuestions() {
   return mockSurveyQuestions
 }
 
 // Sender survey
-export async function
-submitSurvey(
-  answers
-) {
+async function getCsrfToken() {
+  const response = await fetch('http://localhost:2000/csrf', {
+    credentials: 'include',
+  })
 
-  return {
-    success: true,
-    answers
+  const data = await response.json()
+
+  if (!response.ok) {
+    throw new Error(data.message || 'Could not get CSRF token.')
   }
+
+  return data.csrfToken
 }
 
+// Sender survey
+export async function submitSurvey(data) {
+  const csrfToken = await getCsrfToken()
+  return fetch('http://localhost:2000/survey/survey-answers', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'CSRF-Token': csrfToken,
+    },
+    credentials: 'include',
+    body: JSON.stringify(data),
+  }).then((res) => res.json())
+}
 // Opret survey
-export async function
-createSurvey(
-  surveyQuestions
-) {
-
+export async function createSurvey(surveyQuestions) {
   return {
     success: true,
-    surveyQuestions
+    surveyQuestions,
   }
 }
 
 // Henter besvarede surveys
-export async function
-getAnsweredSurveys() {
-
+export async function getAnsweredSurveys() {
   return mockAnsweredSurveys
 }

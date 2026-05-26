@@ -26,7 +26,7 @@ onMounted(() => {
 onBeforeUnmount(() => {
   dialogRef.value?.close()
 })
-
+// fjern surveyid
 async function opretKlient() {
   await fetch(`http://localhost:2000/register/create-new-client-account/${surveyId.value}`, {
     method: 'POST',
