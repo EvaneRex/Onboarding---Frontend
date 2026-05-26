@@ -4,6 +4,7 @@ import {
   getSurveyQuestions,
   submitSurvey
 } from './services/surveyService'
+import Header from '@/components/shared/header.vue'
 
 const surveyQuestions = ref([])
 
@@ -162,6 +163,7 @@ onMounted(loadSurvey)
 </script>
 
 <template>
+  <Header :logout="logout" />
   <main class="surveyPage">
 
     <section class="surveyCard">
