@@ -620,6 +620,10 @@ header .logout:active {
   font-size: 18px;
   color: #53575a;
 }
+.matOverview .matTable .icon {
+  width: 22px;
+  height: 22px;
+}
 
 .upManager {
   width: 90%;

@@ -15,11 +15,26 @@ function lukUploadManager() {
 const pdfSlides = ref([])
 const youtubeLinks = ref([])
 
+async function getCsrfToken() {
+  const response = await fetch('http://localhost:2000/csrf', {
+    credentials: 'include',
+  })
+  const data = await response.json()
+  if (!response.ok) {
+    throw new Error(data.message || 'Could not get CSRF token.')
+  }
+  return data.csrfToken
+}
+
 async function sletYoutubeLink(linkId) {
   try {
+    const csrfToken = await getCsrfToken()
     const res = await fetch(`http://localhost:2000/onboarding/youtube-link/${linkId}`, {
       method: 'DELETE',
       credentials: 'include',
+      headers: {
+        'x-csrf-token': csrfToken,
+      },
     })
     const data = await res.json()
     if (res.ok) {
@@ -33,13 +48,16 @@ async function sletYoutubeLink(linkId) {
 }
 async function sletPdfFil(filename) {
   try {
+    const csrfToken = await getCsrfToken()
     const res = await fetch(`http://localhost:2000/onboarding/pdf-file/${filename}`, {
       method: 'DELETE',
       credentials: 'include',
+      headers: {
+        'x-csrf-token': csrfToken,
+      },
     })
     const data = await res.json()
     if (res.ok) {
-      // Fjern filen fra listen
       pdfSlides.value = pdfSlides.value.filter((pdf) => pdf.filnavn !== filename)
     } else {
       alert(data.message || 'Kunne ikke slette fil')
@@ -51,7 +69,9 @@ async function sletPdfFil(filename) {
 
 onMounted(async () => {
   try {
-    const pdfRes = await fetch('http://localhost:2000/onboarding/pdf-slides')
+    const pdfRes = await fetch('http://localhost:2000/onboarding/pdf-slides', {
+      credentials: 'include',
+    })
     if (pdfRes.ok) {
       const data = await pdfRes.json()
       pdfSlides.value = Array.isArray(data) ? data : data.hvis_res_ok || []
@@ -60,13 +80,16 @@ onMounted(async () => {
     console.error('Fejl ved hentning af PDF:', e)
   }
   try {
-    const ytRes = await fetch('http://localhost:2000/onboarding/youtube-links')
+    const ytRes = await fetch('http://localhost:2000/onboarding/youtube-links', {
+      credentials: 'include',
+    })
     if (ytRes.ok) {
       const data = await ytRes.json()
       youtubeLinks.value = Array.isArray(data) ? data : data.hvis_res_ok || []
     }
   } catch (e) {
     console.error('Fejl ved hentning af YouTube:', e)
+    console.log('YouTube data fra backend:', data)
   }
 })
 </script>
@@ -85,38 +108,37 @@ onMounted(async () => {
           <tr>
             <th>Materiale</th>
             <th>Type</th>
+            <th></th>
+            <!-- Slet-knap -->
           </tr>
         </thead>
         <tbody>
           <tr v-if="pdfSlides.length === 0 && youtubeLinks.length === 0">
-            <td colspan="2">Ingen materialer fundet.</td>
+            <td colspan="3">Ingen materialer fundet.</td>
           </tr>
           <tr v-for="pdf in pdfSlides" :key="pdf.filnavn">
+            <td>{{ pdf.filnavn }}</td>
+            <td>PDF</td>
             <td>
-              {{ pdf.filnavn }}
-
               <img
                 src="@/assets/icon/trash-solid-full.svg"
                 alt="Slet"
                 class="icon"
-                style="cursor: pointer; margin-left: 4px"
                 @click="() => sletPdfFil(pdf.filnavn)"
               />
             </td>
-            <td>PDF</td>
           </tr>
           <tr v-for="yt in youtubeLinks" :key="yt.id">
+            <td>{{ yt.titel }}</td>
+            <td>YouTube</td>
             <td>
-              {{ yt.titel }}
               <img
                 src="@/assets/icon/trash-solid-full.svg"
                 alt="Slet"
                 class="icon"
-                style="cursor: pointer; margin-left: 4px"
                 @click="() => sletYoutubeLink(yt.id)"
               />
             </td>
-            <td>YouTube</td>
           </tr>
         </tbody>
       </table>

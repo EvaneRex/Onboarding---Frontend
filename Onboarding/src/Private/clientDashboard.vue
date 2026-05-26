@@ -5,6 +5,7 @@ import clientMatView from '@/components/client/clientMatView.vue'
 import Header from '@/components/shared/header.vue'
 
 defineProps({
+  user: Object,
   logout: Function,
 })
 

@@ -457,6 +457,11 @@ header {
     overflow: hidden;
 
     @include partial.tableBox();
+
+    .icon {
+      width: 22px;
+      height: 22px;
+    }
   }
 }
 
