@@ -108,38 +108,37 @@ onMounted(async () => {
           <tr>
             <th>Materiale</th>
             <th>Type</th>
+            <th></th>
+            <!-- Slet-knap -->
           </tr>
         </thead>
         <tbody>
           <tr v-if="pdfSlides.length === 0 && youtubeLinks.length === 0">
-            <td colspan="2">Ingen materialer fundet.</td>
+            <td colspan="3">Ingen materialer fundet.</td>
           </tr>
           <tr v-for="pdf in pdfSlides" :key="pdf.filnavn">
+            <td>{{ pdf.filnavn }}</td>
+            <td>PDF</td>
             <td>
-              {{ pdf.filnavn }}
-
               <img
                 src="@/assets/icon/trash-solid-full.svg"
                 alt="Slet"
                 class="icon"
-                style="cursor: pointer; margin-left: 4px"
                 @click="() => sletPdfFil(pdf.filnavn)"
               />
             </td>
-            <td>PDF</td>
           </tr>
           <tr v-for="yt in youtubeLinks" :key="yt.id">
+            <td>{{ yt.titel }}</td>
+            <td>YouTube</td>
             <td>
-              {{ yt.titel }}
               <img
                 src="@/assets/icon/trash-solid-full.svg"
                 alt="Slet"
                 class="icon"
-                style="cursor: pointer; margin-left: 4px"
                 @click="() => sletYoutubeLink(yt.id)"
               />
             </td>
-            <td>YouTube</td>
           </tr>
         </tbody>
       </table>
