@@ -10,7 +10,17 @@ const dialogRef = ref(null)
 const email = ref('')
 const name = ref('')
 const surveyId = ref('')
-const token = await getCsrfToken()
+
+async function getCsrfToken() {
+  const response = await fetch('http://localhost:2000/csrf', {
+    credentials: 'include',
+  })
+  const data = await response.json()
+  if (!response.ok) {
+    throw new Error(data.message || 'Could not get CSRF token.')
+  }
+  return data.csrfToken
+}
 
 onMounted(async () => {
   const res = await fetch('http://localhost:2000/survey/survey-questions', {
@@ -28,7 +38,8 @@ onBeforeUnmount(() => {
 })
 // fjern surveyid
 async function opretKlient() {
-  await fetch(`http://localhost:2000/register/create-new-client-account/${surveyId.value}`, {
+  const token = await getCsrfToken()
+  await fetch('http://localhost:2000/register/create-new-client-account', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json', 'x-csrf-token': token },
     credentials: 'include',
@@ -37,9 +48,10 @@ async function opretKlient() {
 }
 
 async function opretAdmin() {
+  const token = await getCsrfToken()
   await fetch('http://localhost:2000/register/create-new-admin-account', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', 'x-csrf-token': token },
     credentials: 'include',
     body: JSON.stringify({ name: name.value, email: email.value }),
   })
@@ -52,11 +64,11 @@ async function opretAdmin() {
     <section>
       <h1>Opret en ny bruger</h1>
       <form class="createUserBox">
-        <label for="email">Email</label>
-        <input id="email" v-model="email" type="email" />
-
         <label for="name">Brugernavn</label>
         <input id="name" v-model="name" type="text" />
+
+        <label for="email">Email</label>
+        <input id="email" v-model="email" type="email" />
         <div class="createBtn">
           <button @click="opretKlient" type="button">Opret klient</button>
           <button @click="opretAdmin" type="button">Opret admin</button>
