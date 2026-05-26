@@ -15,12 +15,12 @@ $border-radius: 10px;
 
 @font-face {
   font-family: 'OpenSans-SemiBold';
-  src: url(fonts/OpenSans-SemiBold.ttf);
+  src: url(/fonts/OpenSans-SemiBold.ttf);
 }
 
 @font-face {
   font-family: 'OpenSans-Bold';
-  src: url(fonts/OpenSans-Bold.ttf);
+  src: url(/fonts/OpenSans-Bold.ttf);
 }
 
 @mixin heading($size: 24px) {

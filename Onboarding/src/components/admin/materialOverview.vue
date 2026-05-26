@@ -14,6 +14,7 @@ function lukUploadManager() {
 
 const pdfSlides = ref([])
 const youtubeLinks = ref([])
+const surveyFileName = ref('')
 
 async function getCsrfToken() {
   const response = await fetch('http://localhost:2000/csrf', {
@@ -91,6 +92,22 @@ onMounted(async () => {
     console.error('Fejl ved hentning af YouTube:', e)
     console.log('YouTube data fra backend:', data)
   }
+  try {
+    const surveyRes = await fetch('http://localhost:2000/survey/survey-questions', {
+      credentials: 'include',
+    })
+    if (surveyRes.ok) {
+      const data = await surveyRes.json()
+      const questions = Array.isArray(data) ? data : data.questions
+      if (Array.isArray(questions) && questions.length > 0) {
+        surveyFileName.value = 'Survey.json'
+      } else {
+        surveyFileName.value = ''
+      }
+    }
+  } catch (e) {
+    surveyFileName.value = ''
+  }
 })
 </script>
 
@@ -109,11 +126,15 @@ onMounted(async () => {
             <th>Materiale</th>
             <th>Type</th>
             <th></th>
-            <!-- Slet-knap -->
           </tr>
         </thead>
         <tbody>
-          <tr v-if="pdfSlides.length === 0 && youtubeLinks.length === 0">
+          <tr v-if="surveyFileName">
+            <td>{{ surveyFileName }}</td>
+            <td>Survey</td>
+            <td></td>
+          </tr>
+          <tr v-if="pdfSlides.length === 0 && youtubeLinks.length === 0 && !surveyFileName">
             <td colspan="3">Ingen materialer fundet.</td>
           </tr>
           <tr v-for="pdf in pdfSlides" :key="pdf.filnavn">
