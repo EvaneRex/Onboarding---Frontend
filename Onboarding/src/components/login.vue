@@ -39,8 +39,7 @@ const login = async () => {
       user.value = data.user
       emit('login-success', data.user)
     } else {
-      error.value = data.message
-      brugernavn.value = ''
+      error.value = data.message || 'Forkert brugernavn eller adgangskode'
       adgangskode.value = ''
     }
   } catch (err) {
