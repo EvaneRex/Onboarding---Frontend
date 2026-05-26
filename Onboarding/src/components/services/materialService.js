@@ -1,180 +1,115 @@
-// import axios from 'axios'
+const API_URL =
+  'http://localhost:2000'
 
-// const API_URL = 'http://localhost:3000'
+// CSRF
+async function getCsrfToken() {
+  const response =
+    await fetch(
+      `${API_URL}/csrf`,
+      {
+        credentials:
+          'include'
+      }
+    )
 
-// // Henter alle uploadede PDF-materialer
-// export async function getPdfSlides() {
-//   try {
+  const data =
+    await response.json()
 
-//     const response = await axios.get(
-//       `${API_URL}/onboarding/pdf-slides`
-//     )
-
-//     return response.data
-
-//   } catch (error) {
-
-//     console.error(
-//       'Fejl ved hentning af PDF:',
-//       error
-//     )
-
-//     return []
-//   }
-// }
-
-// // Uploader PDF-materiale
-// export async function uploadPdf(
-//   formData
-// ) {
-//   try {
-
-//     const response = await axios.post(
-//       `${API_URL}/onboarding/pdf-slides`,
-//       formData
-//     )
-
-//     return response.data
-
-//   } catch (error) {
-
-//     console.error(
-//       'Fejl ved upload af PDF:',
-//       error
-//     )
-
-//     return {
-//       success: false,
-//       message:
-//         'Kunne ikke uploade PDF'
-//     }
-//   }
-// }
-
-// // Henter alle YouTube-links
-// export async function getYoutubeLinks() {
-//   try {
-
-//     const response = await axios.get(
-//       `${API_URL}/onboarding/youtube-links`
-//     )
-
-//     return response.data
-
-//   } catch (error) {
-
-//     console.error(
-//       'Fejl ved hentning af videoer:',
-//       error
-//     )
-
-//     return []
-//   }
-// }
-
-// // Uploader YouTube-materialer
-// export async function uploadYoutubeLinks(
-//   links
-// ) {
-//   try {
-
-//     const response = await axios.post(
-//       `${API_URL}/onboarding/youtube-links`,
-//       links
-//     )
-
-//     return response.data
-
-//   } catch (error) {
-
-//     console.error(
-//       'Fejl ved upload af video:',
-//       error
-//     )
-
-//     return {
-//       success: false,
-//       message:
-//         'Kunne ikke uploade video'
-//     }
-//   }
-// }
-
-// // Henter kundens onboarding-materialer
-// export async function getOnboarding() {
-//   try {
-
-//     const response =
-//       await axios.get(
-//         `${API_URL}/onboarding`
-//       )
-
-//     return response.data
-
-//   } catch (error) {
-
-//     console.error(
-//       'Fejl ved hentning af onboarding:',
-//       error
-//     )
-
-//     return {
-//       success: false,
-//       message:
-//         'Ingen onboarding endnu'
-//     }
-//   }
-// }
-
-import {
-  mockPdfSlides,
-  mockYoutubeLinks,
-  mockOnboarding
+  return data.csrfToken
 }
-from '@/api/mockApi'
 
-// Henter PDF'er
+// Hent alle PDF'er
 export async function
 getPdfSlides() {
+  try {
 
-  return mockPdfSlides
-}
+    const response =
+      await fetch(
+        `${API_URL}/onboarding/pdf-slides`,
+        {
+          credentials:
+            'include'
+        }
+      )
 
-// Upload PDF
-export async function
-uploadPdf(
-  formData
-) {
+    return await response.json()
 
-  return {
-    success: true,
-    formData
+  } catch (error) {
+
+    console.error(error)
+
+    return []
   }
 }
 
-// Henter videoer
+// Hent youtube links
 export async function
 getYoutubeLinks() {
+  try {
 
-  return mockYoutubeLinks
-}
+    const response =
+      await fetch(
+        `${API_URL}/onboarding/youtube-links`,
+        {
+          credentials:
+            'include'
+        }
+      )
 
-// Upload video
-export async function
-uploadYoutubeLinks(
-  links
-) {
+    return await response.json()
 
-  return {
-    success: true,
-    links
+  } catch (error) {
+
+    console.error(error)
+
+    return []
   }
 }
 
-// Henter onboarding
+// Gem onboarding til klient
 export async function
-getOnboarding() {
+assignOnboarding(
+  clientId,
+  slides
+) {
+  try {
 
-  return mockOnboarding
+    const csrfToken =
+      await getCsrfToken()
+
+    const response =
+      await fetch(
+        `${API_URL}/onboarding/${clientId}/onboarding`,
+        {
+          method: 'POST',
+
+          headers: {
+            'Content-Type':
+              'application/json',
+
+            'x-csrf-token':
+              csrfToken
+          },
+
+          credentials:
+            'include',
+
+          body: JSON.stringify(
+            slides
+          )
+        }
+      )
+
+    return await response.json()
+
+  } catch (error) {
+
+    console.error(error)
+
+    return {
+      success: false,
+      message:
+        'Kunne ikke gemme onboarding'
+    }
+  }
 }
-

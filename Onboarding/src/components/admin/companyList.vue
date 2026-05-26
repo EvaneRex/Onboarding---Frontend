@@ -4,7 +4,7 @@ import { ref, onMounted } from 'vue'
 import companyInfo from '@/components/admin/companyInfo.vue'
 import createUser from '@/components/admin/CreateUserModule.vue'
 
-import { getAllClients, deleteClient } from '@/components/services/customerService'
+import { getAllClients, deleteClient, getClientInfo } from '@/components/services/customerService'
 
 // Event til parent
 const emit = defineEmits(['goBack'])
@@ -52,16 +52,16 @@ async function loadClients() {
   loading.value = false
 }
 
-// Åbn virksomhed
-function openCompany(
-  client
-) {
-  selectedCompany.value =
-    client
-
-  showCompanyInfo.value =
-    true
+async function openCompany(client) {
+  const clientInfo = await getClientInfo(client.clientId)
+  if (!clientInfo) {
+    alert('Kunne ikke hente information om virksomheden.')
+    return
+  }
+  selectedCompany.value = clientInfo
+  showCompanyInfo.value = true
 }
+
 
 // Tilbage til liste
 function goBackToList() {

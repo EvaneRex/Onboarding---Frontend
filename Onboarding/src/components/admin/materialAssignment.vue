@@ -1,6 +1,6 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue'
-import { getOnboarding } from '@/components/services/materialService'
+import { getPdfSlides, getYoutubeLinks, assignOnboarding } from '@/components/services/materialService'
 
 const emit = defineEmits([
   'close',
@@ -19,34 +19,74 @@ const selectedMaterials = ref([])
 onMounted(async () => {
   dialogRef.value?.showModal()
 
-  const onboarding =
-    await getOnboarding()
+  //hent pdfer
+  const pdfs =
+    await getPdfSlides()
 
-  allMaterials.value =
-    onboarding?.onboardingSlides ||
-    onboarding ||
-    []
+  const formattedPdfs =
+    pdfs.map(pdf => ({
+      id: pdf.src,
+      type: 'pdf',
+      src: pdf.src,
+      title:
+        pdf.filnavn
+    }))
+
+    //hent youtube
+    const videos =
+    await getYoutubeLinks()
+
+    
+
+  const formattedVideos =
+    videos.map(video => ({
+      id: video.id,
+      type:
+        'youtube',
+      src: video.url,
+      title:
+        video.titel
+    }))
+
+  allMaterials.value = [
+    ...formattedPdfs,
+    ...formattedVideos
+  ]
 
   // allerede tildelte materialer
   selectedMaterials.value =
     props.client?.onboardingSlides?.map(
-      material => material.id
+      material => material.src
     ) || []
 })
 
-function saveMaterials() {
+async function saveMaterials() {
+
   const selected =
     allMaterials.value.filter(
       material =>
         selectedMaterials.value.includes(
-          material.id
+          material.src
         )
     )
 
-  dialogRef.value.close()
+  const response =
+    await assignOnboarding(
+      props.client.clientId,
+      selected
+    )
 
-  emit('save', selected)
-  emit('close')
+  if (
+    response.success
+  ) {
+
+    emit(
+      'save',
+      selected
+    )
+
+    closeModal()
+  }
 }
 
 function closeModal() {
@@ -108,7 +148,7 @@ onBeforeUnmount(() => {
 
           <tr
             v-for="material in allMaterials"
-            :key="material.id"
+            :key="material.src"
           >
             <td>
               {{ material.title }}
@@ -119,7 +159,7 @@ onBeforeUnmount(() => {
               <label>
                 <input
                   type="checkbox"
-                  :value="material.id"
+                  :value="material.src"
                   v-model="selectedMaterials"
                 />
 

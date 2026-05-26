@@ -1,7 +1,6 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import clientMatView from '@/components/client/clientMatView.vue'
-import { getOnboarding } from '@/components/services/materialService.js'
 
 import Header from '@/components/shared/header.vue'
 
