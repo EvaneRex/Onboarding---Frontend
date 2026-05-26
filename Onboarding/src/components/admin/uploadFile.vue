@@ -26,9 +26,8 @@ async function uploadPdfFiler() {
   }
 
   try {
-    const API_URL = 'http://localhost:2000'
     const csrfToken = await getCsrfToken()
-    const res = await fetch(`${API_URL}/onboarding/pdf-slides`, {
+    const res = await fetch(`http://localhost:2000/onboarding/pdf-slides`, {
       method: 'POST',
       credentials: 'include',
       headers: {

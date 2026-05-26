@@ -12,6 +12,12 @@ const currentPage = ref('login')
 const currentUser = ref(null)
 
 function handleLogin(user) {
+  if (!user || !user.role) {
+    alert('Brugerdata mangler eller er ugyldig!')
+    currentUser.value = null
+    currentPage.value = 'login'
+    return
+  }
   currentUser.value = user
   if (user.role === 'admin') {
     currentPage.value = 'adminDashboard'

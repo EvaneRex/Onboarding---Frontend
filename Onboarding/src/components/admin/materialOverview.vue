@@ -17,7 +17,7 @@ const youtubeLinks = ref([])
 
 async function sletYoutubeLink(linkId) {
   try {
-    const res = await fetch(`/onboarding/youtube-link/${linkId}`, {
+    const res = await fetch(`http://localhost:2000/onboarding/youtube-link/${linkId}`, {
       method: 'DELETE',
       credentials: 'include',
     })
@@ -33,7 +33,7 @@ async function sletYoutubeLink(linkId) {
 }
 async function sletPdfFil(filename) {
   try {
-    const res = await fetch(`/onboarding/pdf-file/${filename}`, {
+    const res = await fetch(`http://localhost:2000/onboarding/pdf-file/${filename}`, {
       method: 'DELETE',
       credentials: 'include',
     })
@@ -51,7 +51,7 @@ async function sletPdfFil(filename) {
 
 onMounted(async () => {
   try {
-    const pdfRes = await fetch('/onboarding/pdf-slides')
+    const pdfRes = await fetch('http://localhost:2000/onboarding/pdf-slides')
     if (pdfRes.ok) {
       const data = await pdfRes.json()
       pdfSlides.value = Array.isArray(data) ? data : data.hvis_res_ok || []
@@ -60,7 +60,7 @@ onMounted(async () => {
     console.error('Fejl ved hentning af PDF:', e)
   }
   try {
-    const ytRes = await fetch('/onboarding/youtube-links')
+    const ytRes = await fetch('http://localhost:2000/onboarding/youtube-links')
     if (ytRes.ok) {
       const data = await ytRes.json()
       youtubeLinks.value = Array.isArray(data) ? data : data.hvis_res_ok || []

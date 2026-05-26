@@ -35,9 +35,8 @@ async function uploadVideo() {
   }
 
   try {
-    const API_URL = 'http://localhost:2000'
     const csrfToken = await getCsrfToken()
-    const res = await fetch(`${API_URL}/onboarding/youtube-links`, {
+    const res = await fetch(`http://localhost:2000/onboarding/youtube-links`, {
       method: 'POST',
       credentials: 'include',
       headers: {

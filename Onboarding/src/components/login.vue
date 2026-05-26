@@ -1,24 +1,47 @@
-<!-- <script setup>
+<script setup>
 import { ref } from 'vue'
-import { getUser, login as loginService } from './services/authService'
+const emit = defineEmits(['login-success'])
 
-const email = ref('')
+const brugernavn = ref('')
 const adgangskode = ref('')
 const error = ref('')
 const user = ref(null)
 
+async function getCsrfToken() {
+  const response = await fetch('http://localhost:2000/csrf', {
+    credentials: 'include',
+  })
+  const data = await response.json()
+  if (!response.ok) {
+    throw new Error(data.message || 'Could not get CSRF token.')
+  }
+  return data.csrfToken
+}
+
 const login = async () => {
   try {
-    const data = await loginService(email.value, adgangskode.value)
+    const csrfToken = await getCsrfToken()
+    const res = await fetch('http://localhost:2000/auth/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'x-csrf-token': csrfToken,
+      },
+      credentials: 'include',
+      body: JSON.stringify({
+        username: brugernavn.value,
+        password: adgangskode.value,
+      }),
+    })
+    const data = await res.json()
 
     if (data.success) {
-      const userData = await getUser()
-
-      if (userData.success) {
-        user.value = userData
-      }
+      user.value = data.user
+      emit('login-success', data.user)
     } else {
       error.value = data.message
+      brugernavn.value = ''
+      adgangskode.value = ''
     }
   } catch (err) {
     error.value = 'Fejl ved login'
@@ -30,95 +53,18 @@ const login = async () => {
   <main class="login">
     <div class="login-wrapper">
       <h1>Login</h1>
+
       <form method="post" @submit.prevent="login">
-        <label for="email">Email</label>
-        <input id="email" type="email" v-model="email" required />
+        <label for="brugernavn">Brugernavn</label>
+        <input id="brugernavn" type="text" v-model="brugernavn" required />
 
         <label for="adgangskode">Adgangskode</label>
         <input id="adgangskode" type="password" v-model="adgangskode" required />
 
-    <p v-if="error">{{ error }}</p>
-    <button type="submit">Login</button>
-  </form>
-</template> -->
-
-<script setup>
-import { onMounted, ref } from 'vue'
-
-// emit
-const emit = defineEmits(['login-success'])
-
-const email = ref('')
-const adgangskode = ref('')
-const error = ref('')
-const rememberMe = ref(false)
-
-onMounted(() => {
-  rememberMe.value = localStorage.getItem('rememberMe') === 'true'
-
-  if (rememberMe.value) {
-    email.value = localStorage.getItem('rememberedEmail') || ''
-  }
-})
-
-const login = async () => {
-  error.value = ''
-
-  // FAKE LOGIN
-  if (email.value === 'admin@test.dk') {
-    if (rememberMe.value) {
-      localStorage.setItem('rememberMe', 'true')
-      localStorage.setItem('rememberedEmail', email.value)
-    } else {
-      localStorage.removeItem('rememberMe')
-      localStorage.removeItem('rememberedEmail')
-    }
-
-    emit('login-success', {
-      name: 'Admin',
-      role: 'admin',
-    })
-
-    return
-  }
-
-  if (email.value === 'client@test.dk') {
-    if (rememberMe.value) {
-      localStorage.setItem('rememberMe', 'true')
-      localStorage.setItem('rememberedEmail', email.value)
-    } else {
-      localStorage.removeItem('rememberMe')
-      localStorage.removeItem('rememberedEmail')
-    }
-
-    emit('login-success', {
-      name: 'Client',
-      role: 'client',
-    })
-
-    return
-  }
-
-  error.value = 'Forkert login'
-}
-</script>
-
-<template>
-  <main class="login">
-    <div class="login-wrapper">
-      <h1>Login</h1>
-
-      <form method="post" @submit.prevent="login">
-        <label for="email">Email</label>
-        <input id="email" type="email" v-model="email" required />
-
-        <label for="adgangskode">Adgangskode</label>
-        <input id="adgangskode" type="password" v-model="adgangskode" required />
-
-        <label>
+        <!--<label>
           <input type="checkbox" v-model="rememberMe" />
           Husk mig
-        </label>
+        </label>-->
 
         <p v-if="error">{{ error }}</p>
         <button type="submit">Login</button>
