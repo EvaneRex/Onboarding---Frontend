@@ -37,7 +37,6 @@ async function uploadNewSurvey() {
     return
   }
 
-  const csrfToken = await getCsrfToken()
 
   const res = await fetch('http://localhost:2000/survey/new-survey', {
     method: 'POST',

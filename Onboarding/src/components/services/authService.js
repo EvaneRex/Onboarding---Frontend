@@ -1,87 +1,16 @@
+import {
+  getCsrfToken
+}
+from '@/components/services/csrfService'
 
-const API_URL = 'http://localhost:2000'
+const API_URL =
+  'http://localhost:2000'
 
-// // Henter brugerens rolle ved login og tjekker loginstatus
-// export async function getUser() {
-//   try {
-//     const response = await axios.get(`${API_URL}/auth/user`)
-
-//     return response.data
-//   } catch (error) {
-//     console.error('Fejl ved login:', error)
-
-//     return {
-//       success: false,
-//       message: 'Kunne ikke hente bruger',
-//     }
-//   }
-// }
-
-// // Logger ind
-// export async function login(
-//   username,
-//   password
-// ) {
-//   try {
-
-//     const response =
-//       await axios.post(
-//         `${API_URL}/auth/login`,
-//         {
-//           username,
-//           password
-//         }
-//       )
-
-//     return response.data
-
-//   } catch (error) {
-
-//     console.error(
-//       'Fejl ved login:',
-//       error
-//     )
-
-//     return {
-//       success: false,
-//       message:
-//         'Kunne ikke logge ind'
-//     }
-//   }
-// }
-
-// // Logger ud
-// export async function logout() {
-//   try {
-
-//     const response =
-//       await axios.post(
-//         `${API_URL}/auth/logout`
-//       )
-
-//     return response.data
-
-//   } catch (error) {
-
-//     console.error(
-//       'Fejl ved logout:',
-//       error
-//     )
-
-//     return {
-//       success: false,
-//       message:
-//         'Kunne ikke logge ud'
-//     }
-//   }
-// }
-
-const csrfToken =
-  await getCsrfToken()
-
-// begge til at oprette en ny bruger - både admin og kunde
-
-async function createNewClient() {
+// Opret klient
+export async function
+createNewClientAccount(
+  clientData
+) {
   try {
 
     const csrfToken =
@@ -89,9 +18,10 @@ async function createNewClient() {
 
     const response =
       await fetch(
-        'http://localhost:2000/register/create-new-client-account',
+        `${API_URL}/register/create-new-client-account`,
         {
-          method: 'POST',
+          method:
+            'POST',
 
           headers: {
             'Content-Type':
@@ -105,56 +35,37 @@ async function createNewClient() {
             'include',
 
           body:
-            JSON.stringify({
-              name:
-                name.value,
-
-              email:
-                email.value
-            })
+            JSON.stringify(
+              clientData
+            )
         }
       )
 
-    const data =
-      await response.json()
-
-    console.log(
-      'CLIENT RESPONSE:',
-      data
-    )
-
-    if (
-      response.ok
-    ) {
-      alert(
-        'Client created!'
-      )
-
-      emit(
-        'close'
-      )
-    }
-
-    else {
-      alert(
-        data.message
-      )
-    }
+    return await response.json()
 
   }
 
   catch (error) {
+
     console.error(
       error
     )
 
-    alert(
-      'Error creating client'
-    )
+    return {
+      success:
+        false,
+
+      message:
+        'Could not create client'
+    }
   }
 }
 
-async function createNewAdmin() {
+// Opret admin
+export async function
+createNewAdminAccount(
+  adminData
+) {
   try {
 
     const csrfToken =
@@ -162,9 +73,10 @@ async function createNewAdmin() {
 
     const response =
       await fetch(
-        'http://localhost:2000/register/create-new-admin-account',
+        `${API_URL}/register/create-new-admin-account`,
         {
-          method: 'POST',
+          method:
+            'POST',
 
           headers: {
             'Content-Type':
@@ -178,51 +90,28 @@ async function createNewAdmin() {
             'include',
 
           body:
-            JSON.stringify({
-              name:
-                name.value,
-
-              email:
-                email.value
-            })
+            JSON.stringify(
+              adminData
+            )
         }
       )
 
-    const data =
-      await response.json()
-
-    console.log(
-      'ADMIN RESPONSE:',
-      data
-    )
-
-    if (
-      response.ok
-    ) {
-      alert(
-        'Admin created!'
-      )
-
-      emit(
-        'close'
-      )
-    }
-
-    else {
-      alert(
-        data.message
-      )
-    }
+    return await response.json()
 
   }
 
   catch (error) {
+
     console.error(
       error
     )
 
-    alert(
-      'Error creating admin'
-    )
+    return {
+      success:
+        false,
+
+      message:
+        'Could not create admin'
+    }
   }
 }

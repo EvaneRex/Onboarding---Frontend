@@ -1,22 +1,10 @@
+import {
+  getCsrfToken
+}
+from '@/components/services/csrfService'
+
 const API_URL =
   'http://localhost:2000'
-
-// CSRF
-async function getCsrfToken() {
-  const response =
-    await fetch(
-      `${API_URL}/csrf`,
-      {
-        credentials:
-          'include'
-      }
-    )
-
-  const data =
-    await response.json()
-
-  return data.csrfToken
-}
 
 // Hent alle PDF'er
 export async function

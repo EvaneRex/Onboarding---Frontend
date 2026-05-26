@@ -1,93 +1,33 @@
-// import axios from 'axios'
-
-// const API_URL = 'http://localhost:3000'
-
-// // Henter spørgsmål til survey
-// export async function getSurveyQuestions() {
-//   try {
-
-//     const response = await axios.get(
-//       `${API_URL}/survey/survey-questions`
-//     )
-
-//     return response.data
-
-//   } catch (error) {
-
-//     console.error(
-//       'Fejl ved hentning af survey:',
-//       error
-//     )
-
-//     return {
-//       success: false,
-//       message:
-//         'Kunne ikke hente survey'
-//     }
-//   }
-// }
-
-// // Sender kundens survey-besvarelser
-// export async function submitSurvey(
-//   answers
-// ) {
-//   try {
-
-//     const response = await axios.post(
-//       `${API_URL}/survey/survey-answers`,
-//       answers
-//     )
-
-//     return response.data
-
-//   } catch (error) {
-
-//     console.error(
-//       'Fejl ved upload af survey:',
-//       error
-//     )
-
-//     return {
-//       success: false,
-//       message:
-//         'Kunne ikke sende survey'
-//     }
-//   }
-// }
-
-// // Admin opretter survey-spørgsmål
-// export async function createSurvey(
-//   surveyQuestions
-// ) {
-//   try {
-
-//     const response = await axios.post(
-//       `${API_URL}/survey/new-survey`,
-//       surveyQuestions
-//     )
-
-//     return response.data
-
-//   } catch (error) {
-
-//     console.error(
-//       'Fejl ved oprettelse af survey:',
-//       error
-//     )
-
-//     return {
-//       success: false,
-//       message:
-//         'Kunne ikke oprette survey'
-//     }
-//   }
-// }
-
-import { mockSurveyQuestions, mockAnsweredSurveys } from '@/api/mockApi'
+import {
+  getCsrfToken
+}
+from '@/components/services/csrfService'
 
 // Henter survey
-export async function getSurveyQuestions() {
-  return mockSurveyQuestions
+const API_URL =
+  'http://localhost:2000'
+
+export async function
+getSurveyQuestions() {
+  try {
+
+    const response =
+      await fetch(
+        `${API_URL}/survey/survey-questions`,
+        {
+          credentials:
+            'include'
+        }
+      )
+
+    return await response.json()
+
+  } catch (error) {
+
+    console.error(error)
+
+    return []
+  }
 }
 
 

@@ -1,22 +1,12 @@
+import {
+  getCsrfToken
+}
+from '@/components/services/csrfService'
+
 const API_URL =
   'http://localhost:2000'
 
-// Hent CSRF token
-async function getCsrfToken() {
-  const response =
-    await fetch(
-      `${API_URL}/csrf`,
-      {
-        credentials:
-          'include'
-      }
-    )
 
-  const data =
-    await response.json()
-
-  return data.csrfToken
-}
 
 // Henter alle virksomheder
 export async function

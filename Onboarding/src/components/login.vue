@@ -17,7 +17,6 @@ onMounted(() => {
   }
 })
 
-const csrfToken = await getCsrfToken()
 
 const login = async () => {
   try {

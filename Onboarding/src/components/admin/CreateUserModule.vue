@@ -4,57 +4,134 @@ Denne er ansvarligt for at oprette nye brugere, alt efter hvilken knap man trykk
 
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue'
-import {
-  getCsrfToken
-}
-from '@/components/services/csrfService'
+import { createNewClientAccount, createNewAdminAccount } from '@/components/services/authService'
 
 const emit = defineEmits(['close'])
 
 const dialogRef = ref(null)
 const email = ref('')
 const name = ref('')
-const csrfToken = await getCsrfToken()
-
-onMounted(async () => {
-  const res = await fetch('http://localhost:2000/survey/survey-questions', {
-    credentials: 'include',
-  })
-  const data = await res.json()
-  surveyId.value = data.id
-})
 
 onMounted(() => {
-  dialogRef.value?.showModal()
+  dialogRef.value
+    ?.showModal()
 })
+
 onBeforeUnmount(() => {
   dialogRef.value?.close()
 })
-// fjern surveyid
-async function opretKlient() {
-  const token = await getCsrfToken()
-  await fetch('http://localhost:2000/register/create-new-client-account', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'x-csrf-token': token },
-    credentials: 'include',
-    body: JSON.stringify({ name: name.value, email: email.value }),
-  })
+
+function closeModal() {
+  dialogRef.value?.close()
+
+  emit('close')
 }
 
-async function opretAdmin() {
-  const token = await getCsrfToken()
-  await fetch('http://localhost:2000/register/create-new-admin-account', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'x-csrf-token': token },
-    credentials: 'include',
-    body: JSON.stringify({ name: name.value, email: email.value }),
-  })
+async function createNewClient() {
+  try {
+
+    const response =
+      await createNewClientAccount({
+        name:
+          name.value,
+
+        email:
+          email.value
+      })
+
+    console.log(
+      'CLIENT RESPONSE:',
+      response
+    )
+
+    if (
+      response.success
+    ) {
+
+      alert(
+        'Client created!'
+      )
+
+      closeModal()
+    }
+
+    else {
+
+      alert(
+        response.message ||
+        'Could not create client'
+      )
+    }
+
+  }
+
+  catch (error) {
+
+    console.error(
+      error
+    )
+
+    alert(
+      'Error creating client'
+    )
+  }
+}
+
+// Opret admin
+async function createNewAdmin() {
+  try {
+
+    const response =
+      await createNewAdminAccount({
+        name:
+          name.value,
+
+        email:
+          email.value
+      })
+
+    console.log(
+      'ADMIN RESPONSE:',
+      response
+    )
+
+    if (
+      response.success
+    ) {
+
+      alert(
+        'Admin created!'
+      )
+
+      closeModal()
+    }
+
+    else {
+
+      alert(
+        response.message ||
+        'Could not create admin'
+      )
+    }
+
+  }
+
+  catch (error) {
+
+    console.error(
+      error
+    )
+
+    alert(
+      'Error creating admin'
+    )
+  }
 }
 </script>
 
 <template>
   <dialog ref="dialogRef" class="createUser">
-    <button class="closeBtn" @click="emit('close')">x</button>
+    <button class="closeBtn" @click="closeModal">x</button>
     <section>
       <h1>Opret en ny bruger</h1>
       <form class="createUserBox">
@@ -64,8 +141,8 @@ async function opretAdmin() {
         <label for="email">Email</label>
         <input id="email" v-model="email" type="email" />
         <div class="createBtn">
-          <button @click="opretKlient" type="button">Opret klient</button>
-          <button @click="opretAdmin" type="button">Opret admin</button>
+          <button @click="createNewClient" type="button">Opret klient</button>
+          <button @click="createNewAdmin" type="button">Opret admin</button>
         </div>
       </form>
     </section>
