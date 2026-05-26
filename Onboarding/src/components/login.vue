@@ -34,10 +34,20 @@ const login = async () => {
       }),
     })
     const data = await res.json()
+    console.log('Login response:', data)
 
     if (data.success) {
-      user.value = data.user
-      emit('login-success', data.user)
+      const user = {
+        id: data.id,
+        role: data.role,
+        email: data.email,
+        username: data.username,
+        registrationCompleted: data.registrationCompleted,
+        registrationTokenHash: data.registrationTokenHash,
+        registrationTokenExpiresAt: data.registrationTokenExpiresAt,
+        registrationTokenUsedAt: data.registrationTokenUsedAt,
+      }
+      emit('login-success', user)
     } else {
       error.value = data.message || 'Forkert brugernavn eller adgangskode'
       adgangskode.value = ''
