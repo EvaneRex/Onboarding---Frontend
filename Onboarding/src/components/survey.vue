@@ -1,10 +1,9 @@
+// vi skal hente spørgsmål ind, inputfelter, vi skal have med virksomhedsinfo inden indsend bliver
+aktiv, færdig knap går videre til indsend
+
 <script setup>
 import { onMounted, ref } from 'vue'
-import {
-  getSurveyQuestions,
-  submitSurvey,
-  getAnsweredSurveys,
-} from './services/surveyService'
+import { getSurveyQuestions, submitSurvey, getAnsweredSurveys } from './services/surveyService'
 
 // Reactive state used by the template
 const surveyQuestions = ref([])

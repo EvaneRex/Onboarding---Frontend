@@ -8,8 +8,9 @@ const emit = defineEmits(['close'])
 
 const dialogRef = ref(null)
 const email = ref('')
-const username = ref('')
+const name = ref('')
 const surveyId = ref('')
+const token = await getCsrfToken()
 
 onMounted(async () => {
   const res = await fetch('http://localhost:2000/survey/survey-questions', {
@@ -29,9 +30,9 @@ onBeforeUnmount(() => {
 async function opretKlient() {
   await fetch(`http://localhost:2000/register/create-new-client-account/${surveyId.value}`, {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { 'Content-Type': 'application/json', 'x-csrf-token': token },
     credentials: 'include',
-    body: JSON.stringify({ username: username.value, email: email.value }),
+    body: JSON.stringify({ name: name.value, email: email.value }),
   })
 }
 
@@ -40,7 +41,7 @@ async function opretAdmin() {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     credentials: 'include',
-    body: JSON.stringify({ username: username.value, email: email.value }),
+    body: JSON.stringify({ name: name.value, email: email.value }),
   })
 }
 </script>
@@ -54,8 +55,8 @@ async function opretAdmin() {
         <label for="email">Email</label>
         <input id="email" v-model="email" type="email" />
 
-        <label for="username">Brugernavn</label>
-        <input id="username" v-model="username" type="text" />
+        <label for="name">Brugernavn</label>
+        <input id="name" v-model="name" type="text" />
         <div class="createBtn">
           <button @click="opretKlient" type="button">Opret klient</button>
           <button @click="opretAdmin" type="button">Opret admin</button>

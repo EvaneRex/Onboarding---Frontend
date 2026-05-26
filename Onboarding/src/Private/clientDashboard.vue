@@ -6,7 +6,7 @@ import { getOnboarding } from '@/components/services/materialService.js'
 import Header from '@/components/shared/header.vue'
 
 defineProps({
-  logout: Function
+  logout: Function,
 })
 
 const currentView = ref('dashboard')
@@ -41,16 +41,13 @@ const getStatus = (material, index) => {
 
 const openMaterial = (material, index) => {
   // sæt igangværende hvis ikke gennemført
-  if (
-    !material.complete &&
-    !startedSlides.value.includes(index)
-  ) {
+  if (!material.complete && !startedSlides.value.includes(index)) {
     startedSlides.value.push(index)
   }
 
   selectedMaterial.value = {
     ...material,
-    index
+    index,
   }
 
   currentView.value = 'material'
@@ -72,26 +69,19 @@ const goBack = () => {
   <Header :logout="logout" />
 
   <!-- DASHBOARD -->
-  <section
-    v-if="currentView === 'dashboard'"
-    class="dashboard clientDashboard"
-  >
+  <section v-if="currentView === 'dashboard'" class="dashboard clientDashboard">
     <div class="welcome">
       <h1>Velkommen!</h1>
 
       <p>
-        Her finder i et overblik over de forskellige onboarding materialer,
-        her kan i også se status.
-        <br>
-        Når materialerne er gennemført,
-        hører i fra os igen.
+        Her finder i et overblik over de forskellige onboarding materialer, her kan i også se
+        status.
       </p>
+      <p>Når materialerne er gennemført, hører i fra os igen.</p>
     </div>
 
     <div class="materialTable">
-
       <table v-if="currentState === 'success'" class="tableClient">
-
         <thead>
           <tr>
             <th>Materialer</th>
@@ -106,25 +96,18 @@ const goBack = () => {
             class="clickableRow"
             @click="openMaterial(material, index)"
           >
-            <td>
-              Materiale {{ index + 1 }}
-            </td>
+            <td>Materiale {{ index + 1 }}</td>
 
             <td>
               {{ getStatus(material, index) }}
             </td>
           </tr>
         </tbody>
-
       </table>
 
-      <p v-if="currentState === 'loading'">
-        Indlæser materialer...
-      </p>
+      <p v-if="currentState === 'loading'">Indlæser materialer...</p>
 
-      <p v-if="currentState === 'error'">
-        Der skete en fejl.
-      </p>
+      <p v-if="currentState === 'error'">Der skete en fejl.</p>
     </div>
   </section>
 
