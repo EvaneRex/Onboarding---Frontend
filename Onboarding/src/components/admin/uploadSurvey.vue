@@ -4,7 +4,9 @@ Dens forældre komponent er uploadManager.vue
 -->
 
 <script setup>
-import { ref } from 'vue'
+import { ref, defineEmits } from 'vue'
+
+const emit = defineEmits(['uploaded'])
 
 const filInput = ref(null)
 
@@ -37,7 +39,6 @@ async function uploadNewSurvey() {
     return
   }
 
-
   const res = await fetch('http://localhost:2000/survey/new-survey', {
     method: 'POST',
     credentials: 'include',
@@ -50,6 +51,10 @@ async function uploadNewSurvey() {
 
   const data = await res.json()
   console.log(data)
+  if (res.ok) {
+    alert('Survey uploadet')
+    emit('uploaded')
+  }
 }
 </script>
 

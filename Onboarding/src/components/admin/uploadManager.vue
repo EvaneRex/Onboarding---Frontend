@@ -48,9 +48,9 @@ onMounted(() => {
           </button>
         </div>
         <div class="tabContent">
-          <UploadFile v-if="activeTab === 'pdf'" />
-          <UploadVideo v-else-if="activeTab === 'video'" />
-          <UploadSurvey v-else-if="activeTab === 'survey'" />
+          <UploadFile v-if="activeTab === 'pdf'" @uploaded="$emit('uploaded')" />
+          <UploadVideo v-else-if="activeTab === 'video'" @uploaded="$emit('uploaded')" />
+          <UploadSurvey v-else-if="activeTab === 'survey'" @uploaded="$emit('uploaded')" />
         </div>
       </div>
     </div>

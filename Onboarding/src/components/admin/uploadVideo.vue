@@ -4,6 +4,7 @@ Dens forældre komponent er uploadManager.vue
 -->
 <script setup>
 import { ref } from 'vue'
+const emit = defineEmits(['uploaded'])
 
 const links = ref([{ titel: '', url: '' }])
 
@@ -53,7 +54,8 @@ async function uploadVideo() {
       return
     }
 
-    alert('YouTube-links uploadet!')
+    alert('Linket/linksene er uploadet')
+    emit('uploaded')
     links.value = [{ titel: '', url: '' }]
   } catch (err) {
     alert('Der opstod en fejl.')

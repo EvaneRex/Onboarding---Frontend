@@ -3,7 +3,9 @@ Dette er komponenten der styrer upload af PDF'filer, de kan uploade en eller fle
 Forældrekomponenten er uploadManager.vue
 -->
 <script setup>
-import { ref } from 'vue'
+import { ref, defineEmits } from 'vue'
+
+const emit = defineEmits(['uploaded'])
 
 const filInput = ref(null)
 async function getCsrfToken() {
@@ -43,6 +45,8 @@ async function uploadPdfFiler() {
     }
 
     console.log(data)
+    alert('Filen/filerne er uploadet')
+    emit('uploaded')
   } catch (err) {
     console.error(err)
   }
