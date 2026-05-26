@@ -1,7 +1,8 @@
 <script setup>
 import {
   ref,
-  onMounted
+  onMounted,
+  onBeforeUnmount
 } from 'vue'
 
 import {
@@ -66,10 +67,16 @@ onMounted(async () => {
       'error'
   }
 })
+
+onBeforeUnmount(() => {
+  dialogRef.value?.close()
+
+  emit('close')
+})
 </script>
 
 <template>
-  <dialog
+<dialog
     ref="dialogRef"
     class="surveyDialog"
   >
@@ -147,6 +154,5 @@ onMounted(async () => {
       </div>
 
     </section>
-
-  </dialog>
+</dialog>
 </template>

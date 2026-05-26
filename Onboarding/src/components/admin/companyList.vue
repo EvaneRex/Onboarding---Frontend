@@ -10,7 +10,8 @@ import { getAllClients, deleteClient } from '@/components/services/customerServi
 const emit = defineEmits(['goBack'])
 
 // Hvilken side der vises
-const currentView = ref('list')
+const showCompanyInfo =
+  ref(false)
 
 // Valgt virksomhed
 const selectedCompany = ref(null)
@@ -52,15 +53,19 @@ async function loadClients() {
 }
 
 // Åbn virksomhed
-function openCompany(client) {
-  selectedCompany.value = client
+function openCompany(
+  client
+) {
+  selectedCompany.value =
+    client
 
-  currentView.value = 'companyInfo'
+  showCompanyInfo.value =
+    true
 }
 
 // Tilbage til liste
 function goBackToList() {
-  currentView.value = 'list'
+  showCompanyInfo.value = false
 }
 
 // Slet virksomhed
@@ -84,7 +89,7 @@ onMounted(() => {
 
 <template>
   <!-- COMPANY LIST -->
-  <section v-if="currentView === 'list'" class="companyList">
+  <section class="companyList">
     <!-- Tilbage -->
     <button class="backBtn" @click="emit('goBack')">⟵ Tilbage til dashboard</button>
 
@@ -154,7 +159,7 @@ onMounted(() => {
 
   <!-- COMPANY INFO -->
   <companyInfo
-    v-if="currentView === 'companyInfo'"
+    v-if="showCompanyInfo"
     :client="selectedCompany"
     @goBack="goBackToList"
   />

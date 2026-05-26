@@ -1,39 +1,76 @@
 <script setup>
-import { ref, onMounted } from 'vue'
-import { getOnboarding } from '@/components/services/materialService'
+import {
+  ref,
+  onMounted,
+  onBeforeUnmount
+} from 'vue'
 
-import MaterialAssignment from '@/components/admin/materialAssignment.vue'
-import ClientSurvey from '@/components/admin/clientSurvey.vue'
+import MaterialAssignment
+from '@/components/admin/materialAssignment.vue'
 
+import ClientSurvey
+from '@/components/admin/clientSurvey.vue'
 
-const showAssignment = ref(false)
-const showSurvey = ref(false)
+const emit =
+  defineEmits([
+    'goBack'
+  ])
 
+const props =
+  defineProps({
+    client: {
+      type: Object,
+      default: null
+    }
+  })
+
+const dialogRef =
+  ref(null)
+
+const materials =
+  ref([])
+
+const currentState =
+  ref('loading')
+
+const showAssignment =
+  ref(false)
+
+const showSurvey =
+  ref(false)
+
+// Åbn modaler ovenpå
 function openAssignment() {
   dialogRef.value?.close()
-  showAssignment.value = true
+  showAssignment.value =
+    true
 }
 
 function openSurvey() {
   dialogRef.value?.close()
-
-  showSurvey.value = true
+  showSurvey.value =
+    true
 }
 
-function closeSurvey() {
-  showSurvey.value = false
-
-  // åbn company modal igen
-  dialogRef.value?.showModal()
-}
-
+// Luk assignment
 function closeAssignment() {
-  showAssignment.value = false
+  showAssignment.value =
+    false
 
-  // åbn company modal igen
   dialogRef.value?.showModal()
 }
-function saveAssignedMaterials(selectedMaterials) {
+
+// Luk survey
+function closeSurvey() {
+  showSurvey.value =
+    false
+  dialogRef.value?.showModal()
+}
+
+// Gem materialer
+function saveAssignedMaterials(
+  selectedMaterials
+) {
   props.client.onboardingSlides =
     selectedMaterials
 
@@ -42,72 +79,92 @@ function saveAssignedMaterials(selectedMaterials) {
 
   showAssignment.value =
     false
-
-  // åbn modal igen
+  
   dialogRef.value?.showModal()
 }
 
-const emit = defineEmits(['goBack'])
-
-const props = defineProps({
-  client: {
-    type: Object,
-    default: null,
-  },
-})
-
-const dialogRef = ref(null)
-
-const materials = ref([])
-const currentState = ref('loading')
-
+// Luk company modal
 function closeModal() {
   dialogRef.value?.close()
-
   emit('goBack')
 }
 
-function getMaterialStatus(material) {
-  if (material.complete === true) {
+// Status
+function getMaterialStatus(
+  material
+) {
+  if (
+    material.complete ===
+    true
+  ) {
     return '100% gennemført'
   }
 
-  if (material.started === true) {
+  if (
+    material.started ===
+    true
+  ) {
     return 'Igangværende'
   }
 
   return 'Ikke startet'
 }
 
+// Åbn modal
 onMounted(() => {
   dialogRef.value?.showModal()
 
-  materials.value = props.client?.onboardingSlides || []
+  materials.value =
+    props.client
+      ?.onboardingSlides || []
 
-  currentState.value = 'success'
+  currentState.value =
+    'success'
+})
+
+// Luk dialog korrekt
+onBeforeUnmount(() => {
+  dialogRef.value?.close()
 })
 </script>
 
 <template>
-  <dialog ref="dialogRef" class="companyDialog">
-    <div>
-      <button class="closeBtn" @click="closeModal">x</button>
-    </div>
-    <!-- Top -->
+  <dialog
+    ref="dialogRef"
+    class="companyDialog"
+  >
+    <button
+      class="closeBtn"
+      @click="closeModal"
+    >
+      ✕
+    </button>
+
+    <!-- TOP -->
     <section class="modalTop">
+
       <div>
         <h1>
           {{ props.client?.clientName }}
         </h1>
 
         <p>
-          Her er de materialer, som er tildelt denne virksomhed samt status på hvor langt de er med
-          disse.
+          Her er de materialer,
+          som er tildelt denne
+          virksomhed samt status
+          på hvor langt de er
+          med disse.
         </p>
       </div>
 
       <div class="topButtons">
-        <button class="createBtn" @click="openAssignment">Tildel materialer</button>
+
+        <button
+          class="createBtn"
+          @click="openAssignment"
+        >
+          Tildel materialer
+        </button>
 
         <button
           class="createBtn"
@@ -115,38 +172,81 @@ onMounted(() => {
         >
           Se spørgeskema
         </button>
+
       </div>
+
     </section>
 
-    <!-- Table -->
+    <!-- TABLE -->
     <section class="tableBox">
-      <table v-if="currentState === 'success'">
+
+      <table
+        v-if="
+          currentState ===
+          'success'
+        "
+      >
         <thead>
           <tr>
-            <th>Materialer</th>
-            <th>Status</th>
+            <th>
+              Materialer
+            </th>
+
+            <th>
+              Status
+            </th>
           </tr>
         </thead>
 
         <tbody>
-          <tr v-for="(material, index) in materials" :key="index">
+          <tr
+            v-for="(
+              material,
+              index
+            ) in materials"
+            :key="index"
+          >
             <td>
-              {{ material.title || `Materiale ${index + 1}` }}
+              {{
+                material.title ||
+                `Materiale ${index + 1}`
+              }}
             </td>
 
             <td>
-              {{ getMaterialStatus(material) }}
+              {{
+                getMaterialStatus(
+                  material
+                )
+              }}
             </td>
           </tr>
         </tbody>
+
       </table>
 
-      <p v-if="currentState === 'loading'">Indlæser materialer...</p>
+      <p
+        v-if="
+          currentState ===
+          'loading'
+        "
+      >
+        Indlæser materialer...
+      </p>
 
-      <p v-if="currentState === 'error'">Der skete en fejl.</p>
+      <p
+        v-if="
+          currentState ===
+          'error'
+        "
+      >
+        Der skete en fejl.
+      </p>
+
     </section>
   </dialog>
 
+  <!-- Material modal -->
   <MaterialAssignment
     v-if="showAssignment"
     :client="props.client"
@@ -154,9 +254,10 @@ onMounted(() => {
     @save="saveAssignedMaterials"
   />
 
+  <!-- Survey modal -->
   <ClientSurvey
-  v-if="showSurvey"
-  :client="props.client"
-  @close="closeSurvey"
-/>
+    v-if="showSurvey"
+    :client="props.client"
+    @close="closeSurvey"
+  />
 </template>
