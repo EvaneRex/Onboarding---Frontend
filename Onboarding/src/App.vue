@@ -1,15 +1,27 @@
 <script setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
 
-import login from './components/login.vue'
-
-import adminDashboard from './Private/adminDashboard.vue'
-
-import clientDashboard from './Private/clientDashboard.vue'
+import Login from './components/login.vue'
+import AdminDashboard from './Private/adminDashboard.vue'
+import ClientDashboard from './Private/clientDashboard.vue'
+import Survey from './components/survey.vue'
 
 const currentPage = ref('login')
-
 const currentUser = ref(null)
+
+onMounted(() => {
+
+  const path =
+    window.location.pathname
+
+  if (
+    path ===
+    '/survey'
+  ) {
+    currentPage.value =
+      'survey'
+  }
+})
 
 function handleLogin(user) {
   if (!user || !user.role) {
@@ -18,10 +30,14 @@ function handleLogin(user) {
     currentPage.value = 'login'
     return
   }
+
   currentUser.value = user
+
   if (user.role === 'admin') {
     currentPage.value = 'adminDashboard'
-  } else {
+  }
+
+  else {
     currentPage.value = 'clientDashboard'
   }
 }
@@ -30,10 +46,33 @@ function logout() {
   currentUser.value = null
   currentPage.value = 'login'
 }
+
+function closeSurvey() {
+  window.history.pushState({}, '', '/')
+  currentPage.value = 'login'
+}
 </script>
 
 <template>
-  <login v-if="currentPage === 'login'" @login-success="handleLogin" />
-  <adminDashboard v-if="currentPage === 'adminDashboard'" :user="currentUser" :logout="logout" />
-  <clientDashboard v-if="currentPage === 'clientDashboard'" :user="currentUser" :logout="logout" />
+  <Login
+    v-if="currentPage === 'login'"
+    @login-success="handleLogin"
+  />
+
+  <AdminDashboard
+    v-if="currentPage === 'adminDashboard'"
+    :user="currentUser"
+    :logout="logout"
+  />
+
+  <ClientDashboard
+    v-if="currentPage === 'clientDashboard'"
+    :user="currentUser"
+    :logout="logout"
+  />
+
+  <Survey
+    v-if="currentPage === 'survey'"
+    @close="closeSurvey"
+  />
 </template>

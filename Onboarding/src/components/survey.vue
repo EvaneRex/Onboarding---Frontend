@@ -1,109 +1,324 @@
 <script setup>
-import { onMounted, ref, computed } from 'vue'
-import { getSurveyQuestions, submitSurvey, getAnsweredSurveys } from './services/surveyService'
+import { ref, computed, onMounted } from 'vue'
+import {
+  getSurveyQuestions,
+  submitSurvey
+} from './services/surveyService'
 
 const surveyQuestions = ref([])
-const answeredSurveys = ref([])
-const surveyError = ref('')
-const submitError = ref('')
-const submitMessage = ref('')
+
+const currentQuestionIndex = ref(0)
+
 const answers = ref({})
 
 const companyName = ref('')
 const companyEmail = ref('')
 
-const normalizeList = (value, keys = []) => {
-  if (Array.isArray(value)) {
-    return value
-  }
-  for (const key of keys) {
-    if (Array.isArray(value?.[key])) {
-      return value[key]
-    }
-  }
-  return []
-}
+const loading = ref(true)
+const error = ref('')
+const submitMessage = ref('')
+const submitError = ref('')
 
-const allQuestionsAnswered = computed(
-  () =>
+const surveySubmitted = ref(false)
+
+const currentQuestion = computed(() => {
+  return surveyQuestions.value[
+    currentQuestionIndex.value
+  ]
+})
+
+const isLastQuestion = computed(() => {
+  return (
+    currentQuestionIndex.value ===
+    surveyQuestions.value.length - 1
+  )
+})
+
+const showCompanyForm = computed(() => {
+  return (
     surveyQuestions.value.length > 0 &&
-    surveyQuestions.value.every(
-      (q) =>
-        answers.value[q.id || q._id || q.question] &&
-        answers.value[q.id || q._id || q.question].trim(),
-    ),
-)
+    currentQuestionIndex.value >=
+    surveyQuestions.value.length
+  )
+})
 
-const canSubmit = computed(
-  () => allQuestionsAnswered.value && companyName.value.trim() && companyEmail.value.trim(),
-)
+async function loadSurvey() {
+  try {
 
-const loadSurveyData = async () => {
-  surveyError.value = ''
-  const questionsResponse = await getSurveyQuestions()
-  if (questionsResponse?.success === false) {
-    surveyError.value = questionsResponse.message || 'Kunne ikke hente survey'
-    surveyQuestions.value = []
-  } else {
-    surveyQuestions.value = normalizeList(questionsResponse, ['questions', 'data'])
+    loading.value = true
+
+    const response =
+      await getSurveyQuestions()
+
+    surveyQuestions.value =
+      response || []
+
   }
-  const answeredResponse = await getAnsweredSurveys()
-  if (answeredResponse?.success === false) {
-    answeredSurveys.value = []
-  } else {
-    answeredSurveys.value = normalizeList(answeredResponse, ['answeredSurveys', 'surveys', 'data'])
+
+  catch (err) {
+
+    console.error(err)
+
+    error.value =
+      'Kunne ikke hente spørgsmål'
+  }
+
+  finally {
+    loading.value = false
   }
 }
 
-const onSubmit = async () => {
-  submitError.value = ''
-  submitMessage.value = ''
-  const response = await submitSurvey({
-    companyName: companyName.value,
-    companyEmail: companyEmail.value,
-    answers: answers.value,
-  })
-  if (response?.success === false) {
-    submitError.value = response.message || 'Kunne ikke sende survey'
+function nextQuestion() {
+
+  const currentAnswer =
+    answers.value[
+      currentQuestion.value
+    ]
+
+  if (
+    !currentAnswer ||
+    !currentAnswer.trim()
+  ) {
+    alert(
+      'Du skal besvare spørgsmålet'
+    )
+
     return
   }
-  submitMessage.value = response?.message || 'Survey sendt'
+
+  currentQuestionIndex.value++
 }
 
-onMounted(loadSurveyData)
+function previousQuestion() {
+
+  if (
+    currentQuestionIndex.value > 0
+  ) {
+    currentQuestionIndex.value--
+  }
+}
+
+async function sendSurvey() {
+
+  submitError.value = ''
+  submitMessage.value = ''
+
+  if (
+    !companyName.value.trim() ||
+    !companyEmail.value.trim()
+  ) {
+    alert(
+      'Udfyld virksomhedsnavn og email'
+    )
+
+    return
+  }
+
+  try {
+
+    const formattedAnswers =
+      surveyQuestions.value.map(
+        question => ({
+          question,
+          answer:
+            answers.value[
+              question
+            ] || ''
+        })
+      )
+
+    const response =
+      await submitSurvey(
+        formattedAnswers
+      )
+
+    if (
+        response.success
+      ) {
+
+        surveySubmitted.value =
+          true
+      }
+
+    else {
+
+      submitError.value =
+        response.message ||
+        'Kunne ikke sende survey'
+    }
+
+  }
+
+  catch (error) {
+
+    console.error(error)
+
+    submitError.value =
+      'Noget gik galt'
+  }
+}
+
+onMounted(loadSurvey)
 </script>
 
 <template>
-  <section>
-    <h1>Survey</h1>
-    <p v-if="surveyError">{{ surveyError }}</p>
-    <form v-else @submit.prevent="onSubmit">
-      <div
-        v-for="question in surveyQuestions"
-        :key="question.id || question._id || question.question"
+  <main class="surveyPage">
+
+    <section class="surveyCard">
+
+      <!-- SUCCESS SCREEN -->
+      <template
+        v-if="surveySubmitted"
       >
-        <label :for="`q-${question.id || question._id || question.question}`">
-          {{ question.question || question.label || 'Spørgsmål' }}
-        </label>
+
+        <h1>
+          Tak for din besvarelse
+        </h1>
+
+        <p class="successText">
+          Tak for at udfylde spørgeskemaet.
+        </p>
+
+        <p class="successText">
+          Vi gennemgår nu jeres besvarelse og uddeler relevante materialer.
+        </p>
+
+        <p class="successText">
+          Derefter modtager I registrering på mail.
+        </p>
+
+      </template>
+
+      <!-- LOADING -->
+      <p
+        v-else-if="loading"
+      >
+        Indlæser spørgsmål...
+      </p>
+
+      <!-- ERROR -->
+      <p
+        v-else-if="error"
+      >
+        {{ error }}
+      </p>
+
+      <!-- SPØRGSMÅL -->
+      <template
+        v-else-if="
+          !showCompanyForm &&
+          !surveySubmitted
+        "
+      >
+
+        <h1>
+          Spørgeskema
+        </h1>
+
+        <h2>
+          Spørgsmål
+          {{ currentQuestionIndex + 1 }}
+        </h2>
+
+        <p class="question">
+          {{ currentQuestion }}
+        </p>
+
         <input
-          :id="`q-${question.id || question._id || question.question}`"
-          v-model="answers[question.id || question._id || question.question]"
+          v-model="
+            answers[currentQuestion]
+          "
           type="text"
-          required
+          placeholder="Skriv dit svar..."
         />
-      </div>
-      <div>
-        <label for="companyName">Virksomhedsnavn</label>
-        <input id="companyName" v-model="companyName" type="text" required />
-      </div>
-      <div>
-        <label for="companyEmail">Virksomheds-email</label>
-        <input id="companyEmail" v-model="companyEmail" type="email" required />
-      </div>
-      <p v-if="submitError">{{ submitError }}</p>
-      <p v-if="submitMessage">{{ submitMessage }}</p>
-      <button type="submit" :disabled="!canSubmit">Send Survey</button>
-    </form>
-    <p>Besvarede surveys: {{ answeredSurveys.length }}</p>
-  </section>
+
+        <div class="buttons">
+
+          <button
+            @click="
+              previousQuestion
+            "
+            :disabled="
+              currentQuestionIndex === 0
+            "
+          >
+            Tilbage
+          </button>
+
+          <button
+            @click="
+              nextQuestion
+            "
+          >
+            {{
+              isLastQuestion
+                ? 'Fortsæt'
+                : 'Næste'
+            }}
+          </button>
+
+        </div>
+
+      </template>
+
+      <!-- FIRMA INFO -->
+      <template
+        v-else-if="
+          !surveySubmitted
+        "
+      >
+
+        <h1>
+          Virksomhedsoplysninger
+        </h1>
+
+        <input
+          v-model="
+            companyName
+          "
+          type="text"
+          placeholder="Virksomhedsnavn"
+        />
+
+        <input
+          v-model="
+            companyEmail
+          "
+          type="email"
+          placeholder="Virksomheds-email"
+        />
+
+        <div class="buttons">
+
+          <button
+            @click="
+              previousQuestion
+            "
+          >
+            Tilbage
+          </button>
+
+          <button
+            @click="
+              sendSurvey
+            "
+          >
+            Send spørgeskema
+          </button>
+
+        </div>
+
+        <p
+          v-if="
+            submitError
+          "
+        >
+          {{ submitError }}
+        </p>
+
+      </template>
+
+    </section>
+
+  </main>
 </template>
