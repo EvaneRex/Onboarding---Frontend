@@ -4,23 +4,17 @@ Denne er ansvarligt for at oprette nye brugere, alt efter hvilken knap man trykk
 
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue'
+import {
+  getCsrfToken
+}
+from '@/components/services/csrfService'
+
 const emit = defineEmits(['close'])
 
 const dialogRef = ref(null)
 const email = ref('')
 const name = ref('')
-const surveyId = ref('')
-
-async function getCsrfToken() {
-  const response = await fetch('http://localhost:2000/csrf', {
-    credentials: 'include',
-  })
-  const data = await response.json()
-  if (!response.ok) {
-    throw new Error(data.message || 'Could not get CSRF token.')
-  }
-  return data.csrfToken
-}
+const csrfToken = await getCsrfToken()
 
 onMounted(async () => {
   const res = await fetch('http://localhost:2000/survey/survey-questions', {

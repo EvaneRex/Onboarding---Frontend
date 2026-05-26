@@ -1,6 +1,5 @@
-// import axios from 'axios'
 
-// const API_URL = 'http://localhost:3000'
+const API_URL = 'http://localhost:2000'
 
 // // Henter brugerens rolle ved login og tjekker loginstatus
 // export async function getUser() {
@@ -77,121 +76,153 @@
 //   }
 // }
 
-// // begge til at oprette en ny bruger - både admin og kunde
+const csrfToken =
+  await getCsrfToken()
 
-// export async function
-// createNewClientAccount(
-//   surveyId,
-//   clientData
-// ) {
-//   try {
+// begge til at oprette en ny bruger - både admin og kunde
 
-//     const response =
-//       await axios.post(
-//         `${API_URL}/register/create-new-client-account/${surveyId}`,
-//         clientData
-//       )
+async function createNewClient() {
+  try {
 
-//     return response.data
+    const csrfToken =
+      await getCsrfToken()
 
-//   } catch (error) {
+    const response =
+      await fetch(
+        'http://localhost:2000/register/create-new-client-account',
+        {
+          method: 'POST',
 
-//     console.error(
-//       'Fejl ved oprettelse af klient:',
-//       error
-//     )
+          headers: {
+            'Content-Type':
+              'application/json',
 
-//     return {
-//       success: false,
-//       message:
-//         'Kunne ikke oprette klient'
-//     }
-//   }
-// }
+            'x-csrf-token':
+              csrfToken
+          },
 
-// export async function
-// createNewAdminAccount(
-//   adminData
-// ) {
-//   try {
+          credentials:
+            'include',
 
-//     const response =
-//       await axios.post(
-//         `${API_URL}/register/create-new-admin-account`,
-//         adminData
-//       )
+          body:
+            JSON.stringify({
+              name:
+                name.value,
 
-//     return response.data
+              email:
+                email.value
+            })
+        }
+      )
 
-//   } catch (error) {
+    const data =
+      await response.json()
 
-//     console.error(
-//       'Fejl ved oprettelse af admin:',
-//       error
-//     )
+    console.log(
+      'CLIENT RESPONSE:',
+      data
+    )
 
-//     return {
-//       success: false,
-//       message:
-//         'Kunne ikke oprette admin'
-//     }
-//   }
-// }
+    if (
+      response.ok
+    ) {
+      alert(
+        'Client created!'
+      )
 
-import {
-  mockUser
-}
-from '@/api/mockApi'
+      emit(
+        'close'
+      )
+    }
 
-// Henter brugerens rolle ved login
-export async function getUser() {
+    else {
+      alert(
+        data.message
+      )
+    }
 
-  return mockUser
-}
+  }
 
-// Logger ind
-export async function login(
-  username,
-  password
-) {
+  catch (error) {
+    console.error(
+      error
+    )
 
-  return {
-    success: true,
-    username,
-    role: 'admin'
+    alert(
+      'Error creating client'
+    )
   }
 }
 
-// Logger ud
-export async function logout() {
+async function createNewAdmin() {
+  try {
 
-  return {
-    success: true
+    const csrfToken =
+      await getCsrfToken()
+
+    const response =
+      await fetch(
+        'http://localhost:2000/register/create-new-admin-account',
+        {
+          method: 'POST',
+
+          headers: {
+            'Content-Type':
+              'application/json',
+
+            'x-csrf-token':
+              csrfToken
+          },
+
+          credentials:
+            'include',
+
+          body:
+            JSON.stringify({
+              name:
+                name.value,
+
+              email:
+                email.value
+            })
+        }
+      )
+
+    const data =
+      await response.json()
+
+    console.log(
+      'ADMIN RESPONSE:',
+      data
+    )
+
+    if (
+      response.ok
+    ) {
+      alert(
+        'Admin created!'
+      )
+
+      emit(
+        'close'
+      )
+    }
+
+    else {
+      alert(
+        data.message
+      )
+    }
+
   }
-}
 
-// Opret klient
-export async function
-createNewClientAccount(
-  surveyId,
-  clientData
-) {
+  catch (error) {
+    console.error(
+      error
+    )
 
-  return {
-    success: true,
-    surveyId,
-    clientData
-  }
-}
-
-// Opret admin
-export async function
-createNewAdminAccount(
-  adminData
-) {
-
-  return {
-    success: true,
-    adminData
+    alert(
+      'Error creating admin'
+    )
   }
 }

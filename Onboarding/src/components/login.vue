@@ -1,5 +1,9 @@
 <script setup>
 import { onMounted, ref } from 'vue'
+import {
+  getCsrfToken
+}
+from '@/components/services/csrfService'
 const emit = defineEmits(['login-success'])
 const error = ref('')
 const brugernavn = ref('')
@@ -13,16 +17,7 @@ onMounted(() => {
   }
 })
 
-async function getCsrfToken() {
-  const response = await fetch('http://localhost:2000/csrf', {
-    credentials: 'include',
-  })
-  const data = await response.json()
-  if (!response.ok) {
-    throw new Error(data.message || 'Could not get CSRF token.')
-  }
-  return data.csrfToken
-}
+const csrfToken = await getCsrfToken()
 
 const login = async () => {
   try {

@@ -83,31 +83,6 @@
 //   }
 // }
 
-// // Henter alle besvarede surveys til admin
-// export async function getAnsweredSurveys() {
-//   try {
-
-//     const response = await axios.get(
-//       `${API_URL}/survey/answered-surveys`
-//     )
-
-//     return response.data
-
-//   } catch (error) {
-
-//     console.error(
-//       'Fejl ved hentning af besvarede surveys:',
-//       error
-//     )
-
-//     return {
-//       success: false,
-//       message:
-//         'Kunne ikke hente surveys'
-//     }
-//   }
-// }
-
 import { mockSurveyQuestions, mockAnsweredSurveys } from '@/api/mockApi'
 
 // Henter survey
@@ -115,20 +90,6 @@ export async function getSurveyQuestions() {
   return mockSurveyQuestions
 }
 
-// Sender survey
-async function getCsrfToken() {
-  const response = await fetch('http://localhost:2000/csrf', {
-    credentials: 'include',
-  })
-
-  const data = await response.json()
-
-  if (!response.ok) {
-    throw new Error(data.message || 'Could not get CSRF token.')
-  }
-
-  return data.csrfToken
-}
 
 // Sender survey
 export async function submitSurvey(data) {
@@ -149,9 +110,4 @@ export async function createSurvey(surveyQuestions) {
     success: true,
     surveyQuestions,
   }
-}
-
-// Henter besvarede surveys
-export async function getAnsweredSurveys() {
-  return mockAnsweredSurveys
 }

@@ -1,8 +1,5 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue'
-import {
-  getAnsweredSurveys
-} from '@/components/services/surveyService'
 
 const emit = defineEmits(['close'])
 
@@ -29,13 +26,8 @@ onMounted(async () => {
   dialogRef.value?.showModal()
 
   try {
-    const surveys = await getAnsweredSurveys()
-
-    // find survey til denne kunde
-    const companySurvey = surveys.find((survey) => survey.clientId === props.client?.clientId)
-
-    surveyAnswers.value = companySurvey?.survey || []
-
+    surveyAnswers.value = props.client?.surveyAnswers || []
+    
     currentState.value = 'success'
   } catch (error) {
     console.error(error)

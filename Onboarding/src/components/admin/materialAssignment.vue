@@ -1,6 +1,10 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue'
 import { getPdfSlides, getYoutubeLinks, assignOnboarding } from '@/components/services/materialService'
+import {
+  getCsrfToken
+}
+from '@/components/services/csrfService'
 
 const emit = defineEmits([
   'close',
@@ -15,6 +19,7 @@ const dialogRef = ref(null)
 
 const allMaterials = ref([])
 const selectedMaterials = ref([])
+const csrfToken = await getCsrfToken()
 
 onMounted(async () => {
   dialogRef.value?.showModal()
