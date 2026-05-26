@@ -97,6 +97,11 @@ onMounted(() => {
     <section class="topSection">
       <h1>Oversigt over kunder</h1>
 
+
+      <div class="allSurveys">
+        <button class="allSurveyBtn">Vis alle undersøgelser</button>
+      </div>
+
       <div class="topButtons">
         <button class="createBtn" @click="openCreateUser">Opret bruger</button>
       </div>
