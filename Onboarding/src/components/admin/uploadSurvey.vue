@@ -8,6 +8,17 @@ import { ref } from 'vue'
 
 const filInput = ref(null)
 
+async function getCsrfToken() {
+  const response = await fetch('http://localhost:2000/csrf', {
+    credentials: 'include',
+  })
+  const data = await response.json()
+  if (!response.ok) {
+    throw new Error(data.message || 'Could not get CSRF token.')
+  }
+  return data.csrfToken
+}
+
 async function uploadNewSurvey() {
   const input = filInput.value
   const surveyFile = input.files[0]
@@ -26,11 +37,14 @@ async function uploadNewSurvey() {
     return
   }
 
+  const csrfToken = await getCsrfToken()
+
   const res = await fetch('http://localhost:2000/survey/new-survey', {
     method: 'POST',
     credentials: 'include',
     headers: {
       'Content-Type': 'application/json',
+      'x-csrf-token': csrfToken,
     },
     body: JSON.stringify(jsonParsed),
   })

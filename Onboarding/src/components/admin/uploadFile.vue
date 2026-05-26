@@ -6,6 +6,16 @@ Forældrekomponenten er uploadManager.vue
 import { ref } from 'vue'
 
 const filInput = ref(null)
+async function getCsrfToken() {
+  const response = await fetch('http://localhost:2000/csrf', {
+    credentials: 'include',
+  })
+  const data = await response.json()
+  if (!response.ok) {
+    throw new Error(data.message || 'Could not get CSRF token.')
+  }
+  return data.csrfToken
+}
 
 async function uploadPdfFiler() {
   const filer = filInput.value.files
@@ -17,9 +27,13 @@ async function uploadPdfFiler() {
 
   try {
     const API_URL = 'http://localhost:2000'
+    const csrfToken = await getCsrfToken()
     const res = await fetch(`${API_URL}/onboarding/pdf-slides`, {
       method: 'POST',
       credentials: 'include',
+      headers: {
+        'x-csrf-token': csrfToken,
+      },
       body: formData,
     })
 
