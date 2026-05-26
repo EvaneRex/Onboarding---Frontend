@@ -10,17 +10,17 @@ $border-radius: 10px;
 
 @font-face {
   font-family: 'OpenSans-Regular';
-  src: url(/Onboarding/src/assets/fonts/OpenSans-Regular.ttf);
+  src: url(/fonts/OpenSans-Regular.ttf);
 }
 
 @font-face {
   font-family: 'OpenSans-SemiBold';
-  src: url(/Onboarding/src/assets/fonts/OpenSans-SemiBold.ttf);
+  src: url(fonts/OpenSans-SemiBold.ttf);
 }
 
 @font-face {
   font-family: 'OpenSans-Bold';
-  src: url(/Onboarding/src/assets/fonts/OpenSans-Bold.ttf);
+  src: url(fonts/OpenSans-Bold.ttf);
 }
 
 @mixin heading($size: 24px) {
@@ -60,7 +60,7 @@ $border-radius: 10px;
 
   &:hover {
     opacity: 0.7;
-}
+  }
 }
 
 @mixin tableBox($background-color: $blue) {
