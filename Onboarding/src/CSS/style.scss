@@ -837,7 +837,7 @@ header {
       padding-top: 1rem;
     }
 
-    h2 {
+    h1 {
       @include partial.heading( 32px);
 
       margin: 0;
@@ -983,6 +983,20 @@ header {
       width: 100%;
       min-width: unset;
       padding: 2rem;
+    }
+  }
+
+  .surveyPage{
+    padding: 1rem;
+    min-height: 91vh;
+    .surveyCard {
+      padding: 2rem;
+      h1 {
+        @include partial.heading( 24px);
+      }
+      .questionNumber {
+        @include partial.heading(24px);
+      }
     }
   }
 

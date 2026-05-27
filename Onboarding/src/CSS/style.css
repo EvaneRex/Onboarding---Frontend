@@ -1092,7 +1092,7 @@ header .logout:active {
   gap: 1rem;
   padding-top: 1rem;
 }
-.surveyPage .surveyCard h2 {
+.surveyPage .surveyCard h1 {
   font-family: "OpenSans-SemiBold", Arial, Helvetica, sans-serif;
   font-size: 32px;
   color: #53575a;
@@ -1231,5 +1231,24 @@ header .logout:active {
     width: 100%;
     min-width: unset;
     padding: 2rem;
+  }
+  .surveyPage {
+    padding: 1rem;
+    min-height: 91vh;
+  }
+  .surveyPage .surveyCard {
+    padding: 2rem;
+  }
+  .surveyPage .surveyCard h1 {
+    font-family: "OpenSans-SemiBold", Arial, Helvetica, sans-serif;
+    font-size: 24px;
+    color: #53575a;
+    margin-bottom: 1rem;
+  }
+  .surveyPage .surveyCard .questionNumber {
+    font-family: "OpenSans-SemiBold", Arial, Helvetica, sans-serif;
+    font-size: 24px;
+    color: #53575a;
+    margin-bottom: 1rem;
   }
 }/*# sourceMappingURL=style.css.map */
