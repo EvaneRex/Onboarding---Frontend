@@ -1,3 +1,12 @@
+<!--
+Dette er materiale listen, hvor admin kan se alle filer der er uploadet til serveren og slette det hvis nødvendigt. Det er også her at upload materialer knappen er. 
+Følgende komponenter er tilknyttet denne:
+- uploadManager.vue
+  - uploadFile
+  - uploadVideo
+  - UploadSurvey
+-->
+
 <script setup>
 import { ref, onMounted } from 'vue'
 import UploadManager from './uploadManager.vue'

@@ -1,3 +1,6 @@
+<!--
+Denne er komponent, er hvor listen af alle oprettede brugere og ikke oprettede brugere ligger. (klienter)
+-->
 <script setup>
 import { ref, onMounted, computed } from 'vue'
 

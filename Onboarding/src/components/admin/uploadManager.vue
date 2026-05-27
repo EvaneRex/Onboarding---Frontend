@@ -1,5 +1,5 @@
 <!--
-Denne komponent har faste elementer men har en sektion som skifter mellem tre underkomponenter.
+Dette er et modal, der sidder på materialOverview. Dens formål er at vise en af tre underkomponenter, til forskellige materiale upload. 
 Disse er :
 - uploadSurvey
 - uploadVideo
