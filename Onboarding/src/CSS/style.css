@@ -1026,6 +1026,17 @@ header .logout:active {
   padding: 3rem;
   overflow: hidden;
 }
+.surveyPage .surveyTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.surveyPage .surveyTop .questionNumber {
+  font-family: "OpenSans-SemiBold", Arial, Helvetica, sans-serif;
+  font-size: 32px;
+  color: #53575a;
+  margin-bottom: 1rem;
+}
 .surveyPage .surveyCard {
   background-color: #ffffff;
   border-radius: 10px;
@@ -1085,12 +1096,12 @@ header .logout:active {
   font-family: "OpenSans-SemiBold", Arial, Helvetica, sans-serif;
   font-size: 32px;
   color: #53575a;
-  line-height: 1.5;
+  margin-bottom: 1rem;
   margin: 0;
 }
 .surveyPage .surveyCard .question {
-  font-family: "OpenSans-SemiBold", Arial, Helvetica, sans-serif;
-  font-size: 22px;
+  font-family: "OpenSans-Regular", Arial, Helvetica, sans-serif;
+  font-size: 18px;
   color: #53575a;
   line-height: 1.5;
   margin-bottom: 0.5rem;

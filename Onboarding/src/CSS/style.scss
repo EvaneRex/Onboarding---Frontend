@@ -798,6 +798,14 @@ header {
   align-items: center;
   padding: 3rem;
   overflow: hidden;
+  .surveyTop{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .questionNumber {
+      @include partial.heading(32px);    
+    }
+  }
   .surveyCard {
     background-color: partial.$white;
     border-radius: partial.$border-radius;
@@ -830,19 +838,13 @@ header {
     }
 
     h2 {
-      @include partial.txt(
-        32px,
-        partial.$fontSemi
-      );
+      @include partial.heading( 32px);
 
       margin: 0;
     }
 
     .question {
-      @include partial.txt(
-        22px,
-        partial.$fontSemi
-      );
+      @include partial.txt();
 
       margin-bottom: 0.5rem;
     }

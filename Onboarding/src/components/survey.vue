@@ -197,13 +197,12 @@ onMounted(loadSurvey)
       <template
         v-else
       >
-
+      <div class="surveyTop">
         <h1>
           Spørgeskema
         </h1>
 
-        <h2>
-          Spørgsmål
+        <div class="questionNumber">
           {{
             currentQuestionIndex + 1
           }}
@@ -211,8 +210,8 @@ onMounted(loadSurvey)
           {{
             surveyQuestions.length
           }}
-        </h2>
-
+        </div>
+      </div>
         <p class="question">
           {{ currentQuestion }}
         </p>
