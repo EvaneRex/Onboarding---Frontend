@@ -1,35 +1,21 @@
-import {
-  getCsrfToken
-}
-from '@/components/services/csrfService'
+import { getCsrfToken } from '@/components/services/csrfService'
 
 // Henter survey
-const API_URL =
-  'http://localhost:2000'
+const API_URL = 'http://localhost:2000'
 
-export async function
-getSurveyQuestions() {
+export async function getSurveyQuestions() {
   try {
-
-    const response =
-      await fetch(
-        `${API_URL}/survey/survey-questions`,
-        {
-          credentials:
-            'include'
-        }
-      )
+    const response = await fetch(`${API_URL}/survey/survey-questions`, {
+      credentials: 'include',
+    })
 
     return await response.json()
-
   } catch (error) {
-
     console.error(error)
 
     return []
   }
 }
-
 
 // Sender survey
 export async function submitSurvey(data) {
@@ -49,5 +35,18 @@ export async function createSurvey(surveyQuestions) {
   return {
     success: true,
     surveyQuestions,
+  }
+}
+
+// Få alle svarede suveys
+export async function getAllSurveys() {
+  try {
+    const response = await fetch(`${API_URL}/survey/answered-surveys`, {
+      credentials: 'include',
+    })
+    return await response.json()
+  } catch (error) {
+    console.error(error)
+    return []
   }
 }

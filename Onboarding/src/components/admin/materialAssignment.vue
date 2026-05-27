@@ -1,15 +1,15 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue'
-import { getPdfSlides, getYoutubeLinks, assignOnboarding } from '@/components/services/materialService'
+import {
+  getPdfSlides,
+  getYoutubeLinks,
+  assignOnboarding,
+} from '@/components/services/materialService'
 
-
-const emit = defineEmits([
-  'close',
-  'save'
-])
+const emit = defineEmits(['close', 'save'])
 
 const props = defineProps({
-  client: Object
+  client: Object,
 })
 
 const dialogRef = ref(null)
@@ -21,70 +21,40 @@ onMounted(async () => {
   dialogRef.value?.showModal()
 
   //hent pdfer
-  const pdfs =
-    await getPdfSlides()
+  const pdfs = await getPdfSlides()
 
-  const formattedPdfs =
-    pdfs.map(pdf => ({
-      id: pdf.src,
-      type: 'pdf',
-      src: pdf.src,
-      title:
-        pdf.filnavn
-    }))
+  const formattedPdfs = pdfs.map((pdf) => ({
+    id: pdf.src,
+    type: 'pdf',
+    src: pdf.src,
+    title: pdf.filnavn,
+  }))
 
-    //hent youtube
-    const videos =
-    await getYoutubeLinks()
+  //hent youtube
+  const videos = await getYoutubeLinks()
 
-    
+  const formattedVideos = videos.map((video) => ({
+    id: video.id,
+    type: 'youtube',
+    src: video.url,
+    title: video.titel,
+  }))
 
-  const formattedVideos =
-    videos.map(video => ({
-      id: video.id,
-      type:
-        'youtube',
-      src: video.url,
-      title:
-        video.titel
-    }))
-
-  allMaterials.value = [
-    ...formattedPdfs,
-    ...formattedVideos
-  ]
+  allMaterials.value = [...formattedPdfs, ...formattedVideos]
 
   // allerede tildelte materialer
-  selectedMaterials.value =
-    props.client?.onboardingSlides?.map(
-      material => material.src
-    ) || []
+  selectedMaterials.value = props.client?.onboardingSlides?.map((material) => material.src) || []
 })
 
 async function saveMaterials() {
+  const selected = allMaterials.value.filter((material) =>
+    selectedMaterials.value.includes(material.src),
+  )
 
-  const selected =
-    allMaterials.value.filter(
-      material =>
-        selectedMaterials.value.includes(
-          material.src
-        )
-    )
+  const response = await assignOnboarding(props.client.clientId, selected)
 
-  const response =
-    await assignOnboarding(
-      props.client.clientId,
-      selected
-    )
-
-  if (
-    response.success
-  ) {
-
-    emit(
-      'save',
-      selected
-    )
+  if (response.success) {
+    emit('save', selected)
 
     closeModal()
   }
@@ -99,24 +69,13 @@ function closeModal() {
 onBeforeUnmount(() => {
   dialogRef.value?.close()
 })
-
 </script>
 
 <template>
-  <dialog
-    ref="dialogRef"
-    class="materialDialog"
-  >
-
-    <button
-      class="closeBtn"
-      @click="closeModal"
-    >
-      ✕
-    </button>
+  <dialog ref="dialogRef" class="materialDialog">
+    <button class="closeBtn" @click="closeModal">✕</button>
 
     <section class="modalTop">
-
       <div>
         <h1>
           {{ props.client?.clientName }}
@@ -127,65 +86,38 @@ onBeforeUnmount(() => {
           {{ props.client?.clientName }}
         </p>
       </div>
-
     </section>
 
     <section class="tableBox">
-
       <table>
-
         <thead>
           <tr>
-            <th>
-              Materialer
-            </th>
+            <th>Materialer</th>
 
-            <th>
-            </th>
+            <th></th>
           </tr>
         </thead>
 
         <tbody>
-
-          <tr
-            v-for="material in allMaterials"
-            :key="material.src"
-          >
+          <tr v-for="material in allMaterials" :key="material.src">
             <td>
               {{ material.title }}
             </td>
 
             <td>
-
               <label>
-                <input
-                  type="checkbox"
-                  :value="material.src"
-                  v-model="selectedMaterials"
-                />
+                <input type="checkbox" :value="material.src" v-model="selectedMaterials" />
 
                 Tildel
               </label>
-
             </td>
           </tr>
-
         </tbody>
-
       </table>
-
     </section>
 
     <div class="saveSection">
-
-      <button
-        class="createBtn"
-        @click="saveMaterials"
-      >
-        Gem valg
-      </button>
-
+      <button class="createBtn" @click="saveMaterials">Gem valg</button>
     </div>
-
   </dialog>
 </template>
