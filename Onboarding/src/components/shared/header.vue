@@ -1,24 +1,14 @@
 <script setup>
 defineProps({
-  logout: Function
+  logout: Function,
+  user: Object,
 })
 </script>
 
 <template>
   <header class="header">
+    <img src="@/assets/icon/logo.svg" alt="Modulex logo" class="logo" />
 
-    <img
-      src="@/assets/icon/logo.svg"
-      alt="Modulex logo"
-      class="logo"
-    />
-
-    <p
-      class="logout"
-      @click="logout"
-    >
-      Log ud
-    </p>
-
+    <p v-if="user" class="logout" @click="logout">Log ud</p>
   </header>
 </template>

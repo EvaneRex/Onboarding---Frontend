@@ -1,9 +1,7 @@
 <script setup>
 import { onMounted, ref } from 'vue'
-import {
-  getCsrfToken
-}
-from '@/components/services/csrfService'
+import { getCsrfToken } from '@/components/services/csrfService'
+import Header from '@/components/shared/header.vue'
 const emit = defineEmits(['login-success'])
 const error = ref('')
 const brugernavn = ref('')
@@ -16,7 +14,6 @@ onMounted(() => {
     brugernavn.value = localStorage.getItem('rememberedUsername') || ''
   }
 })
-
 
 const login = async () => {
   try {
@@ -67,6 +64,8 @@ const login = async () => {
 </script>
 
 <template>
+  <Header :logout="logout" :user="user" />
+
   <main class="login">
     <div class="login-wrapper">
       <h1>Login</h1>
