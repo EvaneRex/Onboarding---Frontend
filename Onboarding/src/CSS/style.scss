@@ -903,63 +903,34 @@ header {
   }
 
   .completeBtn {
-    @include partial.btn();
+    @include partial.btn;
 
     width: 190px;
   }
 }
 
-@media (max-width: 768px) {
-    .dashboard .dashboardCards {
-      flex-direction: column;
-      gap: 3rem;
-    }
-
-    .matTable {
-      @media (
-  max-width: 768px
-) {
-
-  table,
-  thead,
-  tbody,
-  th,
-  td,
-  tr {
-    display: block;
-  }
-
-  thead {
-    display: none;
-  }
-
-  tbody {
-    display: flex;
+  @media (max-width: 768px) {
+  .dashboard .dashboardCards {
     flex-direction: column;
+    gap: 3rem;
   }
 
-  tr {
-    background: #d9d9d9;
+  .matTable {
+    overflow-x: scroll;  
+  }
+
+  .login {
     padding: 1rem;
-  }
 
-  td {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    .login-wrapper {
+      width: 100%;
+      min-width: unset;
+      padding: 2rem;
+    }
 
-    border: none;
-    padding: .7rem 0;
-
-    &::before {
-      font-weight: 700;
-      color: #555;
+    h1 {
+      font-size: 2.5rem;
     }
   }
 
-
- 
-
-}
-    }
   }

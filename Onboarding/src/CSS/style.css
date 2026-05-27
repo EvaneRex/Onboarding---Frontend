@@ -1165,36 +1165,18 @@ header .logout:active {
     flex-direction: column;
     gap: 3rem;
   }
-}
-@media (max-width: 768px) and (max-width: 768px) {
-  .matTable table,
-  .matTable thead,
-  .matTable tbody,
-  .matTable th,
-  .matTable td,
-  .matTable tr {
-    display: block;
+  .matTable {
+    overflow-x: scroll;
   }
-  .matTable thead {
-    display: none;
-  }
-  .matTable tbody {
-    display: flex;
-    flex-direction: column;
-  }
-  .matTable tr {
-    background: #d9d9d9;
+  .login {
     padding: 1rem;
   }
-  .matTable td {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border: none;
-    padding: 0.7rem 0;
+  .login .login-wrapper {
+    width: 100%;
+    min-width: unset;
+    padding: 2rem;
   }
-  .matTable td::before {
-    font-weight: 700;
-    color: #555;
+  .login h1 {
+    font-size: 2.5rem;
   }
 }/*# sourceMappingURL=style.css.map */
