@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted } from 'vue'
 import clientMatView from '@/components/client/clientMatView.vue'
-
+import { getOnboarding } from '@/components/services/onboardingService'
 import Header from '@/components/shared/header.vue'
 
 defineProps({
@@ -32,14 +32,14 @@ onMounted(async () => {
   }
 })
 
-const getStatus = (material, index) => {
+function getStatus(material, index) {
   if (material.complete) return 'Gennemført'
   if (startedSlides.value.includes(index)) return 'Igangværende'
 
   return 'Ikke startet'
 }
 
-const openMaterial = (material, index) => {
+function openMaterial(material, index) {
   // sæt igangværende hvis ikke gennemført
   if (!material.complete && !startedSlides.value.includes(index)) {
     startedSlides.value.push(index)
@@ -53,14 +53,14 @@ const openMaterial = (material, index) => {
   currentView.value = 'material'
 }
 
-const completeMaterial = (index) => {
+function completeMaterial(index) {
   materials.value[index].complete = true // obssss skal skiftes til API kald når backend er done
 
   currentView.value = 'dashboard'
   selectedMaterial.value = null
 }
 
-const goBack = () => {
+function goBack() {
   currentView.value = 'dashboard'
 }
 </script>
@@ -69,6 +69,7 @@ const goBack = () => {
   <Header :logout="logout" />
 
   <!-- DASHBOARD -->
+  <main>
   <section v-if="currentView === 'dashboard'" class="dashboard clientDashboard">
     <div class="welcome">
       <h1>Velkommen!</h1>
@@ -110,7 +111,7 @@ const goBack = () => {
       <p v-if="currentState === 'error'">Der skete en fejl.</p>
     </div>
   </section>
-
+</main>
   <!-- MATERIAL VIEW -->
   <clientMatView
     v-if="currentView === 'material'"
