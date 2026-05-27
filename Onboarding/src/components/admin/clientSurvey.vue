@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { getSurveyByClientId } from '@/components/services/surveyService'
 
 const emit = defineEmits(['close'])
 
@@ -44,8 +45,17 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <dialog ref="dialogRef" class="surveyDialog">
-    <button class="closeBtn" @click="closeModal">✕</button>
+  <dialog
+    ref="dialogRef"
+    class="surveyDialog"
+  >
+
+    <button
+      class="closeBtn"
+      @click="closeModal"
+    >
+      ✕
+    </button>
 
     <h1>
       Se
@@ -54,17 +64,54 @@ onBeforeUnmount(() => {
     </h1>
 
     <!-- loading -->
-    <p v-if="currentState === 'loading'">Indlæser spørgsmål...</p>
+    <p
+      v-if="
+        currentState ===
+        'loading'
+      "
+    >
+      Indlæser spørgsmål...
+    </p>
 
     <!-- error -->
-    <p v-if="currentState === 'error'">Der skete en fejl</p>
+    <p
+      v-if="
+        currentState ===
+        'error'
+      "
+    >
+      Der skete en fejl
+    </p>
 
     <!-- ingen survey -->
-    <p v-if="currentState === 'success' && surveyAnswers.length === 0">Ingen besvarelser fundet</p>
+    <p
+      v-if="
+        currentState ===
+        'success' &&
+        surveyAnswers.length === 0
+      "
+    >
+      Ingen besvarelser fundet
+    </p>
 
     <!-- survey -->
-    <section v-if="currentState === 'success'" class="surveyAnswers">
-      <div v-for="(answer, index) in surveyAnswers" :key="index" class="answerCard">
+    <section
+      v-if="
+        currentState ===
+        'success'
+      "
+      class="surveyAnswers"
+    >
+
+      <div
+        v-for="(
+          answer,
+          index
+        ) in surveyAnswers"
+        :key="index"
+        class="answerCard"
+      >
+
         <h3>
           {{ answer.question }}
         </h3>
@@ -72,7 +119,10 @@ onBeforeUnmount(() => {
         <p>
           {{ answer.answer }}
         </p>
+
       </div>
+
     </section>
+
   </dialog>
 </template>

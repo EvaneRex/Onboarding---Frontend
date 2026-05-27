@@ -92,8 +92,27 @@ async function openCompany(client) {
     alert('Kunne ikke hente information om virksomheden.')
     return
   }
-  selectedCompany.value = clientInfo
+  // find survey ud fra navn
+  const matchingSurvey =
+    surveyCompanies.value.find(
+      survey =>
+        survey.name
+          ?.trim()
+          .toLowerCase() ===
+        client.clientName
+          ?.trim()
+          .toLowerCase()
+    )
+
+    selectedCompany.value = {
+    ...clientInfo,  
+    surveyAnswers:
+      matchingSurvey
+        ?.surveyData || []
+  }
+
   showCompanyInfo.value = true
+
 }
 
 // Tilbage til liste

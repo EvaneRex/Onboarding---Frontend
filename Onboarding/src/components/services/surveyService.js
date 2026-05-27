@@ -50,3 +50,31 @@ export async function getAllSurveys() {
     return []
   }
 }
+
+export async function getSurveyByClientId(clientId) {
+  try {
+
+    const response =
+      await fetch(
+        `http://localhost:2000/survey/client/${clientId}`,
+        {
+          credentials:
+            'include'
+        }
+      )
+
+    return await response.json()
+
+  }
+
+  catch (error) {
+
+    console.error(error)
+
+    return {
+      success: false,
+      message:
+        'Kunne ikke hente survey'
+    }
+  }
+}
