@@ -1011,11 +1011,32 @@ header {
 }
 
   @media (max-width: 768px) {
-  .dashboard .dashboardCards {
+  
+  h1 {
+    @include partial.heading(28px);
+  }
+  p {
+    @include partial.txt(14px);
+  }
+  .dashboard {
+    .welcome {
+      margin-bottom: 0;
+    }
+    .dashboardCards {
     flex-direction: column;
     gap: 3rem;
+    margin-top: 3rem;
+  
+      .card{
+        h2{
+          @include partial.heading(22px);
+        }
+        .iconCard{
+          height: 100px;
+        } 
+      }
+    }
   }
-
   .tableBox {
     overflow-x: auto;
     width: 100%;
@@ -1069,4 +1090,4 @@ header {
     }
   }
   }
-  }
+}
