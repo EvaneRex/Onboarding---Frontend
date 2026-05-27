@@ -1011,6 +1011,10 @@ header {
 }
 
 @media (max-width: 768px) {
+
+  * {
+  box-sizing: border-box;
+  }
   
   h1 {
     @include partial.heading(28px);
@@ -1074,6 +1078,8 @@ header {
       margin: 2rem 0;
     }
     .tableBox {
+      overflow-x: hidden;
+      width: 100%;
       table,
       tbody,
       tr,
@@ -1162,17 +1168,4 @@ header {
   }
   }
 
-  .matOverview{
-    .btn{
-      font-size: 14px;
-      margin: 2rem 0;
-    }
-    .matTable{
-      margin: 0;
-      table{
-        max-width: 500px;
-        width: 100%;
-      }
-    }
-  }
 }
