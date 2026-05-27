@@ -87,32 +87,46 @@ const surveyCompaniesWithoutUser = computed(() =>
 )
 
 async function openCompany(client) {
-  const clientInfo = await getClientInfo(client.clientId)
-  if (!clientInfo) {
-    alert('Kunne ikke hente information om virksomheden.')
-    return
-  }
-  // find survey ud fra navn
-  const matchingSurvey =
-    surveyCompanies.value.find(
-      survey =>
-        survey.name
-          ?.trim()
-          .toLowerCase() ===
-        client.clientName
-          ?.trim()
-          .toLowerCase()
-    )
+
+  // Hvis det er survey uden bruger
+  if (!client.clientId) {
 
     selectedCompany.value = {
-    ...clientInfo,  
-    surveyAnswers:
-      matchingSurvey
-        ?.surveyData || []
+      clientName:
+        client.name,
+
+      surveyAnswers:
+        client.surveyData || [],
+
+      onboardingSlides:
+        []
+    }
+
+    showCompanyInfo.value =
+      true
+
+    return
   }
 
-  showCompanyInfo.value = true
+  // Eksisterende klient
+  const clientInfo =
+    await getClientInfo(
+      client.clientId
+    )
 
+  if (!clientInfo) {
+    alert(
+      'Kunne ikke hente information om virksomheden.'
+    )
+
+    return
+  }
+
+  selectedCompany.value =
+    clientInfo
+
+  showCompanyInfo.value =
+    true
 }
 
 // Tilbage til liste

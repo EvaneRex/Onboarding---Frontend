@@ -23,17 +23,23 @@ function closeModal() {
   emit('close')
 }
 
-onMounted(async () => {
+onMounted(() => {
   dialogRef.value?.showModal()
 
   try {
-    surveyAnswers.value = props.client?.surveyAnswers || []
+    surveyAnswers.value =
+      props.client
+        ?.surveyAnswers || []
 
-    currentState.value = 'success'
+    currentState.value =
+      'success'
+
   } catch (error) {
+
     console.error(error)
 
-    currentState.value = 'error'
+    currentState.value =
+      'error'
   }
 })
 

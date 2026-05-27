@@ -969,13 +969,15 @@ header .logout:active {
   margin: auto;
   width: 90%;
   max-width: 1100px;
-  height: -moz-fit-content;
-  height: fit-content;
+  max-height: 85vh;
+  overflow: hidden;
   border: none;
   border-radius: 10px;
   background-color: #ffffff;
   padding: 3rem;
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
 }
 .surveyDialog::backdrop {
   background: rgba(0, 0, 0, 0.35);
@@ -986,17 +988,18 @@ header .logout:active {
   color: #53575a;
   margin-bottom: 1rem;
   margin-bottom: 2rem;
+  flex-shrink: 0;
 }
 .surveyDialog .surveyAnswers {
   background-color: #d1d4d7;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   gap: 2rem;
   padding: 3rem;
-  height: 450px;
   overflow-y: auto;
+  flex: 1;
+  min-height: 0;
 }
 .surveyDialog .answerCard {
   border-bottom: 1px solid rgba(0, 0, 0, 0.12);
@@ -1033,7 +1036,6 @@ header .logout:active {
   font-size: 28px;
   color: #53575a;
   margin-bottom: 1rem;
-  transition: 0.2s ease;
 }
 .surveyDialog .closeBtn:hover {
   opacity: 0.7;
@@ -1377,13 +1379,27 @@ header .logout:active {
     width: 20px;
     height: 20px;
   }
-  .createUser h1 {
+  .companyDialog .topButtons {
+    justify-content: center;
+    align-items: center;
+  }
+  .companyDialog .topButtons .createBtn {
+    font-size: 14px;
+    width: 100%;
+  }
+  .companyDialog .tableBox table thead tr th {
+    font-size: 16px;
+  }
+  .companyDialog .tableBox table tbody tr td {
+    font-size: 14px;
+  }
+  .surveyDialog .createUser h1 {
     font-family: "OpenSans-SemiBold", Arial, Helvetica, sans-serif;
     font-size: 32px;
     color: #53575a;
     margin-bottom: 1rem;
   }
-  .createUser .createUserBox .createBtn button {
+  .surveyDialog .createUser .createUserBox .createBtn button {
     width: 100%;
   }
 }/*# sourceMappingURL=style.css.map */
