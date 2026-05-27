@@ -25,9 +25,19 @@ const loading = ref(true)
 const errorMessage = ref('')
 const showCreateUser = ref(false)
 
-function openCreateUser() {
-  showCreateUser.value = true
+const selectedSurvey = ref(null)
+
+function openCreateUser(
+  company = null
+) {
+
+  selectedSurvey.value =
+    company
+
+  showCreateUser.value =
+    true
 }
+
 function closeCreateUser() {
   showCreateUser.value = false
   loadClients(false)
@@ -201,7 +211,7 @@ onMounted(() => {
               </span>
             </td>
             <td class="actions">
-              <button @click="openCreateUser">Opret bruger</button>
+              <button @click="openCreateUser(company)">Opret bruger</button>
               <button @click="openCompany(company)">
                 <img
                   src="@/assets/icon/arrow-up-right-from-square-solid-full.svg"
@@ -228,5 +238,5 @@ onMounted(() => {
   <!-- COMPANY INFO -->
   <companyInfo v-if="showCompanyInfo" :client="selectedCompany" @goBack="goBackToList" />
 
-  <createUser v-if="showCreateUser" @close="closeCreateUser" />
+  <createUser v-if="showCreateUser" :surveyData="selectedSurvey" @close="closeCreateUser" />
 </template>
