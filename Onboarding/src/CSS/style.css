@@ -254,6 +254,20 @@ header .logout:active {
   font-size: 18px;
   color: #53575a;
 }
+.companyList .refreshBtn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  width: 22px;
+  height: 22px;
+  vertical-align: middle;
+}
+.companyList .refreshBtn img {
+  transition: transform 0.2s ease;
+}
+.companyList .refreshBtn:hover img {
+  transform: rotate(15deg);
+}
 .companyList .actions {
   display: flex;
   justify-content: flex-end;

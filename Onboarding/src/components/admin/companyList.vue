@@ -27,15 +27,10 @@ const showCreateUser = ref(false)
 
 const selectedSurvey = ref(null)
 
-function openCreateUser(
-  company = null
-) {
+function openCreateUser(company = null) {
+  selectedSurvey.value = company
 
-  selectedSurvey.value =
-    company
-
-  showCreateUser.value =
-    true
+  showCreateUser.value = true
 }
 
 function closeCreateUser() {
@@ -68,15 +63,9 @@ async function loadSurveys() {
 const surveyCompanies = computed(() => {
   return surveys.value
     .map((survey) => {
-      const companyName =
-      survey.survey.find(
-        item => item.question === 'Virksomhedsnavn'
-      )?.answer
+      const companyName = survey.survey.find((item) => item.question === 'Virksomhedsnavn')?.answer
 
-      const companyEmail =
-      survey.survey.find(
-        item => item.question === 'Email'
-      )?.answer
+      const companyEmail = survey.survey.find((item) => item.question === 'Email')?.answer
 
       return {
         name: companyName,
@@ -85,7 +74,7 @@ const surveyCompanies = computed(() => {
         surveyData: survey.survey,
       }
     })
-    .filter(company => company.name) // Filtrer kun virksomheder med et navn
+    .filter((company) => company.name) // Filtrer kun virksomheder med et navn
 })
 
 const clientNames = computed(() => clients.value.map((c) => c.clientName.trim().toLowerCase()))
@@ -211,7 +200,9 @@ onMounted(() => {
               </span>
             </td>
             <td class="actions">
-              <button @click="openCreateUser(company)">Opret bruger</button>
+              <button @click="openCreateUser(company)">
+                <img src="@/assets/icon/add.svg" class="iconCompanyList" /> Opret bruger
+              </button>
               <button @click="openCompany(company)">
                 <img
                   src="@/assets/icon/arrow-up-right-from-square-solid-full.svg"
