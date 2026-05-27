@@ -14,17 +14,26 @@ const answers = ref({})
 
 const loading = ref(true)
 const error = ref('')
-const submitMessage = ref('')
 const submitError = ref('')
 
 const surveySubmitted = ref(false)
 
+// nuværende spørgsmål
 const currentQuestion = computed(() => {
   return surveyQuestions.value[
     currentQuestionIndex.value
   ]
 })
 
+//sidste spørgsmål
+const isLastQuestion = computed(() => {
+  return (
+    currentQuestionIndex.value ===
+    surveyQuestions.value.length - 1
+  )
+})
+
+//hent spørgsmål
 async function loadSurvey() {
   try {
 
@@ -51,6 +60,7 @@ async function loadSurvey() {
   }
 }
 
+//næste spørgmål
 function nextQuestion() {
 
   const currentAnswer =
@@ -79,6 +89,7 @@ function nextQuestion() {
   currentQuestionIndex.value++
 }
 
+// forrige spørgsmål
 function previousQuestion() {
 
   if (
@@ -184,10 +195,7 @@ onMounted(loadSurvey)
 
       <!-- SPØRGSMÅL -->
       <template
-        v-else-if="
-          !showCompanyForm &&
-          !surveySubmitted
-        "
+        v-else
       >
 
         <h1>
@@ -196,7 +204,13 @@ onMounted(loadSurvey)
 
         <h2>
           Spørgsmål
-          {{ currentQuestionIndex + 1 }}
+          {{
+            currentQuestionIndex + 1
+          }}
+          /
+          {{
+            surveyQuestions.length
+          }}
         </h2>
 
         <p class="question">
@@ -231,13 +245,23 @@ onMounted(loadSurvey)
           >
             {{
               isLastQuestion
-                ? 'Fortsæt'
+                ? 'Send'
                 : 'Næste'
             }}
           </button>
 
         </div>
 
+        <p
+          v-if="
+            submitError
+          "
+          class="errorText"
+        >
+          {{
+            submitError
+          }}
+        </p>
       </template>
     </section>
 
