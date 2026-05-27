@@ -1081,6 +1081,51 @@ header .logout:active {
   gap: 1rem;
   padding-top: 1rem;
 }
+.surveyPage .surveyCard h2 {
+  font-family: "OpenSans-SemiBold", Arial, Helvetica, sans-serif;
+  font-size: 32px;
+  color: #53575a;
+  line-height: 1.5;
+  margin: 0;
+}
+.surveyPage .surveyCard .question {
+  font-family: "OpenSans-SemiBold", Arial, Helvetica, sans-serif;
+  font-size: 22px;
+  color: #53575a;
+  line-height: 1.5;
+  margin-bottom: 0.5rem;
+}
+.surveyPage .surveyCard input {
+  width: 100%;
+  height: 60px;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  padding: 1rem;
+  font-family: "OpenSans-Regular", Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  color: #53575a;
+  line-height: 1.5;
+  background: #ffffff;
+  transition: 0.2s ease;
+}
+.surveyPage .surveyCard input:focus {
+  outline: none;
+  border-color: #ff5100;
+}
+.surveyPage .surveyCard input::-moz-placeholder {
+  font-family: "OpenSans-Regular", Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  color: #53575a;
+  line-height: 1.5;
+  opacity: 0.6;
+}
+.surveyPage .surveyCard input::placeholder {
+  font-family: "OpenSans-Regular", Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  color: #53575a;
+  line-height: 1.5;
+  opacity: 0.6;
+}
 
 .materialView {
   height: 100vh;
@@ -1175,8 +1220,5 @@ header .logout:active {
     width: 100%;
     min-width: unset;
     padding: 2rem;
-  }
-  .login h1 {
-    font-size: 2.5rem;
   }
 }/*# sourceMappingURL=style.css.map */

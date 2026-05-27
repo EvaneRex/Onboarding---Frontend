@@ -828,6 +828,61 @@ header {
       gap: 1rem;
       padding-top: 1rem;
     }
+
+    h2 {
+      @include partial.txt(
+        32px,
+        partial.$fontSemi
+      );
+
+      margin: 0;
+    }
+
+    .question {
+      @include partial.txt(
+        22px,
+        partial.$fontSemi
+      );
+
+      margin-bottom: 0.5rem;
+    }
+
+    input {
+      width: 100%;
+      height: 60px;
+
+      border: 2px solid
+        rgba(0, 0, 0, 0.1);
+
+      border-radius:
+        partial.$border-radius;
+
+      padding: 1rem;
+
+      @include partial.txt(
+        18px
+      );
+
+      background:
+        partial.$white;
+
+      transition:
+        0.2s ease;
+
+      &:focus {
+        outline: none;
+        border-color:
+          partial.$orange;
+      }
+
+      &::placeholder {
+        @include partial.txt(
+          16px
+        );
+
+        opacity: 0.6;
+      }
+    }
   }
 }
 
@@ -926,10 +981,6 @@ header {
       width: 100%;
       min-width: unset;
       padding: 2rem;
-    }
-
-    h1 {
-      font-size: 2.5rem;
     }
   }
 
