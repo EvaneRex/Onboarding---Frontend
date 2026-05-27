@@ -27,7 +27,11 @@ onMounted(async () => {
     id: pdf.src,
     type: 'pdf',
     src: pdf.src,
-    title: pdf.filnavn,
+    title:
+      pdf.filename ||
+      pdf.filnavn ||
+      pdf.name ||
+      'PDF dokument'
   }))
 
   //hent youtube

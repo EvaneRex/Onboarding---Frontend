@@ -1,16 +1,40 @@
 <script setup>
-
-defineProps({
-  material: Object,
-  logout: Function
-})
+import { computed } from 'vue'
+import { ref } from 'vue'
 
 
+const props =
+  defineProps({
+    material: Object,
+    logout: Function
+  })
 
 const emit = defineEmits([
   'goBack',
   'complete'
 ])
+
+// backend sendr ikke embeded youtube links, så vi skal selv konvertere dem
+const materialSrc =
+  computed(() => {
+
+    if (
+      props.material?.type ===
+      'youtube'
+    ) {
+
+      const videoId =
+        props.material.src
+          .split('v=')[1]
+          ?.split('&')[0]
+
+      return `
+https://www.youtube.com/embed/${videoId}
+`
+    }
+
+    return props.material?.src
+  })  
 
 const completeMaterial = () => {
   emit('complete', props.material.index)
@@ -32,7 +56,7 @@ const completeMaterial = () => {
       <!-- YOUTUBE -->
       <iframe
         v-if="material.type === 'youtube'"
-        :src="material.src"
+        :src="materialSrc"
         frameborder="0"
         allowfullscreen
         class="viewer"
@@ -41,18 +65,19 @@ const completeMaterial = () => {
       <!-- PDF -->
       <iframe
         v-if="material.type === 'pdf'"
-        :src="material.src"
+        :src="materialSrc"
         class="viewer"
       ></iframe>
 
     </div>
 
+   <div class="buttonRow"> 
     <button
       class="completeBtn"
       @click="completeMaterial"
     >
-      Marker som gennemført
+      Gennemført
     </button>
-
+  </div>
   </section>
 </template>
