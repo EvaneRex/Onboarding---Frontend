@@ -12,9 +12,6 @@ const currentQuestionIndex = ref(0)
 
 const answers = ref({})
 
-const companyName = ref('')
-const companyEmail = ref('')
-
 const loading = ref(true)
 const error = ref('')
 const submitMessage = ref('')
@@ -26,21 +23,6 @@ const currentQuestion = computed(() => {
   return surveyQuestions.value[
     currentQuestionIndex.value
   ]
-})
-
-const isLastQuestion = computed(() => {
-  return (
-    currentQuestionIndex.value ===
-    surveyQuestions.value.length - 1
-  )
-})
-
-const showCompanyForm = computed(() => {
-  return (
-    surveyQuestions.value.length > 0 &&
-    currentQuestionIndex.value >=
-    surveyQuestions.value.length
-  )
 })
 
 async function loadSurvey() {
@@ -86,6 +68,13 @@ function nextQuestion() {
 
     return
   }
+  // sidste spørgsmål
+  if (
+    isLastQuestion.value
+  ) {
+    sendSurvey()
+    return
+  }
 
   currentQuestionIndex.value++
 }
@@ -102,18 +91,6 @@ function previousQuestion() {
 async function sendSurvey() {
 
   submitError.value = ''
-  submitMessage.value = ''
-
-  if (
-    !companyName.value.trim() ||
-    !companyEmail.value.trim()
-  ) {
-    alert(
-      'Udfyld virksomhedsnavn og email'
-    )
-
-    return
-  }
 
   try {
 
@@ -134,12 +111,12 @@ async function sendSurvey() {
       )
 
     if (
-        response.success
-      ) {
+      response.success
+    ) {
 
-        surveySubmitted.value =
-          true
-      }
+      surveySubmitted.value =
+        true
+    }
 
     else {
 
@@ -236,7 +213,7 @@ onMounted(loadSurvey)
 
         <div class="buttons">
 
-          <button
+          <button class="surveyBackBtn"
             @click="
               previousQuestion
             "
@@ -247,7 +224,7 @@ onMounted(loadSurvey)
             Tilbage
           </button>
 
-          <button
+          <button class="surveyNextBtn"
             @click="
               nextQuestion
             "
@@ -262,64 +239,6 @@ onMounted(loadSurvey)
         </div>
 
       </template>
-
-      <!-- FIRMA INFO -->
-      <template
-        v-else-if="
-          !surveySubmitted
-        "
-      >
-
-        <h1>
-          Virksomhedsoplysninger
-        </h1>
-
-        <input
-          v-model="
-            companyName
-          "
-          type="text"
-          placeholder="Virksomhedsnavn"
-        />
-
-        <input
-          v-model="
-            companyEmail
-          "
-          type="email"
-          placeholder="Virksomheds-email"
-        />
-
-        <div class="buttons">
-
-          <button
-            @click="
-              previousQuestion
-            "
-          >
-            Tilbage
-          </button>
-
-          <button
-            @click="
-              sendSurvey
-            "
-          >
-            Send spørgeskema
-          </button>
-
-        </div>
-
-        <p
-          v-if="
-            submitError
-          "
-        >
-          {{ submitError }}
-        </p>
-
-      </template>
-
     </section>
 
   </main>
