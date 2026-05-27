@@ -25,6 +25,10 @@ body {
   background-color: #ffffff;
 }
 
+input[type=checkbox] {
+  accent-color: #ff5100;
+}
+
 .login {
   min-height: 100vh;
   display: flex;
@@ -552,6 +556,7 @@ header .logout:active {
 .materialDialog input[type=checkbox] {
   width: 18px;
   height: 18px;
+  accent-color: #ff5100;
   cursor: pointer;
 }
 .materialDialog .saveSection {

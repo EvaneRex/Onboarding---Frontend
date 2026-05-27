@@ -13,6 +13,11 @@
 body {
   background-color: partial.$white;
 }
+
+input[type='checkbox'] {
+  accent-color: partial.$orange;
+}
+
 .login {
   min-height: 100vh;
   display: flex;
@@ -436,6 +441,7 @@ header {
   input[type='checkbox'] {
     width: 18px;
     height: 18px;
+    accent-color: partial.$orange;
 
     cursor: pointer;
   }

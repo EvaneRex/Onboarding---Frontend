@@ -20,15 +20,31 @@ const startedSlides = ref([])
 
 onMounted(async () => {
   try {
-    const clientData = await getOnboarding()
 
-    // onboardingSlides fra backend
-    materials.value = clientData.onboardingSlides || []
+    const clientData =
+      await getOnboarding()
 
-    currentState.value = 'success'
-  } catch (error) {
+    console.log(
+      'ONBOARDING:',
+      clientData
+    )
+
+    materials.value =
+      Array.isArray(clientData)
+        ? clientData
+        : []
+
+    currentState.value =
+      'success'
+
+  }
+
+  catch (error) {
+
     console.error(error)
-    currentState.value = 'error'
+
+    currentState.value =
+      'error'
   }
 })
 
@@ -69,54 +85,154 @@ function goBack() {
   <Header :logout="logout" />
 
   <!-- DASHBOARD -->
-  <main>
-  <section v-if="currentView === 'dashboard'" class="dashboard clientDashboard">
-    <div class="welcome">
-      <h1>Velkommen!</h1>
+  <section
+    v-if="
+      currentView ===
+      'dashboard'
+    "
+    class="
+      companyList
+      clientDashboard
+    "
+  >
 
-      <p>
-        Her finder i et overblik over de forskellige onboarding materialer, her kan i også se
-        status.
-      </p>
-      <p>Når materialerne er gennemført, hører i fra os igen.</p>
-    </div>
+    <!-- Top -->
+    <section class="topSection">
 
-    <div class="materialTable">
-      <table v-if="currentState === 'success'" class="tableClient">
+      <div>
+        <h1>
+          Velkommen!
+        </h1>
+
+        <p>
+          Her finder i et
+          overblik over de
+          onboarding materialer,
+          som er blevet tildelt.
+        </p>
+
+        <p>
+          Når materialerne er
+          gennemført, hører i
+          fra os igen.
+        </p>
+      </div>
+
+    </section>
+
+    <!-- Table -->
+    <section class="tableBox">
+
+      <!-- Loading -->
+      <div
+        v-if="
+          currentState ===
+          'loading'
+        "
+      >
+        Indlæser materialer...
+      </div>
+
+      <!-- Error -->
+      <div
+        v-else-if="
+          currentState ===
+          'error'
+        "
+      >
+        Der skete en fejl.
+      </div>
+
+      <!-- Table -->
+      <table
+        v-else
+      >
         <thead>
           <tr>
-            <th>Materialer</th>
-            <th>Status</th>
+            <th>
+              Materialer
+            </th>
+
+            <th>
+              Status
+            </th>
+
+            <th>
+            </th>
           </tr>
         </thead>
 
         <tbody>
+
           <tr
-            v-for="(material, index) in materials"
+            v-for="(
+              material,
+              index
+            ) in materials"
             :key="index"
-            class="clickableRow"
-            @click="openMaterial(material, index)"
           >
-            <td>Materiale {{ index + 1 }}</td>
 
             <td>
-              {{ getStatus(material, index) }}
+              {{
+                material.title ||
+                `Materiale ${index + 1}`
+              }}
             </td>
+
+            <td>
+              {{
+                getStatus(
+                  material,
+                  index
+                )
+              }}
+            </td>
+
+            <td class="actions">
+
+              <button
+                @click="
+                  openMaterial(
+                    material,
+                    index
+                  )
+                "
+              >
+                <img
+                  src="@/assets/icon/arrow-up-right-from-square-solid-full.svg"
+                  alt="Åben materiale"
+                  class="iconCompanyList"
+                />
+
+                Åben
+              </button>
+
+            </td>
+
           </tr>
+
         </tbody>
+
       </table>
 
-      <p v-if="currentState === 'loading'">Indlæser materialer...</p>
+    </section>
 
-      <p v-if="currentState === 'error'">Der skete en fejl.</p>
-    </div>
   </section>
-</main>
+
   <!-- MATERIAL VIEW -->
   <clientMatView
-    v-if="currentView === 'material'"
-    :material="selectedMaterial"
-    @goBack="goBack"
-    @complete="completeMaterial"
+    v-if="
+      currentView ===
+      'material'
+    "
+    :material="
+      selectedMaterial
+    "
+    @goBack="
+      goBack
+    "
+    @complete="
+      completeMaterial
+    "
   />
 </template>
