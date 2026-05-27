@@ -13,8 +13,7 @@ const email = ref('')
 const name = ref('')
 
 onMounted(() => {
-  dialogRef.value
-    ?.showModal()
+  dialogRef.value?.showModal()
 })
 
 onBeforeUnmount(() => {
@@ -29,102 +28,50 @@ function closeModal() {
 
 async function createNewClient() {
   try {
+    const response = await createNewClientAccount({
+      name: name.value,
 
-    const response =
-      await createNewClientAccount({
-        name:
-          name.value,
+      email: email.value,
+    })
 
-        email:
-          email.value
-      })
+    console.log('CLIENT RESPONSE:', response)
 
-    console.log(
-      'CLIENT RESPONSE:',
-      response
-    )
-
-    if (
-      response.success
-    ) {
-
-      alert(
-        'Client created!'
-      )
+    if (response.success) {
+      alert('Client created!')
 
       closeModal()
+    } else {
+      alert(response.message || 'Could not create client')
     }
+  } catch (error) {
+    console.error(error)
 
-    else {
-
-      alert(
-        response.message ||
-        'Could not create client'
-      )
-    }
-
-  }
-
-  catch (error) {
-
-    console.error(
-      error
-    )
-
-    alert(
-      'Error creating client'
-    )
+    alert('Error creating client')
   }
 }
 
 // Opret admin
 async function createNewAdmin() {
   try {
+    const response = await createNewAdminAccount({
+      name: name.value,
 
-    const response =
-      await createNewAdminAccount({
-        name:
-          name.value,
+      email: email.value,
+    })
 
-        email:
-          email.value
-      })
+    console.log('ADMIN RESPONSE:', response)
 
-    console.log(
-      'ADMIN RESPONSE:',
-      response
-    )
-
-    if (
-      response.success
-    ) {
-
-      alert(
-        'Admin created!'
-      )
+    if (response.success) {
+      alert('Admin created!')
 
       closeModal()
+    } else {
+      alert(response.message || 'Could not create admin')
     }
+  } catch (error) {
+    console.error(error)
 
-    else {
-
-      alert(
-        response.message ||
-        'Could not create admin'
-      )
-    }
-
-  }
-
-  catch (error) {
-
-    console.error(
-      error
-    )
-
-    alert(
-      'Error creating admin'
-    )
+    alert('Error creating admin')
   }
 }
 </script>
