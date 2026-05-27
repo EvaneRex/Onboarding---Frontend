@@ -185,7 +185,7 @@ onMounted(() => {
           <tr v-for="company in surveyCompaniesWithoutUser" :key="company.surveyId">
             <td>
               {{ company.name }}
-              <span title="Svar fra spørgeskema">
+              <span title="Nyt svar fra spørgeskema">
                 <img
                   src="@/assets/icon/alert.svg"
                   alt="Nyt svar"

@@ -1,117 +1,65 @@
-import {
-  getCsrfToken
-}
-from '@/components/services/csrfService'
+import { getCsrfToken } from '@/components/services/csrfService'
 
-const API_URL =
-  'http://localhost:2000'
+const API_URL = 'http://localhost:2000'
 
 // Opret klient
-export async function
-createNewClientAccount(
-  clientData
-) {
+export async function createNewClientAccount(clientData) {
   try {
+    const csrfToken = await getCsrfToken()
 
-    const csrfToken =
-      await getCsrfToken()
+    const response = await fetch(`${API_URL}/register/create-new-client-account`, {
+      method: 'POST',
 
-    const response =
-      await fetch(
-        `${API_URL}/register/create-new-client-account`,
-        {
-          method:
-            'POST',
+      headers: {
+        'Content-Type': 'application/json',
 
-          headers: {
-            'Content-Type':
-              'application/json',
+        'x-csrf-token': csrfToken,
+      },
 
-            'x-csrf-token':
-              csrfToken
-          },
+      credentials: 'include',
 
-          credentials:
-            'include',
-
-          body:
-            JSON.stringify(
-              clientData
-            )
-        }
-      )
+      body: JSON.stringify(clientData),
+    })
 
     return await response.json()
-
-  }
-
-  catch (error) {
-
-    console.error(
-      error
-    )
+  } catch (error) {
+    console.error(error)
 
     return {
-      success:
-        false,
+      success: false,
 
-      message:
-        'Could not create client'
+      message: 'Could not create client',
     }
   }
 }
 
 // Opret admin
-export async function
-createNewAdminAccount(
-  adminData
-) {
+export async function createNewAdminAccount(adminData) {
   try {
+    const csrfToken = await getCsrfToken()
 
-    const csrfToken =
-      await getCsrfToken()
+    const response = await fetch(`${API_URL}/register/create-new-admin-account`, {
+      method: 'POST',
 
-    const response =
-      await fetch(
-        `${API_URL}/register/create-new-admin-account`,
-        {
-          method:
-            'POST',
+      headers: {
+        'Content-Type': 'application/json',
 
-          headers: {
-            'Content-Type':
-              'application/json',
+        'x-csrf-token': csrfToken,
+      },
 
-            'x-csrf-token':
-              csrfToken
-          },
+      credentials: 'include',
 
-          credentials:
-            'include',
-
-          body:
-            JSON.stringify(
-              adminData
-            )
-        }
-      )
+      body: JSON.stringify(adminData),
+    })
 
     return await response.json()
-
-  }
-
-  catch (error) {
-
-    console.error(
-      error
-    )
+  } catch (error) {
+    console.error(error)
 
     return {
-      success:
-        false,
+      success: false,
 
-      message:
-        'Could not create admin'
+      message: 'Could not create admin',
     }
   }
 }
