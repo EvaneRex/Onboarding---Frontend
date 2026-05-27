@@ -27,7 +27,7 @@ onMounted(() => {
 </script>
 <template>
   <dialog ref="dialogRef" class="upManager">
-    <button class="closeBtn" @click="closeModal">x</button>
+    <button class="closeBtn" @click="closeModal">✕</button>
     <div class="modal">
       <h1>Upload materialer</h1>
       <p>

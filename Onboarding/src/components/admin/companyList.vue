@@ -163,30 +163,6 @@ onMounted(() => {
           </tr>
         </thead>
         <tbody>
-          <!-- Eksisterende kunder -->
-          <tr v-for="client in clients" :key="client.clientId">
-            <td>
-              {{ client.clientName }}
-            </td>
-            <td class="actions">
-              <button @click="openCompany(client)">
-                <img
-                  src="@/assets/icon/arrow-up-right-from-square-solid-full.svg"
-                  alt="Åben kunde"
-                  class="iconCompanyList"
-                />
-                Åben
-              </button>
-              <button @click="removeClient(client.clientId)">
-                <img
-                  src="@/assets/icon/trash-solid-full.svg"
-                  alt="Slet kunde"
-                  class="iconCompanyList"
-                />
-                Slet
-              </button>
-            </td>
-          </tr>
           <!-- Virksomheder fra spørgeskemaer uden bruger -->
           <tr v-for="company in surveyCompaniesWithoutUser" :key="company.surveyId">
             <td>
@@ -212,6 +188,30 @@ onMounted(() => {
                 Åben
               </button>
               <button @click="removeClient(company.surveyId)">
+                <img
+                  src="@/assets/icon/trash-solid-full.svg"
+                  alt="Slet kunde"
+                  class="iconCompanyList"
+                />
+                Slet
+              </button>
+            </td>
+          </tr>
+          <!-- Eksisterende kunder -->
+          <tr v-for="client in clients" :key="client.clientId">
+            <td>
+              {{ client.clientName }}
+            </td>
+            <td class="actions">
+              <button @click="openCompany(client)">
+                <img
+                  src="@/assets/icon/arrow-up-right-from-square-solid-full.svg"
+                  alt="Åben kunde"
+                  class="iconCompanyList"
+                />
+                Åben
+              </button>
+              <button @click="removeClient(client.clientId)">
                 <img
                   src="@/assets/icon/trash-solid-full.svg"
                   alt="Slet kunde"

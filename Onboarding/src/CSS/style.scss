@@ -13,6 +13,11 @@
 body {
   background-color: partial.$white;
 }
+
+input[type='checkbox'] {
+  accent-color: partial.$orange;
+}
+
 .login {
   min-height: 100vh;
   display: flex;
@@ -436,6 +441,7 @@ header {
   input[type='checkbox'] {
     width: 18px;
     height: 18px;
+    accent-color: partial.$orange;
 
     cursor: pointer;
   }
@@ -601,15 +607,29 @@ header {
     label {
       input {
         height: 1.5rem;
+        border-radius: 5px;
+        border: 1px solid partial.$darkgray;
       }
+      margin-right: 10px;
     }
     .trash {
-      height: 1.2rem;
-      width: auto;
+      height: 22px;
+      width: 22px;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      vertical-align: middle;
     }
     .addMore {
       @include partial.txt;
       padding: 0.5rem 3rem;
+      border-radius: 5px;
+      border: 1px solid partial.$darkgray;
+      cursor: pointer;
+      transition: 0.2s ease;
+      &:hover {
+        background-color: partial.$white;
+      }
     }
   }
   .submitLink {

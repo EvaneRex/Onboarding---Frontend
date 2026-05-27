@@ -43,6 +43,7 @@ $border-radius: 10px;
   font-family: $fontBold;
   font-size: 18px;
   cursor: pointer;
+  transition: 0.2s ease;
   &:hover {
     background-color: #cc4101;
   }
