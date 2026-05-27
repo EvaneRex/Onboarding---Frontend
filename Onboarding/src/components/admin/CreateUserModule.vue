@@ -8,38 +8,24 @@ import { createNewClientAccount, createNewAdminAccount } from '@/components/serv
 
 const emit = defineEmits(['close'])
 
-const props =
-  defineProps({
-    surveyData: {
-      type: Object,
-      default: null
-    }
-  })
+const props = defineProps({
+  surveyData: {
+    type: Object,
+    default: null,
+  },
+})
 
 const dialogRef = ref(null)
 const email = ref('')
 const name = ref('')
 
-
-
 onMounted(() => {
+  dialogRef.value?.showModal()
 
-  dialogRef.value
-    ?.showModal()
+  if (props.surveyData) {
+    name.value = props.surveyData.name || ''
 
-  if (
-    props.surveyData
-  ) {
-
-    name.value =
-      props
-        .surveyData
-        .name || ''
-
-    email.value =
-      props
-        .surveyData
-        .email || ''
+    email.value = props.surveyData.email || ''
   }
 })
 
@@ -105,7 +91,7 @@ async function createNewAdmin() {
 
 <template>
   <dialog ref="dialogRef" class="createUser">
-    <button class="closeBtn" @click="closeModal">x</button>
+    <button class="closeBtn" @click="closeModal">✕</button>
     <section>
       <h1>Opret en ny bruger</h1>
       <form class="createUserBox">

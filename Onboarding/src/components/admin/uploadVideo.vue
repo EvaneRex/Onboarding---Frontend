@@ -75,8 +75,8 @@ async function uploadVideo() {
         YouTube-link:
         <input v-model="link.url" type="url" required />
       </label>
-      <button type="button" @click="fjernLink(idx)" v-if="links.length > 1">
-        <img class="trash" src="@/assets/icon/trash-solid-full.svg" />
+      <button class="trash" @click="fjernLink(idx)" v-if="links.length > 1">
+        <img src="@/assets/icon/trash-solid-full.svg" />
       </button>
     </div>
     <div class="formGruppe">
