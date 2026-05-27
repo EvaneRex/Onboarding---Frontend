@@ -58,17 +58,24 @@ async function loadSurveys() {
 const surveyCompanies = computed(() => {
   return surveys.value
     .map((survey) => {
-      const arr = survey.survey
-      if (arr && arr.length >= 2) {
-        return {
-          name: arr[arr.length - 2].answer,
-          surveyId: survey.surveyId,
-          surveyData: arr,
-        }
+      const companyName =
+      survey.survey.find(
+        item => item.question === 'Virksomhedsnavn'
+      )?.answer
+
+      const companyEmail =
+      survey.survey.find(
+        item => item.question === 'Email'
+      )?.answer
+
+      return {
+        name: companyName,
+        email: companyEmail,
+        surveyId: survey.surveyId,
+        surveyData: survey.survey,
       }
-      return null
     })
-    .filter((s) => s && s.name)
+    .filter(company => company.name) // Filtrer kun virksomheder med et navn
 })
 
 const clientNames = computed(() => clients.value.map((c) => c.clientName.trim().toLowerCase()))
