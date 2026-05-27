@@ -972,12 +972,18 @@ header {
     gap: 3rem;
   }
 
-  .matTable {
-    overflow-x: scroll;  
+  .tableBox {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+
+    table {
+      min-width: 700px;
+    }
   }
 
   .login {
     padding: 1rem;
+    min-height: 91vh;
 
     .login-wrapper {
       width: 100%;
