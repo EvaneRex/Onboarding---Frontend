@@ -29,6 +29,20 @@ input[type=checkbox] {
   accent-color: #ff5100;
 }
 
+p {
+  font-family: "OpenSans-Regular", Arial, Helvetica, sans-serif;
+  font-size: 18px;
+  color: #53575a;
+  line-height: 1.5;
+}
+
+h1 {
+  font-family: "OpenSans-SemiBold", Arial, Helvetica, sans-serif;
+  font-size: 48px;
+  color: #53575a;
+  margin-bottom: 1rem;
+}
+
 .login {
   min-height: 100vh;
   display: flex;
@@ -44,8 +58,9 @@ input[type=checkbox] {
   padding: 3rem 3rem;
   border-radius: 10px;
   font-family: "OpenSans-SemiBold", Arial, Helvetica, sans-serif;
-  font-size: 24px;
+  font-size: 48px;
   color: #53575a;
+  margin-bottom: 1rem;
 }
 .login .login-wrapper form {
   display: flex;
@@ -55,8 +70,9 @@ input[type=checkbox] {
   margin-top: 1rem;
   margin-bottom: 0.5rem;
   font-family: "OpenSans-Regular", Arial, Helvetica, sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   color: #53575a;
+  line-height: 1.5;
 }
 .login .login-wrapper form input {
   height: 3rem;
@@ -64,8 +80,9 @@ input[type=checkbox] {
   border: none;
   padding: 5px;
   font-family: "OpenSans-Regular", Arial, Helvetica, sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   color: #53575a;
+  line-height: 1.5;
 }
 .login .login-wrapper form button {
   background-color: #ff5100;
@@ -102,6 +119,7 @@ header .logout {
   font-family: "OpenSans-Regular", Arial, Helvetica, sans-serif;
   font-size: 18px;
   color: #53575a;
+  line-height: 1.5;
   cursor: pointer;
   transition: 0.2s ease;
 }
@@ -117,7 +135,7 @@ header .logout:active {
 .companyList,
 .matOverview {
   padding: 2rem 3rem;
-  min-height: 85vh;
+  min-height: 100vh;
   background-color: #ffffff;
 }
 .dashboard .backBtn,
@@ -146,19 +164,6 @@ header .logout:active {
 .dashboard .welcome {
   margin-bottom: 5rem;
   max-width: 700px;
-}
-.dashboard .welcome h1 {
-  font-family: "OpenSans-SemiBold", Arial, Helvetica, sans-serif;
-  font-size: 48px;
-  color: #53575a;
-  margin-bottom: 1rem;
-}
-.dashboard .welcome p {
-  font-family: "OpenSans-Regular", Arial, Helvetica, sans-serif;
-  font-size: 18px;
-  color: #53575a;
-  line-height: 1.7;
-  max-width: 650px;
 }
 .dashboard .dashboardCards {
   display: flex;
@@ -190,6 +195,7 @@ header .logout:active {
   font-family: "OpenSans-SemiBold", Arial, Helvetica, sans-serif;
   font-size: 40px;
   color: #53575a;
+  margin-bottom: 1rem;
   margin-bottom: 1.5rem;
 }
 .dashboard .dashboardCards .card .iconCard {
@@ -202,11 +208,6 @@ header .logout:active {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 3rem;
-}
-.companyList .topSection h1 {
-  font-family: "OpenSans-SemiBold", Arial, Helvetica, sans-serif;
-  font-size: 48px;
-  color: #53575a;
 }
 .companyList .topSection .createBtn {
   background-color: #ff5100;
@@ -247,6 +248,7 @@ header .logout:active {
   font-family: "OpenSans-Regular", Arial, Helvetica, sans-serif;
   font-size: 20px;
   color: #53575a;
+  line-height: 1.5;
   text-align: left;
   padding: 1.4rem 2rem;
   font-family: "OpenSans-SemiBold", Arial, Helvetica, sans-serif;
@@ -266,6 +268,7 @@ header .logout:active {
   font-family: "OpenSans-Regular", Arial, Helvetica, sans-serif;
   font-size: 18px;
   color: #53575a;
+  line-height: 1.5;
 }
 .companyList .refreshBtn {
   background-color: transparent;
@@ -296,6 +299,7 @@ header .logout:active {
   font-family: "OpenSans-Regular", Arial, Helvetica, sans-serif;
   font-size: 18px;
   color: #53575a;
+  line-height: 1.5;
   transition: 0.2s ease;
 }
 .companyList .actions button:hover {
@@ -324,6 +328,7 @@ header .logout:active {
   font-family: "OpenSans-Regular", Arial, Helvetica, sans-serif;
   font-size: 20px;
   color: #53575a;
+  line-height: 1.5;
   text-align: left;
   padding: 1.4rem 2rem;
   font-family: "OpenSans-SemiBold", Arial, Helvetica, sans-serif;
@@ -343,6 +348,7 @@ header .logout:active {
   font-family: "OpenSans-Regular", Arial, Helvetica, sans-serif;
   font-size: 18px;
   color: #53575a;
+  line-height: 1.5;
 }
 .clientDashboard .materialTable .clickableRow {
   cursor: pointer;
@@ -388,25 +394,12 @@ header .logout:active {
 .companyDialog .closeBtn:hover {
   opacity: 0.7;
 }
-.companyDialog .modalTop {
+.companyDialog .topSection {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   margin-bottom: 3rem;
   margin-top: 1rem;
-}
-.companyDialog .modalTop h1 {
-  font-family: "OpenSans-SemiBold", Arial, Helvetica, sans-serif;
-  font-size: 48px;
-  color: #53575a;
-  margin-bottom: 1rem;
-}
-.companyDialog .modalTop p {
-  font-family: "OpenSans-Regular", Arial, Helvetica, sans-serif;
-  font-size: 18px;
-  color: #53575a;
-  max-width: 500px;
-  line-height: 1.6;
 }
 .companyDialog .topButtons {
   display: flex;
@@ -446,6 +439,7 @@ header .logout:active {
   font-family: "OpenSans-Regular", Arial, Helvetica, sans-serif;
   font-size: 20px;
   color: #53575a;
+  line-height: 1.5;
   text-align: left;
   padding: 1.4rem 2rem;
   font-family: "OpenSans-SemiBold", Arial, Helvetica, sans-serif;
@@ -465,6 +459,7 @@ header .logout:active {
   font-family: "OpenSans-Regular", Arial, Helvetica, sans-serif;
   font-size: 18px;
   color: #53575a;
+  line-height: 1.5;
 }
 
 .materialDialog {
@@ -494,6 +489,7 @@ header .logout:active {
   font-family: "OpenSans-SemiBold", Arial, Helvetica, sans-serif;
   font-size: 28px;
   color: #53575a;
+  margin-bottom: 1rem;
   transition: 0.2s ease;
 }
 .materialDialog .closeBtn:hover {
@@ -507,11 +503,13 @@ header .logout:active {
   font-size: 42px;
   color: #53575a;
   margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 .materialDialog .modalTop p {
   font-family: "OpenSans-Regular", Arial, Helvetica, sans-serif;
   font-size: 18px;
   color: #53575a;
+  line-height: 1.5;
   line-height: 1.6;
 }
 .materialDialog .tableBox {
@@ -531,6 +529,7 @@ header .logout:active {
   font-family: "OpenSans-Regular", Arial, Helvetica, sans-serif;
   font-size: 20px;
   color: #53575a;
+  line-height: 1.5;
   text-align: left;
   padding: 1.4rem 2rem;
   font-family: "OpenSans-SemiBold", Arial, Helvetica, sans-serif;
@@ -550,14 +549,16 @@ header .logout:active {
   font-family: "OpenSans-Regular", Arial, Helvetica, sans-serif;
   font-size: 18px;
   color: #53575a;
+  line-height: 1.5;
 }
 .materialDialog label {
   display: flex;
   align-items: center;
   gap: 0.7rem;
   font-family: "OpenSans-Regular", Arial, Helvetica, sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   color: #53575a;
+  line-height: 1.5;
   cursor: pointer;
 }
 .materialDialog input[type=checkbox] {
@@ -594,9 +595,11 @@ header .logout:active {
   font-family: "OpenSans-SemiBold", Arial, Helvetica, sans-serif;
   font-size: 48px;
   color: #53575a;
+  margin-bottom: 1rem;
   font-family: "OpenSans-Regular", Arial, Helvetica, sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   color: #53575a;
+  line-height: 1.5;
 }
 .matOverview .btn {
   margin-top: 3rem;
@@ -631,6 +634,7 @@ header .logout:active {
   font-family: "OpenSans-Regular", Arial, Helvetica, sans-serif;
   font-size: 20px;
   color: #53575a;
+  line-height: 1.5;
   text-align: left;
   padding: 1.4rem 2rem;
   font-family: "OpenSans-SemiBold", Arial, Helvetica, sans-serif;
@@ -650,6 +654,7 @@ header .logout:active {
   font-family: "OpenSans-Regular", Arial, Helvetica, sans-serif;
   font-size: 18px;
   color: #53575a;
+  line-height: 1.5;
 }
 .matOverview .matTable .icon {
   width: 22px;
@@ -691,13 +696,15 @@ header .logout:active {
 }
 .upManager .modal h1 {
   font-family: "OpenSans-SemiBold", Arial, Helvetica, sans-serif;
-  font-size: 24px;
+  font-size: 48px;
   color: #53575a;
+  margin-bottom: 1rem;
 }
 .upManager .modal p {
   font-family: "OpenSans-Regular", Arial, Helvetica, sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   color: #53575a;
+  line-height: 1.5;
 }
 .upManager .modal .obs {
   font-family: "OpenSans-SemiBold", Arial, Helvetica, sans-serif;
@@ -758,8 +765,9 @@ header .logout:active {
   display: flex;
   flex-direction: column;
   font-family: "OpenSans-Regular", Arial, Helvetica, sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   color: #53575a;
+  line-height: 1.5;
 }
 .uploadFile label,
 .uploadSurvey label {
@@ -797,8 +805,9 @@ header .logout:active {
 }
 .uploadVideo .formGruppe {
   font-family: "OpenSans-Regular", Arial, Helvetica, sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   color: #53575a;
+  line-height: 1.5;
   margin-bottom: 1rem;
 }
 .uploadVideo .formGruppe label input {
@@ -819,8 +828,9 @@ header .logout:active {
 }
 .uploadVideo .formGruppe .addMore {
   font-family: "OpenSans-Regular", Arial, Helvetica, sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   color: #53575a;
+  line-height: 1.5;
   padding: 0.5rem 3rem;
   border-radius: 5px;
   border: 1px solid #53575a;
@@ -866,13 +876,15 @@ header .logout:active {
 .createUser h1 {
   margin-top: 1rem;
   font-family: "OpenSans-SemiBold", Arial, Helvetica, sans-serif;
-  font-size: 24px;
+  font-size: 48px;
   color: #53575a;
+  margin-bottom: 1rem;
 }
 .createUser form {
   font-family: "OpenSans-Regular", Arial, Helvetica, sans-serif;
-  font-size: 16px;
+  font-size: 18px;
   color: #53575a;
+  line-height: 1.5;
   margin: 1rem 0rem;
 }
 .createUser form label {
@@ -950,6 +962,7 @@ header .logout:active {
   font-family: "OpenSans-SemiBold", Arial, Helvetica, sans-serif;
   font-size: 42px;
   color: #53575a;
+  margin-bottom: 1rem;
   margin-bottom: 2rem;
 }
 .surveyDialog .surveyAnswers {
@@ -976,11 +989,13 @@ header .logout:active {
   font-size: 24px;
   color: #53575a;
   margin-bottom: 1rem;
+  margin-bottom: 1rem;
 }
 .surveyDialog .answerCard p {
   font-family: "OpenSans-Regular", Arial, Helvetica, sans-serif;
   font-size: 22px;
   color: #53575a;
+  line-height: 1.5;
   line-height: 1.7;
   padding-left: 2rem;
   word-break: break-word;
@@ -995,6 +1010,7 @@ header .logout:active {
   font-family: "OpenSans-SemiBold", Arial, Helvetica, sans-serif;
   font-size: 28px;
   color: #53575a;
+  margin-bottom: 1rem;
   transition: 0.2s ease;
 }
 .surveyDialog .closeBtn:hover {
@@ -1002,12 +1018,13 @@ header .logout:active {
 }
 
 .surveyPage {
-  min-height: 85vh;
+  min-height: 100vh;
   background-color: #d1d4d7;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 3rem;
+  overflow: hidden;
 }
 .surveyPage .surveyCard {
   background-color: #ffffff;
@@ -1102,6 +1119,7 @@ header .logout:active {
   font-family: "OpenSans-SemiBold", Arial, Helvetica, sans-serif;
   font-size: 48px;
   color: #53575a;
+  margin-bottom: 1rem;
   margin-bottom: 2rem;
 }
 .materialView .content {
@@ -1140,4 +1158,43 @@ header .logout:active {
 }
 .materialView .completeBtn {
   width: 190px;
+}
+
+@media (max-width: 768px) {
+  .dashboard .dashboardCards {
+    flex-direction: column;
+    gap: 3rem;
+  }
+}
+@media (max-width: 768px) and (max-width: 768px) {
+  .matTable table,
+  .matTable thead,
+  .matTable tbody,
+  .matTable th,
+  .matTable td,
+  .matTable tr {
+    display: block;
+  }
+  .matTable thead {
+    display: none;
+  }
+  .matTable tbody {
+    display: flex;
+    flex-direction: column;
+  }
+  .matTable tr {
+    background: #d9d9d9;
+    padding: 1rem;
+  }
+  .matTable td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: none;
+    padding: 0.7rem 0;
+  }
+  .matTable td::before {
+    font-weight: 700;
+    color: #555;
+  }
 }/*# sourceMappingURL=style.css.map */

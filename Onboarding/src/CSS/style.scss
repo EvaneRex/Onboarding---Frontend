@@ -18,6 +18,14 @@ input[type='checkbox'] {
   accent-color: partial.$orange;
 }
 
+p {
+  @include partial.txt;
+}
+
+h1 {
+  @include partial.heading;
+}
+
 .login {
   min-height: 100vh;
   display: flex;
@@ -94,7 +102,7 @@ header {
 .companyList,
 .matOverview {
   padding: 2rem 3rem;
-  min-height: 85vh;
+  min-height: 100vh;
   background-color: partial.$white;
   .backBtn {
     @include partial.backBtn();
@@ -106,17 +114,6 @@ header {
   .welcome {
     margin-bottom: 5rem;
     max-width: 700px;
-
-    h1 {
-      @include partial.heading(48px);
-      margin-bottom: 1rem;
-    }
-
-    p {
-      @include partial.txt(18px);
-      line-height: 1.7;
-      max-width: 650px;
-    }
   }
 
   .dashboardCards {
@@ -171,10 +168,6 @@ header {
     align-items: center;
 
     margin-bottom: 3rem;
-
-    h1 {
-      @include partial.heading(48px);
-    }
 
     .createBtn {
       @include partial.btn();
@@ -319,24 +312,13 @@ header {
     }
   }
 
-  .modalTop {
+  .topSection {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
 
     margin-bottom: 3rem;
     margin-top: 1rem;
-
-    h1 {
-      @include partial.heading(48px);
-      margin-bottom: 1rem;
-    }
-
-    p {
-      @include partial.txt(18px);
-      max-width: 500px;
-      line-height: 1.6;
-    }
   }
 
   .topButtons {
@@ -809,13 +791,13 @@ header {
 }
 
 .surveyPage {
-  min-height: 85vh;
+  min-height: 100vh;
   background-color: partial.$lightgray;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 3rem;
-
+  overflow: hidden;
   .surveyCard {
     background-color: partial.$white;
     border-radius: partial.$border-radius;
@@ -886,6 +868,7 @@ header {
 
     margin-bottom: 2rem;
   }
+  
 
   .content {
     flex: 1;
@@ -925,3 +908,58 @@ header {
     width: 190px;
   }
 }
+
+@media (max-width: 768px) {
+    .dashboard .dashboardCards {
+      flex-direction: column;
+      gap: 3rem;
+    }
+
+    .matTable {
+      @media (
+  max-width: 768px
+) {
+
+  table,
+  thead,
+  tbody,
+  th,
+  td,
+  tr {
+    display: block;
+  }
+
+  thead {
+    display: none;
+  }
+
+  tbody {
+    display: flex;
+    flex-direction: column;
+  }
+
+  tr {
+    background: #d9d9d9;
+    padding: 1rem;
+  }
+
+  td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border: none;
+    padding: .7rem 0;
+
+    &::before {
+      font-weight: 700;
+      color: #555;
+    }
+  }
+
+
+ 
+
+}
+    }
+  }

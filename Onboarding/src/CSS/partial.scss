@@ -23,16 +23,18 @@ $border-radius: 10px;
   src: url(/fonts/OpenSans-Bold.ttf);
 }
 
-@mixin heading($size: 24px) {
+@mixin heading($size: 48px) {
   font-family: $fontSemi;
   font-size: $size;
   color: $darkgray;
+  margin-bottom: 1rem;
 }
 
-@mixin txt($size: 16px, $font: $fontReg) {
+@mixin txt($size: 18px, $font: $fontReg) {
   font-family: $font;
   font-size: $size;
   color: $darkgray;
+  line-height: 1.5;
 }
 @mixin btn($bgcolor: $orange, $color: $white) {
   background-color: $bgcolor;
