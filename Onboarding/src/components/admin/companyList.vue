@@ -97,28 +97,31 @@ async function openCompany(client) {
     return
   }
 
-  const clientInfo = await getClientInfo(client.clientId)
-  if (!clientInfo) {
-    alert('Kunne ikke hente information om virksomheden.')
+  // Hvis det er survey uden bruger
+  if (!client.clientId) {
+    selectedCompany.value = {
+      clientName: client.name,
+
+      surveyAnswers: client.surveyData || [],
+
+      onboardingSlides: [],
+    }
+
+    showCompanyInfo.value = true
+
     return
   }
-  selectedCompany.value = clientInfo
-  showCompanyInfo.value = true
-}
+  // find survey ud fra navn
+  const matchingSurvey = surveyCompanies.value.find(
+    (survey) => survey.name?.trim().toLowerCase() === client.clientName?.trim().toLowerCase(),
+  )
 
-// Slet virksomhed / survey
-async function removeClient(id, isSurvey = false) {
-  const confirmed = confirm('Er du sikker på at du vil slette?')
-  if (!confirmed) return
-
-  const response = isSurvey ? await deleteAnsweredSurvey(id) : await deleteClient(id)
-
-  if (response.success) {
-    await loadClients(false)
-    await loadSurveys()
-  } else {
-    alert(response.message || 'Sletning fejlede')
+  selectedCompany.value = {
+    ...clientInfo,
+    surveyAnswers: matchingSurvey?.surveyData || [],
   }
+
+  showCompanyInfo.value = true
 }
 
 // Tilbage til liste
