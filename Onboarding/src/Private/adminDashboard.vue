@@ -28,7 +28,7 @@ function goBack() {
 </script>
 
 <template>
-  <Header :logout="logout" />
+  <Header :logout="logout" :user="user" />
   <!-- DASHBOARD -->
   <section v-if="currentView === 'dashboard'" class="dashboard">
     <!-- Welcome -->
