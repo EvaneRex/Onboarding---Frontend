@@ -92,26 +92,25 @@ const surveyCompaniesWithoutUser = computed(() =>
 )
 
 async function openCompany(client) {
-  if (!client?.clientId) {
-    alert('Denne virksomhed er ikke oprettet som bruger endnu.')
-    return
-  }
-
-  // Hvis det er survey uden bruger
+  // Hvis det er survey virksomhed uden client
   if (!client.clientId) {
     selectedCompany.value = {
       clientName: client.name,
-
       surveyAnswers: client.surveyData || [],
-
       onboardingSlides: [],
     }
 
     showCompanyInfo.value = true
-
     return
   }
-  // find survey ud fra navn
+
+  const clientInfo = await getClientInfo(client.clientId)
+
+  if (!clientInfo) {
+    alert('Kunne ikke hente information om virksomheden.')
+    return
+  }
+
   const matchingSurvey = surveyCompanies.value.find(
     (survey) => survey.name?.trim().toLowerCase() === client.clientName?.trim().toLowerCase(),
   )
@@ -122,6 +121,21 @@ async function openCompany(client) {
   }
 
   showCompanyInfo.value = true
+}
+
+// Slet virksomhed / survey
+async function removeClient(id, isSurvey = false) {
+  const confirmed = confirm('Er du sikker på at du vil slette?')
+  if (!confirmed) return
+
+  const response = isSurvey ? await deleteAnsweredSurvey(id) : await deleteClient(id)
+
+  if (response.success) {
+    await loadClients(false)
+    await loadSurveys()
+  } else {
+    alert(response.message || 'Sletning fejlede')
+  }
 }
 
 // Tilbage til liste
