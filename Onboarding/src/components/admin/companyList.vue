@@ -25,9 +25,19 @@ const loading = ref(true)
 const errorMessage = ref('')
 const showCreateUser = ref(false)
 
-function openCreateUser() {
-  showCreateUser.value = true
+const selectedSurvey = ref(null)
+
+function openCreateUser(
+  company = null
+) {
+
+  selectedSurvey.value =
+    company
+
+  showCreateUser.value =
+    true
 }
+
 function closeCreateUser() {
   showCreateUser.value = false
   loadClients(false)
@@ -58,17 +68,24 @@ async function loadSurveys() {
 const surveyCompanies = computed(() => {
   return surveys.value
     .map((survey) => {
-      const arr = survey.survey
-      if (arr && arr.length >= 2) {
-        return {
-          name: arr[arr.length - 2].answer,
-          surveyId: survey.surveyId,
-          surveyData: arr,
-        }
+      const companyName =
+      survey.survey.find(
+        item => item.question === 'Virksomhedsnavn'
+      )?.answer
+
+      const companyEmail =
+      survey.survey.find(
+        item => item.question === 'Email'
+      )?.answer
+
+      return {
+        name: companyName,
+        email: companyEmail,
+        surveyId: survey.surveyId,
+        surveyData: survey.survey,
       }
-      return null
     })
-    .filter((s) => s && s.name)
+    .filter(company => company.name) // Filtrer kun virksomheder med et navn
 })
 
 const clientNames = computed(() => clients.value.map((c) => c.clientName.trim().toLowerCase()))
@@ -194,7 +211,7 @@ onMounted(() => {
               </span>
             </td>
             <td class="actions">
-              <button @click="openCreateUser">Opret bruger</button>
+              <button @click="openCreateUser(company)">Opret bruger</button>
               <button @click="openCompany(company)">
                 <img
                   src="@/assets/icon/arrow-up-right-from-square-solid-full.svg"
@@ -221,5 +238,5 @@ onMounted(() => {
   <!-- COMPANY INFO -->
   <companyInfo v-if="showCompanyInfo" :client="selectedCompany" @goBack="goBackToList" />
 
-  <createUser v-if="showCreateUser" @close="closeCreateUser" />
+  <createUser v-if="showCreateUser" :surveyData="selectedSurvey" @close="closeCreateUser" />
 </template>
