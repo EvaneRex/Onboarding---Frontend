@@ -94,7 +94,7 @@ header {
 .companyList,
 .matOverview {
   padding: 2rem 3rem;
-  min-height: 100vh;
+  min-height: 85vh;
   background-color: partial.$white;
   .backBtn {
     @include partial.backBtn();
@@ -809,7 +809,7 @@ header {
 }
 
 .surveyPage {
-  min-height: 100vh;
+  min-height: 85vh;
   background-color: partial.$lightgray;
   display: flex;
   justify-content: center;

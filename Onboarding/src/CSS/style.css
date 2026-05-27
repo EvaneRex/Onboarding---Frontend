@@ -117,7 +117,7 @@ header .logout:active {
 .companyList,
 .matOverview {
   padding: 2rem 3rem;
-  min-height: 100vh;
+  min-height: 85vh;
   background-color: #ffffff;
 }
 .dashboard .backBtn,
@@ -1002,7 +1002,7 @@ header .logout:active {
 }
 
 .surveyPage {
-  min-height: 100vh;
+  min-height: 85vh;
   background-color: #d1d4d7;
   display: flex;
   justify-content: center;
