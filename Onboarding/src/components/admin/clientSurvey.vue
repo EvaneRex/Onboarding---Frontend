@@ -1,5 +1,6 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue'
+import { getSurveyByClientId } from '@/components/services/surveyService'
 
 const emit = defineEmits(['close'])
 
@@ -27,7 +28,12 @@ onMounted(async () => {
 
   try {
     surveyAnswers.value = props.client?.surveyAnswers || []
-    
+
+    console.log(
+  'CLIENT DATA:',
+  props.client
+)
+
     currentState.value = 'success'
   } catch (error) {
     console.error(error)
