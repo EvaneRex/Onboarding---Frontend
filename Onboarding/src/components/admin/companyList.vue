@@ -1,12 +1,17 @@
 <!--
-Denne er komponent, er hvor listen af alle oprettede brugere og ikke oprettede brugere ligger. (klienter)
+Denne er komponent, er hvor listen af alle oprettede brugere og ikke oprettede brugere ligger. (klient)
 -->
 <script setup>
 import { ref, onMounted, computed } from 'vue'
 
 import companyInfo from '@/components/admin/companyInfo.vue'
 import createUser from '@/components/admin/CreateUserModule.vue'
-import { getAllClients, deleteClient, getClientInfo } from '@/components/services/customerService'
+import {
+  getAllClients,
+  deleteClient,
+  getClientInfo,
+  deleteAnsweredSurvey,
+} from '@/components/services/customerService'
 import { getAllSurveys } from '../services/surveyService'
 
 const surveys = ref([])
@@ -87,32 +92,33 @@ const surveyCompaniesWithoutUser = computed(() =>
 )
 
 async function openCompany(client) {
+  if (!client?.clientId) {
+    alert('Denne virksomhed er ikke oprettet som bruger endnu.')
+    return
+  }
+
   const clientInfo = await getClientInfo(client.clientId)
   if (!clientInfo) {
     alert('Kunne ikke hente information om virksomheden.')
     return
   }
-  // find survey ud fra navn
-  const matchingSurvey =
-    surveyCompanies.value.find(
-      survey =>
-        survey.name
-          ?.trim()
-          .toLowerCase() ===
-        client.clientName
-          ?.trim()
-          .toLowerCase()
-    )
-
-    selectedCompany.value = {
-    ...clientInfo,  
-    surveyAnswers:
-      matchingSurvey
-        ?.surveyData || []
-  }
-
+  selectedCompany.value = clientInfo
   showCompanyInfo.value = true
+}
 
+// Slet virksomhed / survey
+async function removeClient(id, isSurvey = false) {
+  const confirmed = confirm('Er du sikker på at du vil slette?')
+  if (!confirmed) return
+
+  const response = isSurvey ? await deleteAnsweredSurvey(id) : await deleteClient(id)
+
+  if (response.success) {
+    await loadClients(false)
+    await loadSurveys()
+  } else {
+    alert(response.message || 'Sletning fejlede')
+  }
 }
 
 // Tilbage til liste
@@ -120,20 +126,7 @@ function goBackToList() {
   showCompanyInfo.value = false
 }
 
-// Slet virksomhed
-async function removeClient(clientId) {
-  const confirmed = confirm('Er du sikker på at du vil slette virksomheden?')
-
-  if (!confirmed) return
-
-  const response = await deleteClient(clientId)
-
-  if (response.success) {
-    loadClients()
-  }
-}
-
-// Refresk listen
+// Refresh listen
 // Kunne have været polling eller endnu bedre en websocket men det her var den nemmeste løsning med det tid vi havde tilbage.
 function refreshList() {
   loadClients(false)
@@ -209,7 +202,7 @@ onMounted(() => {
                 />
                 Åben
               </button>
-              <button @click="removeClient(company.surveyId)">
+              <button @click="removeClient(company.surveyId, true)">
                 <img
                   src="@/assets/icon/trash-solid-full.svg"
                   alt="Slet kunde"
