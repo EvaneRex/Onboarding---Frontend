@@ -29,8 +29,8 @@ $border-radius: 10px;
   color: $darkgray;
 }
 
-@mixin txt($size: 16px) {
-  font-family: $fontReg;
+@mixin txt($size: 16px, $font: $fontReg) {
+  font-family: $font;
   font-size: $size;
   color: $darkgray;
 }

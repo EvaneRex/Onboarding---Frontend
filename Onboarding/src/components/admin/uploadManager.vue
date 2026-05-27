@@ -33,8 +33,9 @@ onMounted(() => {
       <p>
         Her kan du uploade PDF’er og links til youtube videoer, som gemmes i databasen samt uploade
         et nyt spørgeskema.
-        <em>OBS Når der uploades et nyt spørgeskema erstatter det det gamle.</em>
       </p>
+      <p class="obs">OBS Når der uploades et nyt spørgeskema erstatter det det gamle.</p>
+
       <div class="uploadbox">
         <div class="tabButtons">
           <button :class="{ active: activeTab === 'pdf' }" @click="activeTab = 'pdf'">

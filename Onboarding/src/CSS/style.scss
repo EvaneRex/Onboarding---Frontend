@@ -63,7 +63,6 @@ header {
   justify-content: space-between;
   align-items: center;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-
   padding: 25px 40px;
 
   .logo {
@@ -526,16 +525,17 @@ header {
   .modal {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1rem;
 
     h1 {
-      @include partial.heading(42px);
-      margin-bottom: 1rem;
+      @include partial.heading;
     }
 
     p {
-      @include partial.txt(18px);
-      line-height: 1.6;
+      @include partial.txt;
+    }
+    .obs {
+      font-family: partial.$fontSemi;
     }
   }
 
@@ -552,7 +552,7 @@ header {
       flex-direction: row;
       gap: 1.5rem;
       button {
-        @include partial.btn();
+        @include partial.btn;
         margin-bottom: 0.5rem;
         min-width: 180px;
         padding: 0.5rem 0.5rem;
