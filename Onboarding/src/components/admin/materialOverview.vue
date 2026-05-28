@@ -148,7 +148,7 @@ onMounted(hentMaterialer)
           <tr v-for="pdf in pdfSlides" :key="pdf.filnavn">
             <td>{{ pdf.filnavn }}</td>
             <td>PDF</td>
-            <td>
+            <td class="actions">
               <img
                 src="@/assets/icon/trash-solid-full.svg"
                 alt="Slet"
@@ -160,7 +160,7 @@ onMounted(hentMaterialer)
           <tr v-for="yt in youtubeLinks" :key="yt.id">
             <td>{{ yt.titel }}</td>
             <td>YouTube</td>
-            <td>
+            <td class="actions">
               <img
                 src="@/assets/icon/trash-solid-full.svg"
                 alt="Slet"
