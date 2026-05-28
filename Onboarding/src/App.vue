@@ -6,58 +6,43 @@ import AdminDashboard from './Private/adminDashboard.vue'
 import ClientDashboard from './Private/clientDashboard.vue'
 import Survey from './components/survey.vue'
 
-const currentPage = ref('login')
+const currentPage = ref(null)
 const currentUser = ref(null)
+const isReady = ref(false)
 
 onMounted(async () => {
-  const path =
-    window.location.pathname
+  const path = window.location.pathname
 
   if (path === '/survey') {
-    currentPage.value =
-      'survey'
+    currentPage.value = 'survey'
+    isReady.value = true
     return
   }
 
   try {
-    const response =
-      await fetch(
-        'http://localhost:2000/auth/user',
-        {
-          credentials:
-            'include',
-        }
-      )
+    const response = await fetch('http://localhost:2000/auth/user', {
+      credentials: 'include',
+    })
 
-    const data =
-      await response.json()
+    const data = await response.json()
 
-    if (
-      data.success &&
-      data.role
-    ) {
+    if (data.success && data.role) {
       currentUser.value = {
         id: data.id,
-        username:
-          data.username,
+        username: data.username,
         role: data.role,
-        onboardingCourse:
-          data.onboardingCourse,
+        onboardingCourse: data.onboardingCourse,
       }
 
-      currentPage.value =
-        data.role ===
-        'admin'
-          ? 'adminDashboard'
-          : 'clientDashboard'
+      currentPage.value = data.role === 'admin' ? 'adminDashboard' : 'clientDashboard'
+    } else {
+      currentPage.value = 'login'
     }
-  }
-
-  catch (error) {
+  } catch (error) {
     console.error(error)
-
-    currentPage.value =
-      'login'
+    currentPage.value = 'login'
+  } finally {
+    isReady.value = true
   }
 })
 
@@ -70,14 +55,7 @@ function handleLogin(user) {
   }
 
   currentUser.value = user
-
-  if (user.role === 'admin') {
-    currentPage.value = 'adminDashboard'
-  }
-
-  else {
-    currentPage.value = 'clientDashboard'
-  }
+  currentPage.value = user.role === 'admin' ? 'adminDashboard' : 'clientDashboard'
 }
 
 function logout() {
@@ -92,25 +70,17 @@ function closeSurvey() {
 </script>
 
 <template>
-  <Login
-    v-if="currentPage === 'login'"
-    @login-success="handleLogin"
-  />
+  <template v-if="isReady">
+    <Login v-if="currentPage === 'login'" @login-success="handleLogin" />
 
-  <AdminDashboard
-    v-if="currentPage === 'adminDashboard'"
-    :user="currentUser"
-    :logout="logout"
-  />
+    <AdminDashboard v-if="currentPage === 'adminDashboard'" :user="currentUser" :logout="logout" />
 
-  <ClientDashboard
-    v-if="currentPage === 'clientDashboard'"
-    :user="currentUser"
-    :logout="logout"
-  />
+    <ClientDashboard
+      v-if="currentPage === 'clientDashboard'"
+      :user="currentUser"
+      :logout="logout"
+    />
 
-  <Survey
-    v-if="currentPage === 'survey'"
-    @close="closeSurvey"
-  />
+    <Survey v-if="currentPage === 'survey'" @close="closeSurvey" />
+  </template>
 </template>
