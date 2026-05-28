@@ -1053,7 +1053,7 @@ header {
     .surveyCard {
       padding: 2rem;
       h1 {
-        @include partial.heading( 24px);
+        @include partial.heading( 28px);
       }
       .questionNumber {
         @include partial.heading(24px);
@@ -1148,47 +1148,254 @@ header {
     }
   }
   
-  .companyDialog{
-    .topButtons{
+  .companyDialog {
+
+    .topButtons {
+      display: flex;
+      flex-direction: row;
       justify-content: center;
       align-items: center;
-      .createBtn{
+      gap: 1rem;
+      margin: 1rem 0;
+
+      .createBtn {
         font-size: 14px;
         width: 100%;
       }
     }
 
-    .tableBox{
-      table{
-        thead{
-          tr{
-            th{
-              font-size: 16px
-                        }
+    .tableBox {
+
+      table,
+      tbody,
+      tr,
+      td {
+        display: block;
+        width: 100%;
+      }
+
+      thead {
+        display: none;
+      }
+
+      tbody {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      tr {
+        background: partial.$lightgray;
+        padding: 1.5rem;
+      }
+
+      td {
+        border: none;
+        padding: 0;
+        font-size: 14px;
+      }
+
+      /* Materiale navn */
+      td:first-child {
+        @include partial.txt(
+          14px,
+          partial.$fontSemi
+        );
+
+        text-align: center;
+        word-break: break-word;
+      }
+
+      /* Status */
+      td:last-child {
+        text-align: center;
+
+        @include partial.txt(
+          14px
+        );
+      }
+
+      /* desktop styling fjernes på mobil */
+      thead tr th {
+        font-size: 16px;
+      }
+
+      tbody tr td {
+        font-size: 14px;
+      }
+    }
+  }
+  .createUser {
+    h1 {
+      @include partial.heading(28px);
+      }
+      .createUserBox{
+        .createBtn button{
+          width: 100%;
+        }
+      }
+  }
+
+  .surveyDialog{
+    h1 {
+      @include partial.heading(28px);
+    }  
+    .surveyAnswers{
+        .answerCard {
+          h3 {
+            @include partial.heading(20px);
+          }
+          p {
+            @include partial.txt(16px);
           }
         }
-        tbody{
-          tr{
-            td{
-              font-size: 14px;
-            }
-          }
-        }
+    }
+  }
+
+  .materialDialog {
+
+    .tableBox {
+
+      table,
+      tbody,
+      tr,
+      td {
+        display: block;
+        width: 100%;
+      }
+
+      thead {
+        display: none;
+      }
+
+      tbody {
+        display: flex;
+        flex-direction: column;
+      }
+
+      tr {
+        background: partial.$lightgray;
+        padding: 1.5rem;
+      }
+
+      td {
+        border: none;
+        padding: 0;
+      }
+
+      /* materiale navn */
+      td:first-child {
+        @include partial.txt(
+          16px,
+          partial.$fontSemi
+        );
+
+        text-align: center;
+        word-break: break-word;
+        margin-bottom: 1rem;
+      }
+
+      /* checkbox række */
+      td:last-child {
+        display: flex;
+        justify-content: center;
+        align-items: center;
       }
     }
 
+    .saveSection {
+      button {
+        width: 100%;
+      }
+    }
+
+
   }
 
-  .surveyDialog
-  .createUser {
-    h1 {
-      @include partial.heading(32px);
-    }
-    .createUserBox{
-    .createBtn button{
+  .matOverview {
+
+    .btn {
+      font-size: 14px;
+      margin: 2rem 0;
       width: 100%;
     }
-  }
-  }
 
+    .matTable {
+      width: 100%;
+      overflow: hidden;
+      margin: 0;
+
+      table,
+      tbody,
+      tr,
+      td {
+        display: block;
+        width: 100%;
+      }
+
+      thead {
+        display: none;
+      }
+
+      tbody {
+        display: flex;
+        flex-direction: column;
+      }
+
+      tr {
+        background: partial.$lightgray;
+        padding: 1rem;
+      }
+
+      td {
+        border: none;
+        padding: 0;
+        text-align: center;
+      }
+
+      /* Filnavn */
+      td:first-child {
+        @include partial.txt(
+          18px,
+          partial.$fontSemi
+        );
+
+        word-break: break-word;
+      }
+
+      /* Type + slet på samme linje */
+      td:nth-child(2),
+      td.actions {
+        display: inline-flex !important;
+        width: auto;
+        align-items: center;
+        justify-content: center;
+      }
+
+      /* wrapper til nederste række */
+      td:nth-child(2) {
+        margin-right: 1rem;
+
+        @include partial.txt(14px);
+      }
+
+      /* centrer bundlinje */
+      tr {
+        text-align: center;
+      }
+
+      .actions {
+        justify-content: center;
+      }
+
+      .icon {
+        width: 22px;
+        height: 22px;
+        cursor: pointer;
+      }
+    }
+  }
 }
+
+  
+
