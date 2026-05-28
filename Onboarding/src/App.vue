@@ -9,17 +9,55 @@ import Survey from './components/survey.vue'
 const currentPage = ref('login')
 const currentUser = ref(null)
 
-onMounted(() => {
-
+onMounted(async () => {
   const path =
     window.location.pathname
 
-  if (
-    path ===
-    '/survey'
-  ) {
+  if (path === '/survey') {
     currentPage.value =
       'survey'
+    return
+  }
+
+  try {
+    const response =
+      await fetch(
+        'http://localhost:2000/auth/user',
+        {
+          credentials:
+            'include',
+        }
+      )
+
+    const data =
+      await response.json()
+
+    if (
+      data.success &&
+      data.role
+    ) {
+      currentUser.value = {
+        id: data.id,
+        username:
+          data.username,
+        role: data.role,
+        onboardingCourse:
+          data.onboardingCourse,
+      }
+
+      currentPage.value =
+        data.role ===
+        'admin'
+          ? 'adminDashboard'
+          : 'clientDashboard'
+    }
+  }
+
+  catch (error) {
+    console.error(error)
+
+    currentPage.value =
+      'login'
   }
 })
 
