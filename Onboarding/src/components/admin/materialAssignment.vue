@@ -5,6 +5,7 @@ import {
   getYoutubeLinks,
   assignOnboarding,
 } from '@/components/services/materialService'
+import { sendRegisterInvitation } from '../services/onboardingService'
 
 const emit = defineEmits(['close', 'save'])
 
@@ -54,6 +55,8 @@ async function saveMaterials() {
   const response = await assignOnboarding(props.client.clientId, selected)
 
   if (response.success) {
+    await sendRegisterInvitation(props.client.clientId)
+
     emit('save', selected)
 
     closeModal()
@@ -117,7 +120,7 @@ onBeforeUnmount(() => {
     </section>
 
     <div class="saveSection">
-      <button class="createBtn" @click="saveMaterials">Gem valg</button>
+      <button class="createBtn" @click="saveMaterials">Tildel og send invitation</button>
     </div>
   </dialog>
 </template>
