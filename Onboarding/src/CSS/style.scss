@@ -340,25 +340,29 @@ header {
     }
   }
 
-  .topSection {
+  .modalTop {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    gap: 2rem;
 
-    margin-bottom: 3rem;
-    margin-top: 1rem;
+    margin: 1rem 0 3rem;
   }
 
   .topButtons {
     display: flex;
+    flex-direction: row;
     gap: 1rem;
-    margin: 1rem;
+    flex-shrink: 0;
+    margin: 1rem 0;
 
     .createBtn {
       @include partial.btn;
       padding: 0 2rem;
+      white-space: nowrap;
     }
   }
+
 
   .tableBox {
     background-color: partial.$lightgray;
@@ -1155,19 +1159,25 @@ header {
   
   .companyDialog {
 
+    .modalTop {
+      display: block;
+      
+    
+
     .topButtons {
       display: flex;
       flex-direction: row;
-      justify-content: center;
-      align-items: center;
-      gap: 1rem;
-      margin: 1rem 0;
-
-      .createBtn {
-        font-size: 14px;
-        width: 100%;
-      }
+      gap: .75rem;
+      margin: 2rem 0 0 0;
+      width: 100%;
     }
+
+    .topButtons .createBtn {
+      width: 100%;
+      font-size: 14px;
+      padding: .75rem 1rem;
+    }
+  } 
 
     .tableBox {
 
@@ -1457,6 +1467,30 @@ header {
       .viewer {
         max-width: 100%;
       }
+  }
+
+  .upManager {
+    .modal {
+        h1 {
+        @include partial.heading(28px);
+      }
+      p {
+        @include partial.txt(14px);
+      }
+    }
+    .uploadbox {
+      .tabButtons {
+        flex-direction: column;
+        button {
+          font-size: 14px;
+        }
+      }
+      .uploadFile {
+        button {
+          font-size: 14px;
+        }
+      }
+    }
   }
 }
 

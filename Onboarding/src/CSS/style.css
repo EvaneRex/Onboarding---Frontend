@@ -410,17 +410,19 @@ header .logout:active {
 .companyDialog .closeBtn:hover {
   opacity: 0.7;
 }
-.companyDialog .topSection {
+.companyDialog .modalTop {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  margin-bottom: 3rem;
-  margin-top: 1rem;
+  gap: 2rem;
+  margin: 1rem 0 3rem;
 }
 .companyDialog .topButtons {
   display: flex;
+  flex-direction: row;
   gap: 1rem;
-  margin: 1rem;
+  flex-shrink: 0;
+  margin: 1rem 0;
 }
 .companyDialog .topButtons .createBtn {
   background-color: #ff5100;
@@ -438,6 +440,7 @@ header .logout:active {
 }
 .companyDialog .topButtons .createBtn {
   padding: 0 2rem;
+  white-space: nowrap;
 }
 .companyDialog .tableBox {
   background-color: #d1d4d7;
@@ -1383,17 +1386,20 @@ header .logout:active {
     width: 20px;
     height: 20px;
   }
-  .companyDialog .topButtons {
+  .companyDialog .modalTop {
+    display: block;
+  }
+  .companyDialog .modalTop .topButtons {
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    margin: 1rem 0;
-  }
-  .companyDialog .topButtons .createBtn {
-    font-size: 14px;
+    gap: 0.75rem;
+    margin: 2rem 0 0 0;
     width: 100%;
+  }
+  .companyDialog .modalTop .topButtons .createBtn {
+    width: 100%;
+    font-size: 14px;
+    padding: 0.75rem 1rem;
   }
   .companyDialog .tableBox table,
   .companyDialog .tableBox tbody,
@@ -1645,5 +1651,26 @@ header .logout:active {
   }
   .materialView .viewer {
     max-width: 100%;
+  }
+  .upManager .modal h1 {
+    font-family: "OpenSans-SemiBold", Arial, Helvetica, sans-serif;
+    font-size: 28px;
+    color: #53575a;
+    margin-bottom: 1rem;
+  }
+  .upManager .modal p {
+    font-family: "OpenSans-Regular", Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    color: #53575a;
+    line-height: 1.5;
+  }
+  .upManager .uploadbox .tabButtons {
+    flex-direction: column;
+  }
+  .upManager .uploadbox .tabButtons button {
+    font-size: 14px;
+  }
+  .upManager .uploadbox .uploadFile button {
+    font-size: 14px;
   }
 }/*# sourceMappingURL=style.css.map */
