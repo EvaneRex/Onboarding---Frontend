@@ -55,18 +55,36 @@ function isAllCompleted(client) {
 
 // Henter alle kunder
 async function loadClients(showLoading = true) {
-  if (showLoading) loading.value = true
+  try {
+    if (showLoading) loading.value = true
 
-  const response = await getAllClients()
+    const response = await getAllClients()
 
-  if (response.success === false) {
-    errorMessage.value = response.message
+    if (!response) {
+      throw new Error('Ingen svar')
+    }
+
+    if (response.success === false) {
+      errorMessage.value = response.message
+      clients.value = []
+      return
+    }
+
+    const data = response.data ?? response
+
+    if (!Array.isArray(data)) {
+      throw new Error('Client er ikke et array')
+    }
+
+    clients.value = data
+    errorMessage.value = ''
+  } catch (err) {
+    console.error(err)
+    errorMessage.value = 'Fejl ved hentning af kunder'
+    clients.value = []
+  } finally {
     loading.value = false
-    return
   }
-
-  clients.value = response
-  loading.value = false
 }
 
 async function loadSurveys() {
