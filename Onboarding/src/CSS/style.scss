@@ -1068,8 +1068,13 @@ header {
     .topSection{
       display: flex;
       flex-direction: column;
-      align-items: flex-start;
+      align-items: stretch;
       margin: 2rem 0;
+
+      .createBtn {
+        font-size: 14px;
+        width: 100%;
+      }
     }
     .tableBox {
       overflow-x: hidden;
