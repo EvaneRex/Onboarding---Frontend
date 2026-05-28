@@ -1400,6 +1400,64 @@ header {
       }
     }
   }
+
+  .clientDashboard {
+
+    .tableBox {
+
+      td:first-child {
+        @include partial.txt(
+          18px,
+          partial.$fontSemi
+        );
+
+        text-align: center;
+        word-break: break-word;
+        margin-bottom: 1rem;
+      }
+
+      /* status + åben på samme linje */
+      td:nth-child(2),
+      td:last-child {
+        display: inline-flex !important;
+        width: auto;
+        align-items: center;
+        justify-content: center;
+        vertical-align: middle;
+      }
+
+      td:nth-child(2) {
+        @include partial.txt(14px);
+        margin-right: 1rem;
+      }
+
+      td:last-child {
+        gap: .5rem;
+      }
+
+      td:last-child button,
+      td:last-child a {
+        @include partial.txt(
+          14px,
+          partial.$fontSemi
+        );
+
+        display: flex;
+        align-items: center;
+        gap: .35rem;
+        width: auto;
+      }
+    }
+  }
+  .materialView {
+    .completeBtn {
+      width: 100%;
+      font-size: 14px;
+    }
+      .viewer {
+        max-width: 100%;
+      }
+  }
 }
 
   
