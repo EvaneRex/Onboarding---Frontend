@@ -47,6 +47,12 @@ function closeCreateUser() {
   loadSurveys()
 }
 
+function isAllCompleted(client) {
+  const slides = client?.onboardingSlides || []
+  if (!Array.isArray(slides) || slides.length === 0) return false
+  return slides.every((m) => m.complete === true)
+}
+
 // Henter alle kunder
 async function loadClients(showLoading = true) {
   if (showLoading) loading.value = true
@@ -86,6 +92,19 @@ const surveyCompanies = computed(() => {
 })
 
 const clientNames = computed(() => clients.value.map((c) => c.clientName.trim().toLowerCase()))
+
+// Så dem der er registreret og færdige med onboarding bliver rykket op i listen
+const sortedClients = computed(() => {
+  return [...clients.value].sort((a, b) => {
+    const aCompleted = isAllCompleted(a)
+    const bCompleted = isAllCompleted(b)
+
+    if (aCompleted && !bCompleted) return -1
+    if (!aCompleted && bCompleted) return 1
+
+    return 0
+  })
+})
 
 const surveyCompaniesWithoutUser = computed(() =>
   surveyCompanies.value.filter((s) => !clientNames.value.includes(s.name.trim().toLowerCase())),
@@ -230,9 +249,16 @@ onMounted(() => {
             </td>
           </tr>
           <!-- Eksisterende kunder -->
-          <tr v-for="client in clients" :key="client.clientId">
+          <tr v-for="client in sortedClients" :key="client.clientId">
             <td>
               {{ client.clientName }}
+              <span v-if="isAllCompleted(client)" title="Alle materialer gennemført">
+                <img
+                  src="@/assets/icon/checkmark.svg"
+                  alt="Fuldført"
+                  style="width: 18px; vertical-align: middle; margin-left: 6px"
+                />
+              </span>
             </td>
             <td class="actions">
               <button @click="openCompany(client)">
